@@ -11,7 +11,8 @@
 		<audio src="songs/bees.mp3" controls></audio>
 		
 		{% for favSongs in favSongs %}
-		{{ favSongs['song_id'] }}
+		{{ favSongs['name'] }}
+		<audio src="{{ favSongs['access'] }}" controls></audio>
 		{% endfor %}
 		
 	</section>
