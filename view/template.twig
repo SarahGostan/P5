@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>{% block title %}{% endblock %}</title>
+        <link href="public/style.css" rel="stylesheet" /> 
+		{% block script %}{% endblock %}
+	
+
+    </head>
+	<body>
+	
+	
+		<header>
+	<p> Wesh alors </p>
+		
+				{% block header %}{% endblock %}
+		</header>
+		 
+			{% block content %}{% endblock %}
+			
+		<footer>
+			
+		</footer>
+		
+
+<script src="public/js/main.js"></script>
+{% block script_bottom %}{% endblock %}
+
+	</body>
+</html>

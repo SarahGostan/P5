@@ -1,0 +1,8 @@
+{% extends 'template.twig' %}
+{% block title %}Page introuvable{% endblock %}
+{% block content %}
+{{ errorMessage|raw }}
+<p>On dirait que vous vous êtes perdus en chemin... <a href="index.php">Revenez plutôt à l'index !</a></p>;
+
+{% endblock %}
+

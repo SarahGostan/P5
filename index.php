@@ -22,6 +22,9 @@ try{
 	$page = $_GET['action'];
 	switch($page)
 		{
+			case 'ingame':
+				ingame($twig);
+				break;
 			default:
 				accueil($twig);
 				break;

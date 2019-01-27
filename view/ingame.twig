@@ -1,0 +1,73 @@
+{% extends 'template.twig' %}
+{% block title %}Interface de partie{% endblock %}
+{% block script %}<script src="public/js/Ingame.js"></script>{% endblock %}
+{% block header %}Ici, plusieurs onglets permettront de passer plus facilement d'une fonctionnalité à l'autre{% endblock %}
+{% block content %}
+
+<div id="ingameContent">
+	<section id="ambianceSong">
+		Ici, on répertorie la liste des sons qui sont mis en favoris, ou bien qui correspondent a la création "clef en main" de l'ambiance.
+		
+		<audio src="songs/bees.mp3" controls></audio>
+		
+		{{ favSongs }}
+		
+	</section>
+
+	<section id="ambianceMusique">
+		<p>Grande section permettant de mettre en liste / miniature plusieurs musiques pré selectionnées. Un mode de lecture automatique est possible, ou bien manuel.</p>
+		
+		<div id="videos">
+			<video width="320" height="240" controls>
+				<source src="movie.mp4" type="video/mp4">
+				<source src="movie.ogg" type="video/ogg">
+				Your browser does not support the video tag.
+			</video>
+			
+			<video width="320" height="240" controls>
+				<source src="movie.mp4" type="video/mp4">
+				<source src="movie.ogg" type="video/ogg">
+				Your browser does not support the video tag.
+			</video>
+			
+			<video width="320" height="240" controls>
+				<source src="movie.mp4" type="video/mp4">
+				<source src="movie.ogg" type="video/ogg">
+				Your browser does not support the video tag.
+			</video>
+			
+			<video width="320" height="240" controls>
+				<source src="movie.mp4" type="video/mp4">
+				<source src="movie.ogg" type="video/ogg">
+				Your browser does not support the video tag.
+			</video>
+		</div>
+	</section>
+
+	<section id="diceRoll">	
+	<div id="last">Welcome</div>
+		<div id="diceResult">
+		
+
+		</div>
+		
+	<div>
+		<form id="roll">
+		<input type="text" name="diceNumber" id="diceNumber" required>
+		Dés
+		<input type="text" name="diceFaces" id="diceFaces" required>
+		   <input type="button" id="rollDices" value="Envoyer">
+		</form>
+
+	</div>	
+	</section>
+
+</div>
+
+
+{% endblock %}
+
+
+{% block script_bottom %}
+<script>var Ingame = new Ingame();</script>
+{% endblock %}

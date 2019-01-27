@@ -1,0 +1,79 @@
+html, body{
+	margin: 0;
+}
+
+header{
+	height: 50px;
+	border-bottom: 2px solid black;
+}
+
+#ingameContent{
+	display: flex;
+}
+
+#ambianceSong{
+    width: 200px;
+	height: 100%;
+	border-right: 1px solid blue;
+	background-color: #dee9ea;
+}
+
+#diceRoll{
+	width: 400px;
+	height: 350px;
+	display: flex;
+	flex-direction: column;
+	background-color: #f2f2f2;
+}
+
+
+#diceResult{
+	height: 250px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-around;
+	overflow-y: scroll;
+}
+
+#total{
+	width: 90%;
+}	
+
+#diceResult div{
+	margin: 2px;
+	display: flex;
+	flex-wrap: wrap;
+	min-height: 25%;
+	align-items: center;
+	justify-content: center;
+	overflow: auto;
+}
+
+
+#diceResult span{
+	border: 1px solid black;
+	box-shadow: 2px 2px 1px black;
+	width: 20px;
+	height: 20px;
+	margin: 3px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#last span{
+	width: 35px;
+	height: 35px;
+}
+#last{
+	background-color: white !important;
+	min-height: 35% !important;
+	overflow: visible !important;
+}
+
+#videos{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	 flex-flow: row wrap;
+}
