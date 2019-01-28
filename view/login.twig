@@ -1,0 +1,19 @@
+{% extends 'template.twig' %}
+{% block title %}Identifiez vous{% endblock %}
+
+{% block script %}{% endblock %}
+
+{% block header %}Connexion{% endblock %}
+
+{% block content %}
+
+<form id="formLogin" action = "index.php?action=authenticize" method="post" >
+		<h2>Identification</h2>
+		<label for="identifiant">Identifiant</label>
+		<input type="text" name="identifiant" id="identifiant" /><br />
+		<label for="password">Mot de passe</label>
+		<input type="password" name="password" id="password" /><br />
+		<input type="submit" value = "Envoyer"/>
+	</form>
+
+{% endblock %}

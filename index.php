@@ -11,8 +11,8 @@ $twig->addExtension(new Twig_Extension_Debug);
 ini_set('display_errors', 1);
 error_reporting( E_ALL );
 
+	require('controller/LogsController.php');
 	require('controller/frontend.php');
-	require('controller/backend.php');
 	$page = 'home';
 	
 try{
@@ -24,6 +24,17 @@ try{
 		{
 			case 'ingame':
 				ingame($twig);
+				break;
+			case 'login':
+				login($twig);
+				break;
+			case 'authenticize':
+				if (!empty($_POST['identifiant']) && !empty($_POST['password'])){
+					authenticize($_POST['identifiant'], $_POST['password'], $twig);
+				}
+				else{
+					throw new Exception ('Login ou mot de passe incorrect');
+				}
 				break;
 			default:
 				accueil($twig);

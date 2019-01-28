@@ -9,6 +9,10 @@ function accueil($twig){
 	
 }
 
+function error($twig, $errorMessage){
+	echo $twig->render('erreur.twig',  array('errorMessage' => $errorMessage));
+}
+
 function ingame($twig){
 	$songsManager = new SongsManager();
 	$id = 1;
@@ -25,3 +29,5 @@ function getFavSongs(){
 	}
 	return $favSongs;
 }
+
+

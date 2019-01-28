@@ -8,11 +8,10 @@
 	<section id="ambianceSong">
 		Ici, on répertorie la liste des sons qui sont mis en favoris, ou bien qui correspondent a la création "clef en main" de l'ambiance.
 		
-		<audio src="songs/bees.mp3" controls></audio>
 		
 		{% for favSongs in favSongs %}
 		{{ favSongs['name'] }}
-		<audio src="{{ favSongs['access'] }}" controls></audio>
+		<audio src="songs/{{ favSongs['access'] }}" controls></audio>
 		{% endfor %}
 		
 	</section>
