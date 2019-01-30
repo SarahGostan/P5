@@ -3,12 +3,26 @@ html, body{
 }
 
 header{
-	height: 50px;
+	height: 100px;
 	border-bottom: 2px solid black;
 }
 
+#connexion{
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	right: 0;
+	width: 200px;
+	margin: 30px;
+	top: 0;
+}
 #ingameContent{
 	display: flex;
+
+}
+
+audio{
+	width: 150px;
 }
 
 #ambianceSong{
@@ -24,6 +38,7 @@ header{
 	display: flex;
 	flex-direction: column;
 	background-color: #f2f2f2;
+	margin: 10px;
 }
 
 
@@ -32,7 +47,8 @@ header{
 	display: flex;
 	flex-direction: column;
 	justify-content: space-around;
-	overflow-y: scroll;
+	overflow-y: auto;
+	box-sizing: border-box;
 }
 
 #total{
@@ -40,7 +56,7 @@ header{
 }	
 
 #diceResult div{
-	margin: 2px;
+	margin-top: 2px;
 	display: flex;
 	flex-wrap: wrap;
 	min-height: 25%;
@@ -75,5 +91,9 @@ header{
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: space-around;
-	 flex-flow: row wrap;
+	align-items: center;
+	flex-flow: row wrap;
+	min-width: 75%;
+	padding: 10px;
+	height: 100%;
 }

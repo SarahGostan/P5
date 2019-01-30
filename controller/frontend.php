@@ -13,9 +13,8 @@ function error($twig, $errorMessage){
 	echo $twig->render('erreur.twig',  array('errorMessage' => $errorMessage));
 }
 
-function ingame($twig){
+function ingame($twig, $id){
 	$songsManager = new SongsManager();
-	$id = 1;
 	$favSongsId = $songsManager->getFavSongsId($id);
 	echo $twig->render('ingame.twig',  array('favSongs' => $favSongsId));
 }

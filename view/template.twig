@@ -13,6 +13,15 @@
 	
 		<header>
 	<p> Tout ceci manque clairement de CSS </p>
+	
+	<div id="connexion">
+	{% if pseudo is not null %}
+	<p>Bienvenue {{pseudo}} !</p>
+	<a href="index?action=logout">Déconnexion</a>
+	{% else %}
+	<a href="index?action=login">Connexion</a>
+	{% endif %}
+	</div>
 		
 				{% block header %}{% endblock %}
 		</header>

@@ -8,6 +8,12 @@ function login($twig){
 	echo $twig->render('login.twig');
 }
 
+function logout($twig){
+	$userSession = new UserSession();
+	$userSession = $userSession->logout();
+	echo $twig->render('login.twig');
+}
+
 function authenticize($pseudo, $password){
 	
 	$adminManager = new UsersManager();
@@ -22,3 +28,13 @@ function authenticize($pseudo, $password){
 		exit();
  	} 
 }
+
+function checkAuth(){
+	$userSession = new UserSession();
+	$checkAuth = $userSession->isAuthenticated();
+	if ($checkAuth == true){
+		return $_SESSION['id'];
+	}
+
+}
+	

@@ -6,13 +6,20 @@
 
 <div id="ingameContent">
 	<section id="ambianceSong">
-		Ici, on répertorie la liste des sons qui sont mis en favoris, ou bien qui correspondent a la création "clef en main" de l'ambiance.
+		<p>Ici, on répertorie la liste des sons qui sont mis en favoris, ou bien qui correspondent a la création "clef en main" de l'ambiance.</p>
 		
+		{% if favSongs %}
 		
 		{% for favSongs in favSongs %}
 		{{ favSongs['name'] }}
 		<audio src="songs/{{ favSongs['access'] }}" controls></audio>
 		{% endfor %}
+		
+		
+		{% else %}
+		Votre liste de sons favoris est vide ! Ajoutez en <a href="#">ici</a>
+		{% endif %}
+
 		
 	</section>
 
@@ -47,9 +54,9 @@
 	</section>
 
 	<section id="diceRoll">	
-	<div id="last">Welcome</div>
+	
 		<div id="diceResult">
-		
+		<div id="last"></div>
 
 		</div>
 		

@@ -1,17 +1,24 @@
 <?php
 
+
+
 require 'vendor/autoload.php';
+require 'class/global.php';
+require('controller/LogsController.php');
+
+checkAuth();
 $loader = new Twig_Loader_Filesystem(__DIR__ . '/view');
 $twig = new Twig_Environment($loader, [
 	'cache' => false, //__DIR__ . '/tmp'
 	'debug' => true
 ]);
 $twig->addExtension(new Twig_Extension_Debug);
+$twig->addExtension(new Project_Twig_Extension);
 
 ini_set('display_errors', 1);
 error_reporting( E_ALL );
 
-	require('controller/LogsController.php');
+	
 	require('controller/frontend.php');
 	$page = 'home';
 	
@@ -23,11 +30,25 @@ try{
 	switch($page)
 		{
 			case 'ingame':
-				ingame($twig);
+			checkAuth();
+			if (isset($_SESSION['id'])){
+				$id = $_SESSION['id'];
+				
+			}
+			else{
+				$id = 0;
+			}
+				ingame($twig, $id);
 				break;
+				
 			case 'login':
 				login($twig);
 				break;
+						
+			case 'logout':
+				logout($twig);
+				break;
+				
 			case 'authenticize':
 				if (!empty($_POST['identifiant']) && !empty($_POST['password'])){
 					authenticize($_POST['identifiant'], $_POST['password'], $twig);
@@ -39,6 +60,7 @@ try{
 			default:
 				accueil($twig);
 				break;
+				
 		}
 	}
 	
