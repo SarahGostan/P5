@@ -2,6 +2,7 @@
 
 require_once("Manager.php");
 
+
 class SongsManager extends Manager{
 	
 	public function getFavSongsId($userId){
@@ -29,4 +30,21 @@ class SongsManager extends Manager{
 		}
 	}  
 	
+	public function getAllSongs(){
+		$req = $this->db->query('SELECT name,access, id
+					FROM songs
+					ORDER BY principal_theme');
+		$allSongs = $req->fetchAll();
+		return $allSongs;
+	}
+	
+	
+	public function addSongToFav($userId, $songId){
+		$query = $this->db->prepare('INSERT INTO users_songs(user_id, song_id) VALUES(:userId, :songId)');
+		$query->execute(array(
+		'userId' => $userId,
+		'songId' => $songId
+		));
+	}
+		
 }

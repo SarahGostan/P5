@@ -6,8 +6,8 @@
 
 <div id="ingameContent">
 	<section id="ambianceSong">
-		<p>Ici, on répertorie la liste des sons qui sont mis en favoris, ou bien qui correspondent a la création "clef en main" de l'ambiance.</p>
 		
+		<h3>Bruitages</h3>
 		{% if favSongs %}
 		
 		{% for favSongs in favSongs %}
@@ -17,7 +17,7 @@
 		
 		
 		{% else %}
-		Votre liste de sons favoris est vide ! Ajoutez en <a href="#">ici</a>
+		Votre liste de sons favoris est vide ! Ajoutez en <a href="?action=allsongs">ici</a>
 		{% endif %}
 
 		

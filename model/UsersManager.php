@@ -18,5 +18,15 @@ class UsersManager extends Manager{
 			return $result;
 		} 
 	}
+	
+	public function signUp($pseudo, $password, $mail){
+		$req = $this->db->prepare('INSERT INTO users(pseudo, password, mail, statut) VALUES(:pseudo, :password, :mail, :statut)');
+		$req->execute(array(
+						'pseudo' => $pseudo,
+						'password' => password_hash($password, PASSWORD_DEFAULT),
+						'mail' => $mail,
+						'statut' => 0
+						));
+	}
 
 }

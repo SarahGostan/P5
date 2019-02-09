@@ -8,6 +8,10 @@ function login($twig){
 	echo $twig->render('login.twig');
 }
 
+function inscription($twig){
+	echo $twig->render('inscription.twig');
+}
+
 function logout($twig){
 	$userSession = new UserSession();
 	$userSession = $userSession->logout();
@@ -35,6 +39,14 @@ function checkAuth(){
 	if ($checkAuth == true){
 		return $_SESSION['id'];
 	}
-
 }
 	
+	
+
+	function signup($pseudo, $password, $mail){
+	$userSignUp= new UsersManager();
+	$userSignUp = $userSignUp->signUp($pseudo, $password, $mail);
+	header('Location:index.php');
+	exit();
+}
+

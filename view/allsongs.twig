@@ -1,0 +1,23 @@
+{% extends 'template.twig' %}
+{% block title %}Interface de partie{% endblock %}
+{% block script %}<script src="public/js/Songs.js"></script>{% endblock %}
+{% block header %}Ici, plusieurs onglets permettront de passer plus facilement d'une fonctionnalité à l'autre{% endblock %}
+{% block content %}
+
+<div id="allSongs">
+
+{% for allSongs in allSongs %}
+		<div class="songs">{{ allSongs['name'] }}
+		<audio src="songs/{{ allSongs['access'] }}" controls></audio></div><button class="addSong" id="tarace">Bouton vert</button>
+		<form action="" method="post">
+			<input type="submit" name="addfav" id="{{ allSongs['id'] }}" class="addSongs" value="Ajouter" />
+		</form>
+		{% endfor %}
+</div>
+
+{% endblock %}
+
+
+{% block script_bottom %}
+<script>var AllSongs = new AllSongs();</script>
+{% endblock %}

@@ -4,6 +4,7 @@
         <meta charset="utf-8" />
         <title>{% block title %}{% endblock %}</title>
         <link href="public/style.css" rel="stylesheet" /> 
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		{% block script %}{% endblock %}
 	
 
@@ -12,7 +13,13 @@
 	
 	
 		<header>
-	<p> Tout ceci manque clairement de CSS </p>
+	<nav>
+		<ul>
+			<li><a href="?action=allsongs">Tous les sons</a></li>
+			<li><a href="#">Lien 2</a></li>
+			<li><a href="#">Lien 3</a></li>
+		</ul>
+	</nav>
 	
 	<div id="connexion">
 	{% if pseudo is not null %}
@@ -20,13 +27,17 @@
 	<a href="index?action=logout">Déconnexion</a>
 	{% else %}
 	<a href="index?action=login">Connexion</a>
+	<a href="index?action=inscription">Inscription</a>
+	
 	{% endif %}
 	</div>
 		
 				{% block header %}{% endblock %}
 		</header>
 		 
+		 <div id="content">
 			{% block content %}{% endblock %}
+		</div>
 			
 		<footer>
 			

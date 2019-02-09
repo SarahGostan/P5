@@ -2,7 +2,6 @@
 
 require_once('model/SongsManager.php');
 
-
 function accueil($twig){
 
 	echo $twig->render('accueil.twig');
@@ -29,4 +28,15 @@ function getFavSongs(){
 	return $favSongs;
 }
 
+
+function allSongs($twig){
+	$songsManager = new SongsManager();
+	$allSongs = $songsManager->getAllSongs();
+	echo $twig->render('allsongs.twig', array('allSongs' => $allSongs));
+}
+
+function addSong($userId, $songId){
+	$songsManager = new SongsManager();
+	$allSongs = $songsManager->addSongToFav($userId, $songId);
+}
 

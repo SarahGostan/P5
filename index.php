@@ -4,7 +4,7 @@
 
 require 'vendor/autoload.php';
 require 'class/global.php';
-require('controller/LogsController.php');
+require 'controller/LogsController.php';
 
 checkAuth();
 $loader = new Twig_Loader_Filesystem(__DIR__ . '/view');
@@ -41,13 +41,33 @@ try{
 				ingame($twig, $id);
 				break;
 				
+			case 'allsongs':
+				allSongs($twig);
+				break;
+				
 			case 'login':
 				login($twig);
+				break;
+			
+			case 'addSong':
+			
+			$_POST['fonction'];
+		$param = json_decode($_POST['params'])	;
+			addSong($param[0], $param[1]);
+				break;
+									
+			case 'inscription':
+				inscription($twig);
+				break;
+				
+			case 'signup':
+				signup($_POST['pseudo'], $_POST['password'],  $_POST['mail']);
 				break;
 						
 			case 'logout':
 				logout($twig);
 				break;
+		
 				
 			case 'authenticize':
 				if (!empty($_POST['identifiant']) && !empty($_POST['password'])){
