@@ -1,16 +1,4 @@
 
-/*  var AllSongs = function(){
-	this.init();
-}
-
-AllSongs.prototype.addSongToFav = function(){
-	console.log("jusque là, tout va bien");
-} 
-
-AllSongs.prototype.init = function(){
-	document.getElementById("tarace").addEventListener('click', this.addSongToFav);	
-} */
-
 
  var AllSongs = function(){
 	this.init();
@@ -26,35 +14,32 @@ AllSongs.prototype.init = function(){
 }
 
 AllSongs.prototype.addSongToFav = function(){
-	var id = $("#id").val();
+	var idElt = this.getAttribute('id');
+	console.log(idElt);
 	$.ajax({
 		type: "POST",
 		url: "?action=addSong",
-		 data: {
-			 fonction: 'addSong',
-                params: {
-					param1: '6',
-					param2: '4'
-					},
-               },
+		 dataType: 'html',
+		data : 'songId=' + idElt,
 						
 		success: function(){
 			console.log ("AJAX DONE");
+			return false;
 	}
 	});
 } 
-/* 	
 
-AllSongs.prototype.addSongToFav = function(){
-	console.log("jusque là, tout va bien");
-	var id = $("#id").val();
+AllSongs.prototype.removeFavSong = function(){
+	var idElt = this.getAttribute('id');
+	console.log(idElt);
 	$.ajax({
 		type: "POST",
-		url: "controller/frontend.php",
+		url: "?action=removeSong",
+		 dataType: 'html',
+		data : 'songId=' + idElt,
+						
 		success: function(){
 			console.log ("AJAX DONE");
+			return false;
 	}
 	});
-} 
- */
-

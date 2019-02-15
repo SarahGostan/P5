@@ -8,10 +8,7 @@
 
 {% for allSongs in allSongs %}
 		<div class="songs">{{ allSongs['name'] }}
-		<audio src="songs/{{ allSongs['access'] }}" controls></audio></div><button class="addSong" id="tarace">Bouton vert</button>
-		<form action="" method="post">
-			<input type="submit" name="addfav" id="{{ allSongs['id'] }}" class="addSongs" value="Ajouter" />
-		</form>
+		<audio src="songs/{{ allSongs['access'] }}" controls></audio></div><button class="addSong" id="{{ allSongs['id'] }}">Ajouter aux favoris</button>
 		{% endfor %}
 </div>
 

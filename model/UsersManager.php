@@ -19,14 +19,30 @@ class UsersManager extends Manager{
 		} 
 	}
 	
-	public function signUp($pseudo, $password, $mail){
-		$req = $this->db->prepare('INSERT INTO users(pseudo, password, mail, statut) VALUES(:pseudo, :password, :mail, :statut)');
+	public function signUp($pseudo, $password, $mail, $key){
+		$req = $this->db->prepare('INSERT INTO users(pseudo, password, mail, statut, activation_key) VALUES(:pseudo, :password, :mail, :statut, :key)');
 		$req->execute(array(
 						'pseudo' => $pseudo,
 						'password' => password_hash($password, PASSWORD_DEFAULT),
 						'mail' => $mail,
-						'statut' => 0
-						));
+						'statut' => 0,
+						'key' =>$key,
+						));				
 	}
-
+	
+	public function checkUserKey($pseudo, $key){
+			$req = $this->db->exec('SELECT ');
+		
+	}
+		
+		
+	public function validUser($pseudo, $key){
+		$req = $this->db->prepare('UPDATE users SET statut = 1 WHERE pseudo = :pseudo AND activation_key = :key AND statut = 0');
+		$req->execute(array(
+			'pseudo' => $pseudo,
+			'key' => $key
+			));
+		$result = $req->rowCount();
+		return $result;
+	}
 }

@@ -35,8 +35,37 @@ function allSongs($twig){
 	echo $twig->render('allsongs.twig', array('allSongs' => $allSongs));
 }
 
+function checkSong($userId, $songId){
+	$songsManager = new SongsManager();
+	$checkSongs = $songsManager->checkFavSongs($userId, $songId);
+	if($checkSongs['total'] > 0){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
 function addSong($userId, $songId){
 	$songsManager = new SongsManager();
-	$allSongs = $songsManager->addSongToFav($userId, $songId);
+	$checkSongs = checkSong($userId, $songId);
+	if($checkSongs == true){
+		exit();
+	}	
+	else{
+	$allSongs = $songsManager->addSongToFav($userId, $songId);	
+	}
 }
+
+function removeSong($userId, $songId){
+	$songsManager = new SongsManager();
+	$checkSongs = checkSong($userId, $songId);
+	if($checkSongs == true){
+		exit();
+	}	
+	else{
+	$allSongs = $songsManager->removeFavSong($userId, $songId);	
+	}
+}
+
 

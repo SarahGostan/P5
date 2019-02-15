@@ -50,11 +50,18 @@ try{
 				break;
 			
 			case 'addSong':
-			
 			$_POST['fonction'];
-		$param = json_decode($_POST['params'])	;
-			addSong($param[0], $param[1]);
+			addSong($_SESSION['id'], $_POST['songId']);
 				break;
+				
+			case 'removeSong':
+			$_POST['fonction'];
+			removeSong($_SESSION['id'], $_POST['songId']);
+				break;
+				
+			case 'checkSong':
+			checkSong($twig, $_SESSION['id'], 3);
+			break;
 									
 			case 'inscription':
 				inscription($twig);
@@ -68,6 +75,11 @@ try{
 				logout($twig);
 				break;
 		
+			case 'validaccount':
+				logout($twig);
+				validAccount($_GET['pseudo'], $_GET['key']);
+				break;
+			
 				
 			case 'authenticize':
 				if (!empty($_POST['identifiant']) && !empty($_POST['password'])){

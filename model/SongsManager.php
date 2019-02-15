@@ -39,12 +39,27 @@ class SongsManager extends Manager{
 	}
 	
 	
+	
+	public function checkFavSongs($userId, $songId){
+	 	$req = $this->db->prepare('SELECT COUNT(*) AS total FROM users_songs WHERE user_id = ? AND song_id = ?');
+		$req->execute(array($userId, $songId)); 
+		$donnee = $req->fetchAll();
+		$total = $donnee[0];
+		return $total;
+		
+	}
+	
 	public function addSongToFav($userId, $songId){
-		$query = $this->db->prepare('INSERT INTO users_songs(user_id, song_id) VALUES(:userId, :songId)');
-		$query->execute(array(
+	 
+		$req = $this->db->prepare('INSERT INTO users_songs(user_id, song_id) VALUES(:userId, :songId)');
+		$req->execute(array(
 		'userId' => $userId,
 		'songId' => $songId
 		));
+		
+		}
+		
+		
+		
 	}
 		
-}
