@@ -6,7 +6,7 @@ require_once("Manager.php");
 class SongsManager extends Manager{
 	
 	public function getFavSongsId($userId){
-		$query = $this->db->prepare('SELECT s.name, s.access, us.user_id
+		$query = $this->db->prepare('SELECT s.name, s.access, us.user_id, s.id
 					FROM songs as s
 					INNER JOIN users_songs us
 					ON s.id = us.song_id
@@ -31,7 +31,7 @@ class SongsManager extends Manager{
 	}  
 	
 	public function getAllSongs(){
-		$req = $this->db->query('SELECT name,access, id
+		$req = $this->db->query('SELECT name,access,id
 					FROM songs
 					ORDER BY principal_theme');
 		$allSongs = $req->fetchAll();
@@ -52,6 +52,16 @@ class SongsManager extends Manager{
 	public function addSongToFav($userId, $songId){
 	 
 		$req = $this->db->prepare('INSERT INTO users_songs(user_id, song_id) VALUES(:userId, :songId)');
+		$req->execute(array(
+		'userId' => $userId,
+		'songId' => $songId
+		));
+		
+		}
+		
+			public function removeFavSong($userId, $songId){
+	 
+		$req = $this->db->prepare('DELETE FROM users_songs WHERE user_id = :userId AND song_id = :songId');
 		$req->execute(array(
 		'userId' => $userId,
 		'songId' => $songId

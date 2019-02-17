@@ -5,6 +5,7 @@
 require 'vendor/autoload.php';
 require 'class/global.php';
 require 'controller/LogsController.php';
+require 'controller/SongsController.php';
 
 checkAuth();
 $loader = new Twig_Loader_Filesystem(__DIR__ . '/view');
@@ -42,7 +43,7 @@ try{
 				break;
 				
 			case 'allsongs':
-				allSongs($twig);
+				allSongs($twig, $_SESSION['id']);
 				break;
 				
 			case 'login':

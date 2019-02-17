@@ -1,5 +1,5 @@
-var Ingame = function (){
-this.init();
+var Ingame = function(){
+	this.init();
 }
 
 Ingame.prototype.init = function(){

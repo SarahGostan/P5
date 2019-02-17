@@ -1,6 +1,7 @@
 {% extends 'template.twig' %}
 {% block title %}Interface de partie{% endblock %}
-{% block script %}<script src="public/js/Ingame.js"></script>{% endblock %}
+{% block script %}<script src="public/js/Ingame.js"></script>
+<script src="public/js/VideoPlayer.js"></script>{% endblock %}
 {% block header %}Ici, plusieurs onglets permettront de passer plus facilement d'une fonctionnalité à l'autre{% endblock %}
 {% block content %}
 
@@ -26,31 +27,14 @@
 	<section id="ambianceMusique">
 		<p>Grande section permettant de mettre en liste / miniature plusieurs musiques pré selectionnées. Un mode de lecture automatique est possible, ou bien manuel.</p>
 		
-		<div id="videos">
-			<video width="320" height="240" controls>
-				<source src="movie.mp4" type="video/mp4">
-				<source src="movie.ogg" type="video/ogg">
-				Your browser does not support the video tag.
-			</video>
-			
-			<video width="320" height="240" controls>
-				<source src="movie.mp4" type="video/mp4">
-				<source src="movie.ogg" type="video/ogg">
-				Your browser does not support the video tag.
-			</video>
-			
-			<video width="320" height="240" controls>
-				<source src="movie.mp4" type="video/mp4">
-				<source src="movie.ogg" type="video/ogg">
-				Your browser does not support the video tag.
-			</video>
-			
-			<video width="320" height="240" controls>
-				<source src="movie.mp4" type="video/mp4">
-				<source src="movie.ogg" type="video/ogg">
-				Your browser does not support the video tag.
-			</video>
-		</div>
+		{% for videos in videos %}
+		   <iframe id="player" type="text/html" width="320" height="180"
+  src="http://www.youtube.com/embed/{{ videos['video_link'] }}?enablejsapi=1&origin=http://localhost/appliJDR"
+  frameborder="0"></iframe>
+		{% endfor %}
+		
+		
+	
 	</section>
 
 	<section id="diceRoll">	
@@ -78,5 +62,7 @@
 
 
 {% block script_bottom %}
-<script>var Ingame = new Ingame();</script>
+<script>var Ingame = new Ingame();
+
+</script>
 {% endblock %}

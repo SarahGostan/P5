@@ -4,29 +4,59 @@
 	this.init();
 }
 
-
-
 AllSongs.prototype.init = function(){
-	var addSong = document.getElementsByClassName("addSong");
+	var addSong = document.querySelectorAll(".addSong, .removeSong");
 	for (var i = 0; i < addSong.length; i++){
-	addSong[i].addEventListener('click', this.addSongToFav);
-	}	
+	addSong[i].addEventListener('click', this.addRemoveFav);
+	}
+
 }
 
-AllSongs.prototype.addSongToFav = function(){
+AllSongs.prototype.addRemoveFav = function(){
+
 	var idElt = this.getAttribute('id');
-	console.log(idElt);
+	var addOrRemove = this.getAttribute('class');
+	if(addOrRemove == "addSong"){
 	$.ajax({
 		type: "POST",
 		url: "?action=addSong",
 		 dataType: 'html',
 		data : 'songId=' + idElt,
-						
+			
 		success: function(){
-			console.log ("AJAX DONE");
-			return false;
+	
+	/*	 */		
+			return true;	
 	}
 	});
+	if (success= true){
+	this.textContent = 'Retirer des favoris'; 
+	this.classList.remove("addSong");
+	this.classList.add("removeSong");
+	}
+	
+	}
+	else if(addOrRemove == "removeSong"){
+		$.ajax({
+		type: "POST",
+		url: "?action=removeSong",
+		 dataType: 'html',
+		data : 'songId=' + idElt,
+						
+		success: function(){
+			return true;
+			
+	}
+	});
+	if (success= true){
+	this.textContent = 'Ajouter aux favoris'; 
+	this.classList.remove("removeSong");
+	this.classList.add("addSong");
+	}
+	}
+	
+	
+	
 } 
 
 AllSongs.prototype.removeFavSong = function(){
@@ -39,7 +69,18 @@ AllSongs.prototype.removeFavSong = function(){
 		data : 'songId=' + idElt,
 						
 		success: function(){
-			console.log ("AJAX DONE");
-			return false;
+			
+			return true;
+			
 	}
 	});
+	if (success = true){
+	this.textContent = 'Ajouter aux favoris';
+	this.classList.remove("removeSong");
+	this.classList.add("addSong");
+	this.addEventListener('click', this.addSongToFav);
+	}
+}
+
+
+

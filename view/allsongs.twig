@@ -10,6 +10,9 @@
 		<div class="songs">{{ allSongs['name'] }}
 		<audio src="songs/{{ allSongs['access'] }}" controls></audio></div><button class="addSong" id="{{ allSongs['id'] }}">Ajouter aux favoris</button>
 		{% endfor %}
+{% for favSongs in favSongs %}
+{{ favSongs['id'] }}
+{% endfor %}
 </div>
 
 {% endblock %}
