@@ -37,9 +37,17 @@ try{
 			exit();
 			}
 		}
-	$page = $_GET['action'];
+	$page = $_GET['action'];	
+	if (isset($_GET['message'])){
+				$message = $_GET['message'];
+			}
+			else{
+				$message = "";
+			}
 	switch($page)
 		{
+			
+		
 			case 'ingame':
 			checkAuth();
 			if (isset($_SESSION['id'])){
@@ -83,7 +91,13 @@ try{
 			break;
 				
 			case 'login':
-				login($twig);
+				if (!isset($_SESSION['id']))
+			{	
+				login($twig, $message);
+			}
+			else{
+				accueil($twig);
+			}
 				break;
 			
 			case 'accountAddSong':
@@ -102,7 +116,7 @@ try{
 				break;
 				
 			case 'signup':
-				signup($_POST['pseudo'], $_POST['password'],  $_POST['mail']);
+				signup($_POST['password'],  $_POST['mail'], $message);
 				break;
 						
 			case 'logout':
@@ -125,6 +139,14 @@ try{
 				break;
 			default:
 				accueil($twig);
+				break;
+				
+			case 'account':
+				account($twig, $message);
+				break;
+			
+			case 'accountChangePassword':
+				accountChangePassword($_SESSION['id'], $_POST['actualPassword'], $_POST['newPassword']);
 				break;
 				
 		}

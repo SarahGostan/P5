@@ -14,7 +14,7 @@
 		}
 		
 		public function isAuthenticated(){
-			if (!isset($_SESSION['id']) || !isset($_SESSION['pseudo']))
+			if (!isset($_SESSION['id']))
 			{	
 			return false;
 			}
@@ -23,11 +23,11 @@
 			}
 		}
 		
-		public function getPseudo()
+		public function getId()
 		{
 			
 			if($this->isAuthenticated() == true){
-				return $_SESSION['pseudo'];
+				return $_SESSION['id'];
 			}
 			else{
 				return null;
@@ -35,9 +35,8 @@
 		}
 
 		
-		public function login($id, $name){
+		public function login($id){
 			$_SESSION['id'] = $id;
-			$_SESSION['pseudo'] = $name;
 		}
 	}
 

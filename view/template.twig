@@ -13,19 +13,20 @@
 	
 	
 		<header>
-		
+		{% block message %}{{ message }}{% endblock %}
 		<h1>L'écran du MJ</h1>
 	<nav>
 		<ul>
+		
 			<li><a href="?action=allsongs">Tous les sons</a></li>
-			<li><a href="#">Lien 2</a></li>
-			<li><a href="#">Lien 3</a></li>
+			<li><a href="?action=ingame">Ma partie</a></li>
+			<li><a href="?action=account">Mon compte</a></li>
 		</ul>
 	</nav>
 	
 	<div id="connexion">
-	{% if pseudo is not null %}
-	<p>Bienvenue {{pseudo}} !</p>
+	{% if id is not null %}
+	<p>Bienvenue</p>
 	<a href="index?action=logout">Déconnexion</a>
 	{% else %}
 	<a href="index?action=login">Connexion</a>

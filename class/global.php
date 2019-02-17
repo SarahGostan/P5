@@ -6,9 +6,9 @@ class Project_Twig_Extension extends Twig_Extension implements Twig_Extension_Gl
     public function getGlobals()
     {
 		$auth = new UserSession();
-		$pseudo = $auth->getPseudo();
+		$id = $auth->getId();
         return [
-            'pseudo' => $pseudo
+            'id' => $id
         ];
     }
 

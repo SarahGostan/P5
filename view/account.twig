@@ -1,0 +1,25 @@
+{% extends 'template.twig' %}
+{% block title %}Interface de partie{% endblock %}
+{% block script %}<script src="public/js/Songs.js"></script>{% endblock %}
+{% block header %}Ici, plusieurs onglets permettront de passer plus facilement d'une fonctionnalité à l'autre{% endblock %}
+{% block content %}
+
+<div id="accountChange">
+	<h2>Modifier votre mot de passe :</h2>
+	<form method="post" action="?action=accountChangePassword" id="changePassword">
+	<label for="actualPassword">Mot de passe actuel</label>
+	<input type="text" name="actualPassword" id="actualPassword" /><br />
+	<label for="newPassword">Nouveau mot de passe</label>
+	<input type="text" name="newPassword" id="newPassword" /><br />
+	<label for="confirmPassword">Confirmer le mot de passe</label>
+	<input type="text" name="confirmPassword" id="confirmPassword" /><br />
+	<input type="submit" value="Confirmer">
+	</form>
+</div>
+
+{% endblock %}
+
+
+{% block script_bottom %}
+<script>var AllSongs = new AllSongs();</script>
+{% endblock %}

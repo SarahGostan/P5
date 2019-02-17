@@ -34,3 +34,13 @@ function removeVideo($link, $id){
 	$removeVideo = $video->removeVideoLink($link, $id);
 	header('Location: http://localhost/appliJDR/index?action=ingame');
 }
+
+function account($twig, $message){
+	if($message == 'fail'){
+		$message = "Mot de passe incorrect";
+	echo $twig->render('account.twig', array('message' =>$message));
+	}
+	else{
+		echo $twig->render('account.twig');
+	}
+}
