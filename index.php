@@ -45,6 +45,21 @@ try{
 			case 'allsongs':
 				allSongs($twig, $_SESSION['id']);
 				break;
+			
+			case 'addNewVideo':
+				if (!isset($_SESSION['id'])){
+					throw new Exception ("Vous devez être connecté !");
+				}
+				else if(!isset($_POST['videoLink'])){
+					throw new Exception ("Fumble !");
+				}
+				else if(isset($_SESSION['id']) AND isset($_POST['videoLink'])) {
+				addNewVideo($_POST['videoLink'], $_SESSION['id'], $twig);
+				}
+				else{
+					
+				}
+				break;
 				
 			case 'login':
 				login($twig);

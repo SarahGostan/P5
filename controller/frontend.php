@@ -22,3 +22,8 @@ function ingame($twig, $id){
 	echo $twig->render('ingame.twig',  array('favSongs' => $favSongsId, 'videos' => $videoWay));
 }
 
+function addNewVideo($link, $id, $twig){
+	$video = new VideosManager();
+	$newVideo = $video->addVideoLink($link, $id);
+	header('Location: http://localhost/appliJDR/index?action=ingame');
+}

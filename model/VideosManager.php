@@ -11,5 +11,19 @@ class VideosManager extends Manager{
 		$donnee = $req->fetchAll();
 		return $donnee;
 	}
+	
+	public function addVideoLink($link, $id){
+		$req = $this->db->prepare('INSERT INTO users_videos(user_id, video_link) VALUES(:id, :link)');
+		$req->execute(array(
+		'id' => $id,
+		'link' => $link
+		));
+	}
+	
+	
+	
+	
+	
+	
 }
 	
