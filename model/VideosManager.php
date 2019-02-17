@@ -20,6 +20,14 @@ class VideosManager extends Manager{
 		));
 	}
 	
+	public function removeVideoLink($link, $id){
+		$req = $this->db->prepare('DELETE FROM users_videos WHERE user_id = :id AND video_link = :link');
+		$req->execute(array(
+		'id' => $id,
+		'link' => $link
+		));
+	}
+	
 	
 	
 	

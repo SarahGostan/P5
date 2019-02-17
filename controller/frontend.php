@@ -22,8 +22,15 @@ function ingame($twig, $id){
 	echo $twig->render('ingame.twig',  array('favSongs' => $favSongsId, 'videos' => $videoWay));
 }
 
-function addNewVideo($link, $id, $twig){
+function addNewVideo($link, $id){
 	$video = new VideosManager();
 	$newVideo = $video->addVideoLink($link, $id);
+	header('Location: http://localhost/appliJDR/index?action=ingame');
+}
+
+
+function removeVideo($link, $id){
+	$video = new VideosManager();
+	$removeVideo = $video->removeVideoLink($link, $id);
 	header('Location: http://localhost/appliJDR/index?action=ingame');
 }

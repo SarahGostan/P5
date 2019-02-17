@@ -19,7 +19,7 @@ AllSongs.prototype.addRemoveFav = function(){
 	if(addOrRemove == "addSong"){
 	$.ajax({
 		type: "POST",
-		url: "?action=addSong",
+		url: "?action=accountAddSong",
 		 dataType: 'html',
 		data : 'songId=' + idElt,
 			
@@ -39,7 +39,7 @@ AllSongs.prototype.addRemoveFav = function(){
 	else if(addOrRemove == "removeSong"){
 		$.ajax({
 		type: "POST",
-		url: "?action=removeSong",
+		url: "?action=accountRemoveSong",
 		 dataType: 'html',
 		data : 'songId=' + idElt,
 						
@@ -58,29 +58,6 @@ AllSongs.prototype.addRemoveFav = function(){
 	
 	
 } 
-
-AllSongs.prototype.removeFavSong = function(){
-	var idElt = this.getAttribute('id');
-	console.log(idElt);
-	$.ajax({
-		type: "POST",
-		url: "?action=removeSong",
-		 dataType: 'html',
-		data : 'songId=' + idElt,
-						
-		success: function(){
-			
-			return true;
-			
-	}
-	});
-	if (success = true){
-	this.textContent = 'Ajouter aux favoris';
-	this.classList.remove("removeSong");
-	this.classList.add("addSong");
-	this.addEventListener('click', this.addSongToFav);
-	}
-}
 
 
 

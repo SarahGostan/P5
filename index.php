@@ -27,6 +27,16 @@ try{
 	
 	if (isset($_GET['action']))
 		{	
+	
+	if (strstr($_GET['action'], 'account'))
+		{
+			
+			if (!isset($_SESSION['id']))
+			{	
+			throw new Exception ("Vous devez être connecté pour effectuer cette action");
+			exit();
+			}
+		}
 	$page = $_GET['action'];
 	switch($page)
 		{
@@ -43,41 +53,49 @@ try{
 				break;
 				
 			case 'allsongs':
+			checkAuth();
+			if (isset($_SESSION['id'])){
+				$id = $_SESSION['id'];
+				
+			}
+			else{
+				$id = 0;
+			}
 				allSongs($twig, $_SESSION['id']);
 				break;
 			
-			case 'addNewVideo':
-				if (!isset($_SESSION['id'])){
-					throw new Exception ("Vous devez être connecté !");
-				}
-				else if(!isset($_POST['videoLink'])){
+			case 'accountAddVideo':
+				if(!isset($_POST['videoLink'])){
 					throw new Exception ("Fumble !");
 				}
-				else if(isset($_SESSION['id']) AND isset($_POST['videoLink'])) {
-				addNewVideo($_POST['videoLink'], $_SESSION['id'], $twig);
-				}
 				else{
-					
+				addNewVideo($_POST['videoLink'], $_SESSION['id']);
 				}
 				break;
+				
+			case 'accountRemoveVideo':
+			if(!isset($_POST['videoLink'])){
+					throw new Exception ("Fumble !");
+				}
+			else{
+			removeVideo($_POST['videoLink'], $_SESSION['id']);
+			}
+			break;
 				
 			case 'login':
 				login($twig);
 				break;
 			
-			case 'addSong':
+			case 'accountAddSong':
 			$_POST['fonction'];
 			addSong($_SESSION['id'], $_POST['songId']);
 				break;
 				
-			case 'removeSong':
+			case 'accountRemoveSong':
 			$_POST['fonction'];
 			removeSong($_SESSION['id'], $_POST['songId']);
 				break;
 				
-			case 'checkSong':
-			checkSong($twig, $_SESSION['id'], 3);
-			break;
 									
 			case 'inscription':
 				inscription($twig);
@@ -91,7 +109,7 @@ try{
 				logout($twig);
 				break;
 		
-			case 'validaccount':
+			case 'validation':
 				logout($twig);
 				validAccount($_GET['pseudo'], $_GET['key']);
 				break;

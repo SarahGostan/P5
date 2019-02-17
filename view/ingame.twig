@@ -27,15 +27,20 @@
 	<section id="ambianceMusique">
 		<p>Pour ajouter une vidéo youtube, ajoutez l'identifiant de la vidéo (ex : dQw4w9WgXcQ) ci-dessous</p>
 		
-		<form id="videoAdd" action="index.php?action=addNewVideo" method="post">
+		<form id="videoAdd" action="index.php?action=accountAddVideo" method="post">
 		<input type="texte" name="videoLink" id="videoLink" required>
 		<input type="submit" id="addVideoLink" value="Ajouter">
 		</form>
 		
 		{% for videos in videos %}
-		   <iframe id="player" type="text/html" width="320" height="180"
+		   <iframe id="player" type="text/html" width="240" height="135"
   src="http://www.youtube.com/embed/{{ videos['video_link'] }}?enablejsapi=1&origin=http://localhost/appliJDR"
   frameborder="0"></iframe>
+  
+  <form id="videoRemove" action="index.php?action=accountRemoveVideo" method="post">
+	<input type="hidden" name="videoLink" id="videoLink" value={{ videos['video_link'] }}>
+	<input type="submit" id="removeVideo" value="x">
+  </form>
 		{% endfor %}
 		
 		
