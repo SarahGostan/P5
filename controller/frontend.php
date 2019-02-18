@@ -3,9 +3,11 @@
 require_once('model/SongsManager.php');
 require_once('model/VideosManager.php');
 
-function accueil($twig){
-
-	echo $twig->render('accueil.twig');
+function accueil($twig, $message){
+	if ($message == 'emailsent'){
+		$message = 'Un email de confirmation vous a été envoyé';
+	}
+	echo $twig->render('accueil.twig', array('message' => $message));
 	
 }
 

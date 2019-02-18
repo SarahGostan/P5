@@ -6,8 +6,8 @@
 {% block content %}
 
 <div id="ingameContent">
-	<section id="ambianceSong">
-		
+	<section id="ambianceSong" class="ingame">
+
 		<h3>Bruitages</h3>
 		{% if favSongs %}
 		
@@ -21,10 +21,10 @@
 		Votre liste de sons favoris est vide ! Ajoutez en <a href="?action=allsongs">ici</a>
 		{% endif %}
 
-		
+	
 	</section>
 
-	<section id="ambianceMusique">
+	<section id="ambianceMusique" class="ingame">
 		<p>Pour ajouter une vidéo youtube, ajoutez l'identifiant de la vidéo (ex : dQw4w9WgXcQ) ci-dessous</p>
 		
 		<form id="videoAdd" action="index.php?action=accountAddVideo" method="post">
@@ -47,7 +47,7 @@
 	
 	</section>
 
-	<section id="diceRoll">	
+	<section id="diceRoll" class="ingame">	
 	
 		<div id="diceResult">
 		<div id="last"></div>
@@ -66,7 +66,11 @@
 	</section>
 
 </div>
-
+<div id="bloc">
+<span id="bloc_note">
+<p>Blah</p>
+</span>
+</div>
 
 {% endblock %}
 

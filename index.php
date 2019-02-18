@@ -25,6 +25,13 @@ error_reporting( E_ALL );
 	
 try{
 	
+	if (isset($_GET['message'])){
+				$message = $_GET['message'];
+			}
+			else{
+				$message = "";
+			}
+	
 	if (isset($_GET['action']))
 		{	
 	
@@ -38,12 +45,7 @@ try{
 			}
 		}
 	$page = $_GET['action'];	
-	if (isset($_GET['message'])){
-				$message = $_GET['message'];
-			}
-			else{
-				$message = "";
-			}
+	
 	switch($page)
 		{
 			
@@ -55,7 +57,7 @@ try{
 				login($twig, $message);
 			}
 			else{
-				accueil($twig);
+				accueil($twig, $message);
 			}
 				break;
 				
@@ -87,7 +89,7 @@ try{
 				allSongs($twig, $_SESSION['id']);
 				break;
 				
-			case 'sendpassword':
+			case 'resetpassword':
 			if (isset($_POST['mail']) AND $_POST['mail'] != null)
 			{
 				$mail = $_POST['mail'];
@@ -95,7 +97,7 @@ try{
 			}
 			else 
 			{
-				accueil($twig);
+				accueil($twig, $message);
 			}
 			break;
 					
@@ -131,7 +133,7 @@ try{
 				break;
 				
 			default:
-				accueil($twig);
+				accueil($twig, $message);
 				break;
 				
 			case 'account':
@@ -184,7 +186,7 @@ try{
 		/* Page d'index par défaut */
 	else
 	{	
-				accueil($twig);
+				accueil($twig, $message);
 	}
 }
 		/* Affichage de la page d'erreur */

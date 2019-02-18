@@ -65,8 +65,8 @@ function checkAuth(){
 	Ceci est un mail automatique, Merci de ne pas y répondre.';
 	$sujet = 'Activation de votre compte';
 	$entete = "From: inscription@lecrandumj.com" ;
-	//mail($mail, $sujet, $content, $entete);
-	echo $twig->render('accueil.twig');
+	mail($mail, $sujet, $content, $entete);
+	header('Location:?action=accueil&message=emailsent');
 	exit();
 	}
 }
@@ -109,14 +109,16 @@ function sendPassword($mail){
 		
 		Si vous êtes à l\'origine de cette demande, cliquez sur ce lien pour recevoir un nouveau mot de passe, ou copiez le dans votre navigateur internet :
 		
-		localhost/appliJDR/index.php?action=resetpassword&id='.($id['id']).'&key='.urlencode($key).'
+		localhost/appliJDR/index.php?action=changepassword&id='.($id['id']).'&key='.urlencode($key).'
  
 		Si vous n\'avez pas demandé la réinitialisation de votre mot de passe, ignorez cet email.
  
 ---------------
 Ceci est un mail automatique, Merci de ne pas y répondre.';
 
-		mail($mail, $sujet, $content, $entete);
+		//mail($mail, $sujet, $content, $entete);
+		header('location:index?action=accueil&message=emailsent');
+		
 	}
 	else {
 		throw new Exception ('Email invalide');
