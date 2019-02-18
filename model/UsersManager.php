@@ -61,4 +61,31 @@ class UsersManager extends Manager{
 			return $result;
 		} 
 	}
+	
+	
+	public function checkMail($mail){
+		$req = $this->db->prepare('SELECT COUNT(*) AS checkmail FROM users WHERE mail = :mail');
+		$req->execute(array(
+		'mail' =>$mail)); 
+		$donnee = $req->fetchAll();
+		$checkMail = $donnee[0];
+		return $checkMail;
+			
+	}
+	
+	public function changeKey($mail, $key){
+		$req = $this->db->prepare('UPDATE users SET activation_key = :key WHERE mail = :mail');
+		$req->execute(array(
+		'key' =>$key,
+		'mail' =>$mail)); 
+	}
+	
+	public function selectId($mail){
+		$req = $this->db->prepare('SELECT id FROM users WHERE mail = :mail');
+		$req->execute(array(
+		'mail' => $mail));
+		$donnee = $req->fetchAll();
+		$id = $donnee[0];
+		return $id;
+	}
 }

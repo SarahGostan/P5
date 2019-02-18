@@ -7,11 +7,8 @@ require_once('class/UserSession.php');
 function login($twig, $message){
 	if($message == 'fail'){
 		$message="Echec de la connexion";
+	}
 	echo $twig->render('login.twig', array('message' => $message));
-	}
-	else{
-		echo $twig->render('login.twig');
-	}
 }
 
 function inscription($twig){
@@ -47,24 +44,31 @@ function checkAuth(){
 	}
 }
 
-	function signup($password, $mail, $message){
+	function signup($password, $mail, $message, $twig){
+		
 	$key = md5(microtime(TRUE)*100000);
 	$userSignUp= new UsersManager();
-	$userSignUp = $userSignUp->signUp($pseudo, $password, $mail, $key);
+	$checkMail = $userSignUp->checkMail($mail);
+	if($checkMail['checkmail'] > 0){
+		throw new Exception ('Cet email est déjà enregistré.<br /><a href="index?action=inscription">Connectez vous</a>');
+	}
+	else{
+	$userSignUp = $userSignUp->signUp($password, $mail, $key);
 	$content = 'Bienvenue sur l\'Ecran du MJ,
  
-Pour activer votre compte, veuillez cliquer sur le lien ci dessous
-ou copier/coller dans votre navigateur internet.
- 
-localhost/appliJDR/index.php?action=validaccount&mail='.urlencode($mail).'&key='.urlencode($key).'
- 
----------------
-Ceci est un mail automatique, Merci de ne pas y répondre.';
-$sujet = 'Activation de votre compte';
-$entete = "From: inscription@jaipasencoretrouvedenom.com" ;
-mail($mail, $sujet, $content, $entete);
-header('Location:index.php');
-exit();
+	Pour activer votre compte, veuillez cliquer sur le lien ci dessous
+	ou copier/coller dans votre navigateur internet.
+	 
+	localhost/appliJDR/index.php?action=validaccount&mail='.urlencode($mail).'&key='.urlencode($key).'
+	 
+	---------------
+	Ceci est un mail automatique, Merci de ne pas y répondre.';
+	$sujet = 'Activation de votre compte';
+	$entete = "From: inscription@lecrandumj.com" ;
+	//mail($mail, $sujet, $content, $entete);
+	echo $twig->render('accueil.twig');
+	exit();
+	}
 }
 
 function validAccount($mail, $key){
@@ -90,6 +94,34 @@ function accountChangePassword($id, $actualPass, $newPass){
 	}
 }
 
+
+function sendPassword($mail){
+	$newPassword = new UsersManager();
+	$checkMail = $newPassword->checkMail($mail);
+	if($checkMail['checkmail'] > 0){
+		$key = md5(microtime(TRUE)*100000);
+		$newKey = $newPassword->changeKey($mail, $key);
+		$id = $newPassword->selectId($mail);
+		$sujet = 'Réinitialisation de votre mot de passe';
+		$entete = "From: support@lecrandumj.com" ;
+		$content = 
+		'Vous recevez ce mail car vous avez demandé la réinitialisation de votre mot de passe sur l\'Ecran du MJ.
+		
+		Si vous êtes à l\'origine de cette demande, cliquez sur ce lien pour recevoir un nouveau mot de passe, ou copiez le dans votre navigateur internet :
+		
+		localhost/appliJDR/index.php?action=resetpassword&id='.($id['id']).'&key='.urlencode($key).'
+ 
+		Si vous n\'avez pas demandé la réinitialisation de votre mot de passe, ignorez cet email.
+ 
+---------------
+Ceci est un mail automatique, Merci de ne pas y répondre.';
+
+		mail($mail, $sujet, $content, $entete);
+	}
+	else {
+		throw new Exception ('Email invalide');
+	}
+}
 
 
 	

@@ -15,5 +15,14 @@
 		<input type="password" name="password" id="password" /><br />
 		<input type="submit" value = "Envoyer"/>
 	</form>
+<a href="?action=inscription">S'inscrire</a>
+<a href="?action=sendpassword">Mot de passe oublié<a>
+
+<form id="sendPassword" action = "index.php?action=sendpassword" method="post" >
+		<h2>Réintialiser le mot de passe</h2>
+		<label for="mail">Email</label>
+		<input type="email" name="mail" id="mail" required /><br />
+		<input type="submit" value = "Envoyer"/>
+	</form>
 
 {% endblock %}

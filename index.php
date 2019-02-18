@@ -47,8 +47,23 @@ try{
 	switch($page)
 		{
 			
-		
-			case 'ingame':
+		/* AFFICHAGE DE PAGES */
+
+		case 'login':
+				if (!isset($_SESSION['id']))
+			{	
+				login($twig, $message);
+			}
+			else{
+				accueil($twig);
+			}
+				break;
+				
+		case 'inscription':
+				inscription($twig);
+				break;
+				
+		case 'ingame':
 			checkAuth();
 			if (isset($_SESSION['id'])){
 				$id = $_SESSION['id'];
@@ -60,7 +75,7 @@ try{
 				ingame($twig, $id);
 				break;
 				
-			case 'allsongs':
+		case 'allsongs':
 			checkAuth();
 			if (isset($_SESSION['id'])){
 				$id = $_SESSION['id'];
@@ -71,6 +86,64 @@ try{
 			}
 				allSongs($twig, $_SESSION['id']);
 				break;
+				
+			case 'sendpassword':
+			if (isset($_POST['mail']) AND $_POST['mail'] != null)
+			{
+				$mail = $_POST['mail'];
+				sendPassword($mail);
+			}
+			else 
+			{
+				accueil($twig);
+			}
+			break;
+					
+		/* GESTION DE COMPTE UTILISATEUR */		
+				
+		case 'signup':
+		if (!empty($_POST['password']) && !empty($_POST['mail'])){
+			signup($_POST['password'],  $_POST['mail'], $message, $twig);
+		}
+		else{
+			throw new Exception('La page demandée est invalide');
+		}
+			break;
+						
+		case 'logout':
+			logout($twig);
+			break;
+		
+		case 'validation':
+			logout($twig);
+			validAccount($_GET['pseudo'], $_GET['key']);
+			break;
+			
+				
+		case 'authenticize':
+			if (!empty($_POST['identifiant']) && !empty($_POST['password'])){
+				authenticize($_POST['identifiant'], $_POST['password'], $twig);
+			}
+			else{
+				$message = "Email ou mot de passe manquant";
+				login($twig, $message);
+			}
+				break;
+				
+			default:
+				accueil($twig);
+				break;
+				
+			case 'account':
+				account($twig, $message);
+				break;
+			
+			case 'accountChangePassword':
+				accountChangePassword($_SESSION['id'], $_POST['actualPassword'], $_POST['newPassword']);
+				break;
+				
+		
+			
 			
 			case 'accountAddVideo':
 				if(!isset($_POST['videoLink'])){
@@ -90,15 +163,7 @@ try{
 			}
 			break;
 				
-			case 'login':
-				if (!isset($_SESSION['id']))
-			{	
-				login($twig, $message);
-			}
-			else{
-				accueil($twig);
-			}
-				break;
+			
 			
 			case 'accountAddSong':
 			$_POST['fonction'];
@@ -111,44 +176,7 @@ try{
 				break;
 				
 									
-			case 'inscription':
-				inscription($twig);
-				break;
-				
-			case 'signup':
-				signup($_POST['password'],  $_POST['mail'], $message);
-				break;
-						
-			case 'logout':
-				logout($twig);
-				break;
-		
-			case 'validation':
-				logout($twig);
-				validAccount($_GET['pseudo'], $_GET['key']);
-				break;
 			
-				
-			case 'authenticize':
-				if (!empty($_POST['identifiant']) && !empty($_POST['password'])){
-					authenticize($_POST['identifiant'], $_POST['password'], $twig);
-				}
-				else{
-					throw new Exception ('Login ou mot de passe incorrect');
-				}
-				break;
-			default:
-				accueil($twig);
-				break;
-				
-			case 'account':
-				account($twig, $message);
-				break;
-			
-			case 'accountChangePassword':
-				accountChangePassword($_SESSION['id'], $_POST['actualPassword'], $_POST['newPassword']);
-				break;
-				
 		}
 	}
 	

@@ -38,9 +38,7 @@ function removeVideo($link, $id){
 function account($twig, $message){
 	if($message == 'fail'){
 		$message = "Mot de passe incorrect";
+	}
 	echo $twig->render('account.twig', array('message' =>$message));
-	}
-	else{
-		echo $twig->render('account.twig');
-	}
+
 }
