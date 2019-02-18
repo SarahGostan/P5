@@ -18,9 +18,6 @@ header{
 	margin-top: 0;
 }
 
-#menu{
-	
-}
 
 #menu li{
 	display: flex;
@@ -39,6 +36,66 @@ header{
 	margin: 30px;
 	top: 0;
 }
+
+#diceRoll{
+	display: flex;
+	flex-direction: column;
+	border: none;
+	position: relative;  
+	margin-top: calc(1px + 1.1%);
+	display: inline-block;
+	transform: skewY(-0);
+}
+
+#diceRoll:before {
+  content: " ";
+  background-image:linear-gradient(to right, #f9f3e8, white);
+  position: absolute;
+  top:0;
+  left:0px;
+  right:0px;
+  bottom:0;
+  z-index: -1;
+  transform: skewY(4deg);
+  border: 1px solid black;
+  box-sizing: content-box;
+}
+
+#ambianceSong:before {
+  content: " ";
+  background-image:linear-gradient(to right, white, #f9f3e8);
+  position: absolute;
+  top:0;
+  left:0px;
+  right:-1px;
+  bottom:0;
+  z-index: -1;
+  transform: skewY(-4deg);
+  border: 1px solid black;
+  box-sizing: content-box;
+}
+
+
+#ambianceSong{
+	border: none;
+	position: relative;  
+	margin-top: calc(1px + 1.1%);
+	display: inline-block;
+	transform: skewY(-0);
+	display: flex;
+	flex-direction: column;
+}
+.songInGame{
+	width: 250px;
+	height: 20px;
+}
+#ambianceMusique{
+	background-image: radial-gradient(circle at center, white, #f9f3e8);
+	border-right: 3px solid black;
+	border-left: 3px solid black;
+}
+
+
 #ingameContent{
 	display: flex;
 	align-items: flex-start;
@@ -72,53 +129,30 @@ header{
 
 
 
-#diceRoll{
-	display: flex;
-	flex-direction: column;
-	background-color: #f2f2f2;
-	border: none;
-	color: #fff;
-	position: relative;  
-	margin-top: calc(1px + 1.1%);
-	display: inline-block;
-	transform: skewY(-0);
-}
-
-#diceRoll:before {
-  content: " ";
-  background-color: #dee9ea;
-  position: absolute;
-  top:0;
-  left:0px;
-  right:0px;
-  bottom:0;
-  z-index: -1;
-  transform: skewY(4deg);
-  border: 1px solid black;
-  box-sizing: content-box;
-}
-
 
 
 #diceResult{
 	height: 250px;
-	justify-content: space-around;
 	overflow-y: auto;
-	box-sizing: border-box;
 }
 
 #total{
 	width: 90%;
 }	
 
+#last{
+	margin-top: calc(10px + 2.2%) !important;
+	margin: 1px;
+}
+
 #diceResult div{
-	margin-top: 2px;
+	align-items: center;
 	display: flex;
 	flex-wrap: wrap;
 	min-height: 25%;
-	align-items: center;
 	justify-content: center;
 	overflow: auto;
+	margin: 2px;
 }
 
 
@@ -135,30 +169,6 @@ header{
 }
 
 
-
-#ambianceSong:before {
-  content: " ";
- background-color: #dee9ea;
-  position: absolute;
-  top:0;
-  left:0px;
-  right:0px;
-  bottom:0;
-  z-index: -1;
-  transform: skewY(-4deg);
-  border: 1px solid black;
-  box-sizing: content-box;
-}
-
-#ambianceSong{
-	border: none;
-	color: #fff;
-	position: relative;  
-
-	margin-top: calc(1px + 1.1%);
-	display: inline-block;
-	transform: skewY(-0);
-}
 
 #last span{
 	width: 35px;

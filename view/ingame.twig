@@ -13,7 +13,7 @@
 		
 		{% for favSongs in favSongs %}
 		{{ favSongs['name'] }}
-		<audio src="songs/{{ favSongs['access'] }}" controls></audio>
+		<audio class="songInGame" src="songs/{{ favSongs['access'] }}" controls></audio>
 		{% endfor %}
 		
 		

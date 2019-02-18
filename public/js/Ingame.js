@@ -30,7 +30,7 @@ Ingame.prototype.rollDices = function(){
 	diceTotal.setAttribute("id", "total");
 	diceTotal.appendChild(document.createTextNode('Total :' + totalDices));
 	diceElement.appendChild(diceTotal);
-//	diceResults.scrollTop = diceResult.scrollHeight;
+	diceResults.scrollTop = diceResults.scrollHeight;
 }
 
 Ingame.prototype.getRandomDices = function(min, max){
