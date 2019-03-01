@@ -1,0 +1,60 @@
+{% extends 'template.twig' %}
+{% block title %}Parties{% endblock %}
+{% block script %}<script src="public/js/Manage.js"></script><script src="public/js/Songs.js"></script>
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<div id="gamesManager">
+	<div id="gamesNames">
+		<h2>Mes parties</h2>
+
+		{% for gamesInfos in gamesInfos %}
+		<a href="?action=ingame&id={{ gamesInfos['game_id'] }}">{{ gamesInfos['name'] }}</a><a href="index.php?action=accountsupressgame&id={{ gamesInfos['game_id'] }}">Supprimer cette partie</a><br />
+		{% endfor %}
+		<form method="post" action="?action=accountnewgame" id="newGameForm">
+			<h3>Créer une partie</h3>
+			<label for="gameName">Nommer la partie</label>
+			<input type="varchar" name="gameName" id="gameName" required>
+			<input type="submit" value="Créer la partie">
+		</form>
+
+	</div>
+	<div id="favoris">
+		{% if favSongs %}
+
+			{% for favSongs in favSongs %}
+				<div class="favSongs">
+					{{ favSongs['name'] }}
+					<audio class="songInFav" src="public/songs/{{ favSongs['access'] }}" controls></audio><p>Ajouter à :</p>
+					<div>
+							{% for gamesInfos in gamesInfos %}
+								<button id="{{favSongs['id']}}" class="addSongToGame" name="{{gamesInfos['game_id']}}">{{ gamesInfos['name'] }}</button>
+							{% endfor %}
+					</div>
+				<button class="removeSong" id="{{ favSongs['id'] }}"></button>
+				</div>
+			{% endfor %}
+
+
+			{% else %}
+				Votre liste de sons favoris est vide ! Ajoutez en <a href="?action=allsongs">ici</a>
+			{% endif %}
+	</div>
+</div>
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block script_bottom %}
+<script>var Manage = new Manage();</script>
+<script>var AllSongs = new AllSongs();</script>
+{% endblock %}

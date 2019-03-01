@@ -5,15 +5,30 @@
 {% block header %}
 <div class="actionAccueil">
 <h1>L'outil des Maitres de Jeu</h1>
-
-
-	<button><a href="index?action=ingame">Jouer</a></button><br />
-
-</div>
-
 {% endblock %}
 
-
 {% block content %}
+{% if id is not null %}
+
+
+
+	<h2>Mes parties</h2>
+
+
+
+<div id="favoris">
+<p>Liste des favoris du compte</p>
+</div>
+{% else %}
+<p> Bienvenue bla bla </p>
+{% endif %}
+</div>
+
+
+
+
+
+
+
 
 {% endblock %}

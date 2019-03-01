@@ -13,12 +13,12 @@
 	
 	
 		<header>
-		{% block message %}{{ message }}{% endblock %}
-		<a href="index.php" id="title"><h1>L'écran du MJ</h1></a>
+	
+		<a href="index.php" id="title"><img src="public/images/resize_logo.png" alt="logo" /><h1><div id="ecran">L'ecran</div><div id="du">du</div><div id="mj">MJ</div></h1></a>
 	<nav>
 		<ul id="menu">
 			<li><a href="?action=allsongs">Tous les sons</a></li>
-			<li><a href="?action=ingame">Ma partie</a></li>
+			<li><a href="?action=jouer">Mes parties</a></li>
 			{% if id is not null %}
 			<li><a href="?action=account">Mon compte</a></li>
 			{% endif %}
@@ -35,7 +35,7 @@
 	
 	{% endif %}
 	</div>
-		
+			{% block message %}{{ message }}{% endblock %}
 				{% block header %}{% endblock %}
 		</header>
 		 

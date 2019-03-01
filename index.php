@@ -6,6 +6,7 @@ require 'vendor/autoload.php';
 require 'class/global.php';
 require 'controller/LogsController.php';
 require 'controller/SongsController.php';
+require 'controller/GamesController.php';
 
 checkAuth();
 $loader = new Twig_Loader_Filesystem(__DIR__ . '/view');
@@ -19,109 +20,132 @@ $twig->addExtension(new Project_Twig_Extension);
 ini_set('display_errors', 1);
 error_reporting( E_ALL );
 
-	
+
 	require('controller/frontend.php');
 	$page = 'home';
-	
+
 try{
-	
+
 	if (isset($_GET['message'])){
 				$message = $_GET['message'];
 			}
 			else{
 				$message = "";
 			}
-	
+
 	if (isset($_GET['action']))
-		{	
-	
+		{
+
 	if (strstr($_GET['action'], 'account'))
 		{
-			
+
 			if (!isset($_SESSION['id']))
-			{	
-			throw new Exception ("Vous devez être connecté pour effectuer cette action");
+			{
+			throw new Exception ("Vous devez ï¿½tre connectï¿½ pour effectuer cette action");
 			exit();
 			}
 		}
-	$page = $_GET['action'];	
-	
+	if (isset($_SESSION['id'])){
+		$id = $_SESSION['id'];
+	}
+	else{
+		$id = 0;
+	}
+	$page = $_GET['action'];
+
 	switch($page)
 		{
-			
+
 		/* AFFICHAGE DE PAGES */
 
 		case 'login':
 				if (!isset($_SESSION['id']))
-			{	
+			{
 				login($twig, $message);
 			}
 			else{
 				accueil($twig, $message);
 			}
 				break;
-				
+
 		case 'inscription':
 				inscription($twig);
 				break;
-				
+
+		case 'accountnewgame':
+		if (isset ($_POST['gameName'])){
+				newgame($id, $_POST['gameName']);
+			}
+			else{
+				$message='CrÃ©ation impossible';
+				accueil($twig,  $message);
+			}
+
+				break;
+
+			case 'accountsupressgame':
+				if (isset($_GET['id'])){
+					$gameId = $_GET['id'];
+					supressGame($gameId, $id);
+				}
+				else{
+					$message='Erreur : partie inexistante';
+					accueil($twig,  $message);
+				}
+				break;
 		case 'ingame':
 			checkAuth();
-			if (isset($_SESSION['id'])){
-				$id = $_SESSION['id'];
-				
+			if (isset($_GET['id'])){
+				ingame($twig, $id, $_GET['id']);
 			}
 			else{
-				$id = 0;
+				$message="Id incorrect";
+				accueil($twig, $message);
 			}
-				ingame($twig, $id);
 				break;
-				
+
 		case 'allsongs':
 			checkAuth();
-			if (isset($_SESSION['id'])){
-				$id = $_SESSION['id'];
-				
-			}
-			else{
-				$id = 0;
-			}
-				allSongs($twig, $_SESSION['id']);
+				allSongs($twig, $id);
 				break;
-				
+
 			case 'resetpassword':
 			if (isset($_POST['mail']) AND $_POST['mail'] != null)
 			{
 				$mail = $_POST['mail'];
 				sendPassword($mail);
 			}
-			else 
+			else
 			{
 				accueil($twig, $message);
 			}
 			break;
-					
-		/* GESTION DE COMPTE UTILISATEUR */		
-				
+
+		case 'jouer':
+			getGamesInfos($twig, $id);
+			break;
+
+		/* GESTION DE COMPTE UTILISATEUR */
+
 		case 'signup':
 		if (!empty($_POST['password']) && !empty($_POST['mail'])){
 			signup($_POST['password'],  $_POST['mail'], $message, $twig);
 		}
 		else{
-			throw new Exception('La page demandée est invalide');
+			throw new Exception('La page demandï¿½e est invalide');
 		}
 			break;
-						
+
 		case 'logout':
 			logout($twig);
 			break;
-		
+
 		case 'validation':
 			logout($twig);
 			validAccount($_GET['pseudo'], $_GET['key']);
 			break;
-			
-				
+
+
 		case 'authenticize':
 			if (!empty($_POST['identifiant']) && !empty($_POST['password'])){
 				authenticize($_POST['identifiant'], $_POST['password'], $twig);
@@ -131,22 +155,22 @@ try{
 				login($twig, $message);
 			}
 				break;
-				
+
 			default:
 				accueil($twig, $message);
 				break;
-				
+
 			case 'account':
 				account($twig, $message);
 				break;
-			
+
 			case 'accountChangePassword':
 				accountChangePassword($_SESSION['id'], $_POST['actualPassword'], $_POST['newPassword']);
 				break;
-				
-		
-			
-			
+
+
+
+
 			case 'accountAddVideo':
 				if(!isset($_POST['videoLink'])){
 					throw new Exception ("Fumble !");
@@ -155,7 +179,7 @@ try{
 				addNewVideo($_POST['videoLink'], $_SESSION['id']);
 				}
 				break;
-				
+
 			case 'accountRemoveVideo':
 			if(!isset($_POST['videoLink'])){
 					throw new Exception ("Fumble !");
@@ -164,28 +188,32 @@ try{
 			removeVideo($_POST['videoLink'], $_SESSION['id']);
 			}
 			break;
-				
-			
-			
+
+
+
 			case 'accountAddSong':
-			$_POST['fonction'];
+
 			addSong($_SESSION['id'], $_POST['songId']);
 				break;
-				
+
 			case 'accountRemoveSong':
-			$_POST['fonction'];
 			removeSong($_SESSION['id'], $_POST['songId']);
 				break;
-				
-									
-			
+
+			case 'accountAddSongToGame':
+			addSongToGame($_SESSION['id'],  $_POST['gameId'], $_POST['songId']);
+				break;
+			case 'accountRemoveSongFromGame':
+			removeSongFromGame($_SESSION['id'],  $_POST['gameId'], $_POST['songId']);
+
+
 		}
 	}
-	
-	
-		/* Page d'index par défaut */
+
+
+		/* Page d'index par dï¿½faut */
 	else
-	{	
+	{
 				accueil($twig, $message);
 	}
 }

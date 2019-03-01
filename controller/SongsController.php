@@ -3,22 +3,17 @@
 require_once('model/SongsManager.php');
 
 
-function getFavSongs(){
-	$songsManager = new SongsManager();
-	$id = 1;
-	$favSongsId = $songsManager->getFavSongsId($id);
-	while ($favSongsId = $favSongsId->fetch()){
-	$favSongs = $songsManager->getFavSongs($favSongsId);
-	}
-	return $favSongs;
-}
+
 
 
 function allSongs($twig, $userId){
 	$songsManager = new SongsManager();
 	$allSongs = $songsManager->getAllSongs();
-	$favSongsId = $songsManager->getFavSongsId($userId);
-
+	$favSongs = $songsManager->getFavSongs($userId);
+	$favSongsId = [];
+	foreach($favSongs as $favSong){
+	$favSongsId[] = $favSong['id'];
+	}
 	
 	echo $twig->render('allsongs.twig', array('allSongs' => $allSongs, 'favSongs' => $favSongsId));
 }

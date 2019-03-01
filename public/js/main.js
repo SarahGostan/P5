@@ -1,3 +1,5 @@
 document.addEventListener('DOMContentLoaded', function(){
-	var appel = new App();
+	if(typeof Ingame != 'undefined'){
+	var ingame = new Ingame();
+	}	
 });

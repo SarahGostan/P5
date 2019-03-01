@@ -6,18 +6,30 @@
 
 <div id="allSongs">
 
+
 {% for allSongs in allSongs %}
 		<div class="songs">{{ allSongs['name'] }}
-		<audio src="songs/{{ allSongs['access'] }}" controls></audio></div><button class="addSong" id="{{ allSongs['id'] }}">Ajouter aux favoris</button>
+
+{% if allSongs['id'] in favSongs %}
+	<audio src="public/songs/{{ allSongs['access'] }}" controls></audio></div>{% if id is not null %}<button class="removeSong" id="{{ allSongs['id'] }}"></button>{% endif %}
+{% else %}
+		<audio src="public/songs/{{ allSongs['access'] }}" controls></audio></div>{% if id is not null %}<button class="addSong" id="{{ allSongs['id'] }}"></button>{% endif %}
+{% endif %}
+
 		{% endfor %}
-{% for favSongs in favSongs %}
-{{ favSongs['id'] }}
-{% endfor %}
+
+
 </div>
 
 {% endblock %}
 
 
+
+
 {% block script_bottom %}
 <script>var AllSongs = new AllSongs();</script>
 {% endblock %}
+
+
+
+
