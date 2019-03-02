@@ -41,7 +41,7 @@ try{
 
 			if (!isset($_SESSION['id']))
 			{
-			throw new Exception ("Vous devez �tre connect� pour effectuer cette action");
+			throw new Exception ("Vous devez être connecté pour effectuer cette action");
 			exit();
 			}
 		}

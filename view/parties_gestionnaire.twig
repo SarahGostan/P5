@@ -12,7 +12,10 @@
 		<h2>Mes parties</h2>
 
 		{% for gamesInfos in gamesInfos %}
-		<a href="?action=ingame&id={{ gamesInfos['game_id'] }}">{{ gamesInfos['name'] }}</a><a href="index.php?action=accountsupressgame&id={{ gamesInfos['game_id'] }}">Supprimer cette partie</a><br />
+	<div id="games">
+			<a class="linkGame" href="?action=ingame&id={{ gamesInfos['game_id'] }}">{{ gamesInfos['name'] }}</a>
+			<a href="index.php?action=accountsupressgame&id={{ gamesInfos['game_id'] }}">Supprimer cette partie</a>
+	<div>
 		{% endfor %}
 		<form method="post" action="?action=accountnewgame" id="newGameForm">
 			<h3>Créer une partie</h3>

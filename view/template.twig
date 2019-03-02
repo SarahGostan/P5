@@ -3,17 +3,18 @@
     <head>
         <meta charset="utf-8" />
         <title>{% block title %}{% endblock %}</title>
-        <link href="public/style.css" rel="stylesheet" /> 
+        <link href="public/style.css" rel="stylesheet" />
+        <link rel="icon" type="image/png" href="public/images/head_resize.png" />
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		{% block script %}{% endblock %}
-	
+
 
     </head>
 	<body>
-	
-	
+
+
 		<header>
-	
+
 		<a href="index.php" id="title"><img src="public/images/resize_logo.png" alt="logo" /><h1><div id="ecran">L'ecran</div><div id="du">du</div><div id="mj">MJ</div></h1></a>
 	<nav>
 		<ul id="menu">
@@ -24,7 +25,7 @@
 			{% endif %}
 		</ul>
 	</nav>
-	
+
 	<div id="connexion">
 	{% if id is not null %}
 	<p>Bienvenue</p>
@@ -32,21 +33,21 @@
 	{% else %}
 	<a href="index?action=login">Connexion</a>
 	<a href="index?action=inscription">Inscription</a>
-	
+
 	{% endif %}
 	</div>
 			{% block message %}{{ message }}{% endblock %}
 				{% block header %}{% endblock %}
 		</header>
-		 
+
 		 <div id="content">
 			{% block content %}{% endblock %}
 		</div>
-			
+
 		<footer>
-			
+
 		</footer>
-		
+
 
 <script src="public/js/main.js"></script>
 {% block script_bottom %}{% endblock %}

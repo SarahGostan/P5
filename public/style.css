@@ -22,6 +22,19 @@ a{
 
 }
 
+.linkGame{
+	text-decoration: none;
+	margin: 5px;
+	background-color: #aaafff;
+	color: white;
+	padding: 5px;
+}
+
+#games{
+	display: flex;
+	flex-direction: column;
+}
+
 #blocNotes{
 	margin: 30px;
 }
