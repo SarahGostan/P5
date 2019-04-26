@@ -1,8 +1,17 @@
 {% extends 'template.twig' %}
 {% block title %}Interface de partie{% endblock %}
 {% block script %}<script src="public/js/Songs.js"></script>{% endblock %}
-{% block header %}Ici, plusieurs onglets permettront de passer plus facilement d'une fonctionnalité à l'autre{% endblock %}
+{% block header %}{% endblock %}
 {% block content %}
+
+<div id='songSearch'>
+		<label for="search">Rechercher un son</label>
+		<input type="text" id="songSearch" value="">
+		 <input type="button" id="searchASong" value="Rechercher">
+</div>
+<div id="result"></div>
+
+</div>
 
 <div id="allSongs">
 
@@ -29,7 +38,3 @@
 {% block script_bottom %}
 <script>var AllSongs = new AllSongs();</script>
 {% endblock %}
-
-
-
-

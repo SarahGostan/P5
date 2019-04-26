@@ -22,6 +22,13 @@ a{
 
 }
 
+#notes{
+	display: flex;
+}
+.notes{
+	width: 400px;
+}
+
 .linkGame{
 	text-decoration: none;
 	margin: 5px;
@@ -77,13 +84,73 @@ h1{
 
 .favSongs{
 	display: flex;
+	width: 330px;
+	border: 1px solid black;
 }
-.favSongs div{
+
+.favSongs p{
+	text-wrap: wrap;
+
+}
+.favSongs fieldset{
 	display: flex;
 	flex-direction: column;
 }
-#menu li{
+
+.favSongs audio{
+	max-width: 150px;
+	height: 30px;
+}
+
+
+#menu{
+		display: flex;
+		list-style-type:none;
+		justify-content: space-around;
+		align-items: stretch;
+		border: 1px solid black;
+		margin: 0;
+		padding: 0;
+}
+
+.links{
+	opacity: 0.7;
+	color: rgba(249, 249, 249, .9);
+	flex-grow: 1;
+}
+
+.links span{
 	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.links a{
+	color: white;
+	display: block;
+	color: rgba(249, 249, 249, .9);
+	text-decoration: none;
+
+}
+.links:hover{
+	opacity: 1;
+	transition: 1s;
+}
+
+#accountMenu{
+	background-color: rgb(22, 107, 162);
+}
+
+#gamesMenu{
+	background-color:  rgb(208, 101, 3);
+}
+
+#allSongsMenu{
+	background-color: rgb(27, 54, 71);
+}
+
+
+#menu li{
+width: 33%;
 }
 
 #menu li a{

@@ -4,8 +4,10 @@
         <meta charset="utf-8" />
         <title>{% block title %}{% endblock %}</title>
         <link href="public/style.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
         <link rel="icon" type="image/png" href="public/images/head_resize.png" />
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
 		{% block script %}{% endblock %}
 
 
@@ -18,10 +20,25 @@
 		<a href="index.php" id="title"><img src="public/images/resize_logo.png" alt="logo" /><h1><div id="ecran">L'ecran</div><div id="du">du</div><div id="mj">MJ</div></h1></a>
 	<nav>
 		<ul id="menu">
-			<li><a href="?action=allsongs">Tous les sons</a></li>
-			<li><a href="?action=jouer">Mes parties</a></li>
+			<li class= "links" id="gamesMenu">
+        <a href="?action=jouer">
+          <span class="icon"><i class="fas fa-dice"></i></span>
+          <span>Mes parties</span>
+        </a>
+      </li>
+      <li class= "links" id="allSongsMenu">
+        <a href="?action=allsongs">
+          <span class="icon"><i class="fas fa-microphone-alt"></i></span>
+          <span>Tous les sons</span>
+        </a>
+      </li>
 			{% if id is not null %}
-			<li><a href="?action=account">Mon compte</a></li>
+			<li class="links" id="accountMenu">
+        <a href="?action=account">
+          <span class)"icon"><i class="fas fa-user-circle"></i>
+          </span><span>Mon compte</span>
+        </a>
+      </li>
 			{% endif %}
 		</ul>
 	</nav>

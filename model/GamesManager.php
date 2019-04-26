@@ -11,10 +11,21 @@ class GamesManager extends Manager{
 		'gameName' => $gameName,
 		'id' => $id,
 		));
-		$req = $this->db->lastInsertId();
-		return $req;
+		$gameId = $this->db->lastInsertId();
+		return $gameId;
 	}
 
+public function newNotes($id, $gameId){
+	$chapter = 1;
+	$req = $this->db->prepare('INSERT INTO game_notes(chapter, title, content, game_id, owner_id) VALUES (:chapter, :title, :content, :gameId, :id)');
+	$req->execute(array(
+		'chapter' => $chapter,
+		'title' => 'Page ' . $chapter,
+		'content' => 'Ecrivez ici vos notes de jeu',
+		'gameId' => $gameId,
+		'id' => $id,
+	));
+}
 
 	public function getGamesInfos($userId){
 			$query = $this->db->prepare('SELECT name, game_id FROM games WHERE owner_id = ?');
@@ -24,7 +35,7 @@ class GamesManager extends Manager{
 	}
 
 	public function getGameNotes($gameId, $userId){
-			$query = $this->db->prepare('SELECT chapter, title, content FROM game_notes WHERE owner_id = :userId AND game_id = :gameId');
+			$query = $this->db->prepare('SELECT chapter, title, content, id FROM game_notes WHERE owner_id = :userId AND game_id = :gameId');
 			$query->execute(array(
 			'userId' => $userId,
 			'gameId' => $gameId,
@@ -64,6 +75,13 @@ class GamesManager extends Manager{
 		));
 	}
 
+	public function supressGameSongs($gameId){
+		$req = $this->db->prepare('DELETE FROM game_songs WHERE game_id = :gameId');
+		$req->execute(array(
+		'gameId' => $gameId,
+		));
+	}
+
 	public function checkGameId($id, $gameId){
 		$req = $this->db->prepare('SELECT COUNT(*) AS total FROM games WHERE game_id = :gameId AND owner_id = :id');
 		$req->execute(array(
@@ -72,5 +90,25 @@ class GamesManager extends Manager{
 		$donnee = $req->fetchAll();
 		$total = $donnee[0];
 		return $total;
+	}
+
+	public function checkNoteId($ownerId, $postId){
+		$req = $this->db->prepare('SELECT COUNT(*) AS total FROM game_notes WHERE id = :postId AND owner_id = :ownerId');
+		$req->execute(array(
+		'postId' => $postId,
+		'ownerId' =>$ownerId));
+		$donnee = $req->fetchAll();
+		$total = $donnee[0];
+		return $total;
+	}
+
+
+	public function editeNotes($title, $content, $id){
+		$req = $this->db->prepare('UPDATE game_notes SET title = :title, content = :content WHERE id = :id');
+		$req->execute(array(
+		'title' => $title,
+		'content' =>$content,
+		'id' => $id
+	));
 	}
 }

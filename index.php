@@ -104,6 +104,13 @@ try{
 			}
 				break;
 
+		case 'notesEdit':
+		$post_id = $_POST['id'];
+		$title = $_POST['title'];
+		$content = $_POST['content'];
+			notesEdit($post_id, $title, $content, $id);
+		break;
+
 		case 'allsongs':
 			checkAuth();
 				allSongs($twig, $id);
@@ -189,7 +196,8 @@ try{
 			}
 			break;
 
-
+			case 'songSearch':
+			break;
 
 			case 'accountAddSong':
 

@@ -1,10 +1,12 @@
 {% extends 'template.twig' %}
 {% block title %}Interface de partie{% endblock %}
+
 {% block script %}
-<script src="public/js/main.js"></script>
 <script src="public/js/Ingame.js"></script>
 <script src="public/js/Manage.js"></script>
-<script src="public/js/VideoPlayer.js"></script>{% endblock %}
+<script src="public/js/VideoPlayer.js"></script>
+{% endblock %}
+
 {% block header %}Ici, plusieurs onglets permettront de passer plus facilement d'une fonctionnalité à l'autre{% endblock %}
 {% block content %}
 
@@ -70,11 +72,25 @@
 		</section>
 </div>
 
+
+
 		<section id="blocNotes">
 
-				{% for blocNotes in blocNotes %}
-				{{ blocNotes['title'] }}
-				{% endfor %}
+
+				<div class="notes">
+				<form  id="notesGameEdit">
+						{% for blocNotes in blocNotes %}
+					<fieldset id="fieldNotes"  data-id="{{ blocNotes['id'] }}">
+				<legend name="title" class="title" id="notesTitle">{{ blocNotes['title'] }}</legend>
+				<div id="notesContent">{{ blocNotes['content'] }}</div>
+					<input type="button" class="editNotes" value ="Sauvegarder"/>
+			</fieldset>
+			{% endfor %}
+			</form>
+						<button id="switchEdit">+</button>
+				</div>
+
+
 
 
 		</section>
@@ -84,6 +100,5 @@
 
 
 {% block script_bottom %}
-<script src="public/js/main.js"></script>
-<script>var Manage = new Manage();</script>
+
 {% endblock %}
