@@ -116,6 +116,10 @@ try{
 				allSongs($twig, $id);
 				break;
 
+		case 'searchSong':
+		searchSong();
+		break;
+
 			case 'resetpassword':
 			if (isset($_POST['mail']) AND $_POST['mail'] != null)
 			{

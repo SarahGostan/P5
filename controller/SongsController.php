@@ -14,7 +14,7 @@ function allSongs($twig, $userId){
 	foreach($favSongs as $favSong){
 	$favSongsId[] = $favSong['id'];
 	}
-	
+
 	echo $twig->render('allsongs.twig', array('allSongs' => $allSongs, 'favSongs' => $favSongsId));
 }
 
@@ -35,9 +35,9 @@ function addSong($userId, $songId){
 	$checkSongs = checkSong($userId, $songId);
 	if($checkSongs == true){
 		exit();
-	}	
+	}
 	else{
-	$allSongs = $songsManager->addSongToFav($userId, $songId);	
+	$allSongs = $songsManager->addSongToFav($userId, $songId);
 	}
 }
 
@@ -46,10 +46,12 @@ function removeSong($userId, $songId){
 	$checkSongs = checkSong($userId, $songId);
 	if($checkSongs == false){
 		exit();
-	}	
+	}
 	else{
-	$allSongs = $songsManager->removeFavSong($userId, $songId);	
+	$allSongs = $songsManager->removeFavSong($userId, $songId);
 	}
 }
 
+function searchSong(){
 
+}

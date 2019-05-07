@@ -4,14 +4,14 @@
 {% block header %}{% endblock %}
 {% block content %}
 
-<div id='songSearch'>
+<div id='songSearchForm'>
 		<label for="search">Rechercher un son</label>
-		<input type="text" id="songSearch" value="">
-		 <input type="button" id="searchASong" value="Rechercher">
+		<input type="text" id="songSearch">
+		<input type="button" id="searchASong" value="Rechercher">
+		<div id="result"></div>
 </div>
-<div id="result"></div>
 
-</div>
+
 
 <div id="allSongs">
 
@@ -20,9 +20,9 @@
 		<div class="songs">{{ allSongs['name'] }}
 
 {% if allSongs['id'] in favSongs %}
-	<audio src="public/songs/{{ allSongs['access'] }}" controls></audio></div>{% if id is not null %}<button class="removeSong" id="{{ allSongs['id'] }}"></button>{% endif %}
+	<audio src="public/songs/{{ allSongs['access'] }}" controls></audio>{% if id is not null %}<button class="removeSong" id="{{ allSongs['id'] }}"></button>{% endif %}</div>
 {% else %}
-		<audio src="public/songs/{{ allSongs['access'] }}" controls></audio></div>{% if id is not null %}<button class="addSong" id="{{ allSongs['id'] }}"></button>{% endif %}
+		<audio src="public/songs/{{ allSongs['access'] }}" controls></audio>{% if id is not null %}<button class="addSong" id="{{ allSongs['id'] }}"></button>{% endif %}</div>
 {% endif %}
 
 		{% endfor %}

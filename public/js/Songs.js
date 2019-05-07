@@ -57,31 +57,53 @@ AllSongs.prototype.addRemoveFav = function(){
 }
 
 AllSongs.prototype.autoSearch = function(){
-	console.log("blah");
+/*	console.log("blah");
 	var liste = [
-		"Corbeau",
-		"Trompette",
-		"Tasoeur"
-	];
-	$('#songSearch').keyup(function(){
-		console.log("haha");
-		var recherche = $(this).val();
-		console.log(recherche);
-		var data = 'wordkey=' + recherche;
-		if(recherche.length > 2){
-			$.ajax({
-				type : "GET",
-				url: "?action=songSearch",
-				data : data,
-				success: function(server_response){
-					$("#result").html(server_response).show();
-					return true;
-					console.log("ok");
-				}
+	"Abeilles",
+	"Trompette",
+	"Test son",
+	"Cheval",
+	"Toto"
+];
+
+$('#songSearch').autocomplete({
+	source: liste,
+	minLength: 3
+});*/
+
+
+
+	var liste = [
+		{value : "Abeilles", label : "Abeilles", desc : "Bzz bzz"},
+		{value: "Rêve", label : "Reve", desc: "Le marchand de sable est passé"},
+		{value: "Reveillon", label: "Reveillon", desc: "Soirée de fête"}
+];
+
+$('#songSearch').autocomplete({
+	source: function(){
+
+		$.ajax({
+			type: "GET",
+			url: "?action=getSongList",
+			data: 'songSearch =' + term,
+			dataType: 'html',
+
+			success: function(){
+
+			}
 
 		});
 
-}
+	},
+	position : {
+			 my : 'left top',
+			 at : 'left bottom'
+	 },
+	 minLength : 3,
+
+	select: function(event, ui){
+		$('#result').val(ui.item.desc);
+	}
 });
 
 }

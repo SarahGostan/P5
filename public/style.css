@@ -1,10 +1,13 @@
+
+/******* TEMPLATE ********/
+
 html, body{
 	margin: 0;
 	background-color: grey;
 }
 
 #content{
-	max-width: 95%;
+	max-width: 90%;
 	border: 1px solid black;
 	margin: auto;
 	background-color: white;
@@ -108,9 +111,12 @@ h1{
 		list-style-type:none;
 		justify-content: space-around;
 		align-items: stretch;
-		border: 1px solid black;
 		margin: 0;
 		padding: 0;
+}
+
+#fieldNotesEdit{
+	display: none;
 }
 
 .links{

@@ -80,11 +80,18 @@
 				<div class="notes">
 				<form  id="notesGameEdit">
 						{% for blocNotes in blocNotes %}
-					<fieldset id="fieldNotes"  data-id="{{ blocNotes['id'] }}">
+			<fieldset id="fieldNotes"  data-id="{{ blocNotes['id'] }}">
 				<legend name="title" class="title" id="notesTitle">{{ blocNotes['title'] }}</legend>
 				<div id="notesContent">{{ blocNotes['content'] }}</div>
-					<input type="button" class="editNotes" value ="Sauvegarder"/>
 			</fieldset>
+
+			<fieldset id="fieldNotesEdit"  data-id="{{ blocNotes['id'] }}">
+				<input id="notesTitleEdit" value='{{ blocNotes['title'] }}'>
+				<div class="container" id="notesContentEdit">{{ blocNotes['content'] }}</div>
+				<div class="container javascript" id="delta-container"></div>
+			</fieldset>
+
+			<input type="button" class="editNotes" value ="Sauvegarder"/>
 			{% endfor %}
 			</form>
 						<button id="switchEdit">+</button>
