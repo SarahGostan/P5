@@ -37,6 +37,7 @@
 			<p>Pour ajouter une vidéo youtube, ajoutez l'identifiant de la vidéo (ex : dQw4w9WgXcQ) ci-dessous</p>
 			<form id="videoAdd" action="index.php?action=accountAddVideo" method="post">
 				<input type="texte" name="videoLink" id="videoLink" required>
+				<input type="hidden" name="gameId" id="gameId" value="{{ gameId }}">
 				<input type="submit" id="addVideoLink" value="Ajouter">
 			</form>
 
@@ -46,7 +47,9 @@
 			 frameborder="0"></iframe>
 
 		  <form id="videoRemove" action="index.php?action=accountRemoveVideo" method="post">
-				<input type="hidden" name="videoLink" id="videoLink" value={{ videos['video_link'] }}>
+				<input type="hidden" name="videoLink" id="videoLink" value="{{ videos['video_link'] }}">
+				<input type="hidden" name="idGame" id="idGame" value="{{ gameId }}">
+				<input type="hidden" name="videoId" id="videoId" value="{{ videos[id] }}">
 				<input type="submit" id="removeVideo" value="x">
 		  </form>
 			{% endfor %}
@@ -82,12 +85,12 @@
 						{% for blocNotes in blocNotes %}
 			<fieldset id="fieldNotes"  data-id="{{ blocNotes['id'] }}">
 				<legend name="title" class="title" id="notesTitle">{{ blocNotes['title'] }}</legend>
-				<div id="notesContent">{{ blocNotes['content'] }}</div>
+				<div id="notesContent">{{ blocNotes['content']|raw }}</strong></em></color></u></p></div>
 			</fieldset>
 
 			<fieldset id="fieldNotesEdit"  data-id="{{ blocNotes['id'] }}">
 				<input id="notesTitleEdit" value='{{ blocNotes['title'] }}'>
-				<div class="container" id="notesContentEdit">{{ blocNotes['content'] }}</div>
+				<div class="container" id="notesContentEdit">{{ blocNotes['content']|raw }}</strong></em></color></u></p></div>
 				<div class="container javascript" id="delta-container"></div>
 			</fieldset>
 

@@ -52,6 +52,8 @@ function removeSong($userId, $songId){
 	}
 }
 
-function searchSong(){
-
+function searchSong($term){
+	$songManager = new SongsManager();
+	$searchSong = $songManager->searchSong($term);
+	return $searchSong;
 }

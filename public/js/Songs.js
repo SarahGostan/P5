@@ -38,7 +38,7 @@ AllSongs.prototype.addRemoveFav = function(){
 		$.ajax({
 			type: "POST",
 			url: "?action=accountRemoveSong",
-			 dataType: 'html',
+			dataType: 'html',
 			data : 'songId=' + idElt,
 
 			success: function(){
@@ -57,53 +57,19 @@ AllSongs.prototype.addRemoveFav = function(){
 }
 
 AllSongs.prototype.autoSearch = function(){
-/*	console.log("blah");
-	var liste = [
-	"Abeilles",
-	"Trompette",
-	"Test son",
-	"Cheval",
-	"Toto"
-];
 
-$('#songSearch').autocomplete({
-	source: liste,
-	minLength: 3
-});*/
-
-
-
-	var liste = [
-		{value : "Abeilles", label : "Abeilles", desc : "Bzz bzz"},
-		{value: "Rêve", label : "Reve", desc: "Le marchand de sable est passé"},
-		{value: "Reveillon", label: "Reveillon", desc: "Soirée de fête"}
-];
-
-$('#songSearch').autocomplete({
-	source: function(){
-
-		$.ajax({
-			type: "GET",
-			url: "?action=getSongList",
-			data: 'songSearch =' + term,
-			dataType: 'html',
-
-			success: function(){
-
-			}
-
-		});
-
-	},
-	position : {
-			 my : 'left top',
-			 at : 'left bottom'
-	 },
+var song = $('#songSearch').autocomplete({
+	source: '?action=searchsong',
 	 minLength : 3,
-
-	select: function(event, ui){
-		$('#result').val(ui.item.desc);
-	}
+	 select : function(event, ui){
+		var result = ui.item.value;
+		console.log( ui.item.value ); // lance une alerte indiquant la valeur de la proposition
+		return result;
+	},
+	select : function(event, ui){ // lors de la sélection d'une proposition
+        $('#resultSongSearch').html( ui.item.desc ); // on ajoute la description de l'objet dans un bloc
+				console.log(ui.item.desc);
+    }
 });
 
 }

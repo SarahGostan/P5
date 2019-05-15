@@ -13,12 +13,36 @@ function getGamesInfos($twig, $id){
 	echo $twig->render('parties_gestionnaire.twig', array('gamesInfos' => $gamesInfos, 'favSongs' => $favSongs));
 }
 
+
+function ingame($twig, $id, $gameId){
+	$songsManager = new SongsManager();
+	$gameSongs = $songsManager->getGameSongs($gameId);
+	$video = new VideosManager();
+	$videoWay = $video->getVideoWay($gameId);
+	$gamesManager = new GamesManager();
+	$blocNotes = $gamesManager->getGameNotes($gameId, $id);
+	echo $twig->render('ingame.twig',  array('gameSongs' => $gameSongs, 'videos' => $videoWay, 'gameId' => $gameId, 'blocNotes' => $blocNotes));
+}
+
+
+function addNewVideo($link, $id){
+	$video = new VideosManager();
+	$newVideo = $video->addNewVideo($link, $id);
+	header('Location: http://localhost/appliJDR/index?action=ingame&id=' . $id);
+}
+
+
+function removeVideo($link, $gameId, $videoId){
+	$video = new VideosManager();
+	$removeVideo = $video->removeVideoLink($link, $gameId, $videoId);
+	header('Location: http://localhost/appliJDR/index?action=ingame&id=' . $gameId);
+}
+
 function newGame($id, $gameName){
 	$gamesManager = new GamesManager();
 	$newGame = $gamesManager->newGame($id, $gameName);
 	$newGameNotes = $gamesManager->newNotes($id, $newGame);
 	header('Location: ?action=ingame&id=' . $newGame);
-
 }
 
 function supressGame($gameId, $id){

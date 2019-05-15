@@ -43,28 +43,7 @@ function error($twig, $errorMessage){
 	echo $twig->render('erreur.twig',  array('errorMessage' => $errorMessage));
 }
 
-function ingame($twig, $id, $gameId){
-	$songsManager = new SongsManager();
-	$gameSongs = $songsManager->getGameSongs($gameId);
-	$video = new VideosManager();
-	$videoWay = $video->getVideoWay($id);
-	$gamesManager = new GamesManager();
-	$blocNotes = $gamesManager->getGameNotes($gameId, $id);
-	echo $twig->render('ingame.twig',  array('gameSongs' => $gameSongs, 'videos' => $videoWay, 'gameId' => $gameId, 'blocNotes' => $blocNotes));
-}
 
-function addNewVideo($link, $id){
-	$video = new VideosManager();
-	$newVideo = $video->addVideoLink($link, $id);
-	header('Location: http://localhost/appliJDR/index?action=ingame');
-}
-
-
-function removeVideo($link, $id){
-	$video = new VideosManager();
-	$removeVideo = $video->removeVideoLink($link, $id);
-	header('Location: http://localhost/appliJDR/index?action=ingame');
-}
 
 function account($twig, $message){
 	if($message == 'fail'){

@@ -1,12 +1,11 @@
 <?php
 
-
-
 require 'vendor/autoload.php';
 require 'class/global.php';
 require 'controller/LogsController.php';
 require 'controller/SongsController.php';
 require 'controller/GamesController.php';
+require 'controller/frontend.php';
 
 checkAuth();
 $loader = new Twig_Loader_Filesystem(__DIR__ . '/view');
@@ -20,23 +19,23 @@ $twig->addExtension(new Project_Twig_Extension);
 ini_set('display_errors', 1);
 error_reporting( E_ALL );
 
-
-	require('controller/frontend.php');
-	$page = 'home';
+$page = 'home';
 
 try{
 
-	if (isset($_GET['message'])){
-				$message = $_GET['message'];
-			}
-			else{
-				$message = "";
-			}
+	if (isset($_GET['message']))
+	{
+		$message = $_GET['message'];
+	}
+	else
+	{
+		$message = "";
+	}
 
 	if (isset($_GET['action']))
-		{
+	{
 
-	if (strstr($_GET['action'], 'account'))
+		if (strstr($_GET['action'], 'account'))
 		{
 
 			if (!isset($_SESSION['id']))
@@ -45,12 +44,16 @@ try{
 			exit();
 			}
 		}
-	if (isset($_SESSION['id'])){
+
+	if (isset($_SESSION['id']))
+	{
 		$id = $_SESSION['id'];
 	}
-	else{
+	else
+	{
 		$id = 0;
 	}
+
 	$page = $_GET['action'];
 
 	switch($page)
@@ -59,84 +62,97 @@ try{
 		/* AFFICHAGE DE PAGES */
 
 		case 'login':
-				if (!isset($_SESSION['id']))
+			if (!isset($_SESSION['id']))
 			{
 				login($twig, $message);
-			}
-			else{
-				accueil($twig, $message);
-			}
-				break;
-
-		case 'inscription':
-				inscription($twig);
-				break;
-
-		case 'accountnewgame':
-		if (isset ($_POST['gameName'])){
-				newgame($id, $_POST['gameName']);
-			}
-			else{
-				$message='Création impossible';
-				accueil($twig,  $message);
-			}
-
-				break;
-
-			case 'accountsupressgame':
-				if (isset($_GET['id'])){
-					$gameId = $_GET['id'];
-					supressGame($gameId, $id);
-				}
-				else{
-					$message='Erreur : partie inexistante';
-					accueil($twig,  $message);
-				}
-				break;
-		case 'ingame':
-			checkAuth();
-			if (isset($_GET['id'])){
-				ingame($twig, $id, $_GET['id']);
-			}
-			else{
-				$message="Id incorrect";
-				accueil($twig, $message);
-			}
-				break;
-
-		case 'notesEdit':
-		$post_id = $_POST['id'];
-		$title = $_POST['title'];
-		$content = $_POST['content'];
-			notesEdit($post_id, $title, $content, $id);
-		break;
-
-		case 'allsongs':
-			checkAuth();
-				allSongs($twig, $id);
-				break;
-
-		case 'searchSong':
-		searchSong();
-		break;
-
-			case 'resetpassword':
-			if (isset($_POST['mail']) AND $_POST['mail'] != null)
-			{
-				$mail = $_POST['mail'];
-				sendPassword($mail);
 			}
 			else
 			{
 				accueil($twig, $message);
 			}
-			break;
+		break;
+
+		case 'inscription':
+			inscription($twig);
+		break;
+
+		case 'accountnewgame':
+			if (isset ($_POST['gameName']))
+			{
+				newgame($id, $_POST['gameName']);
+			}
+			else
+			{
+				$message='Veuillez rentrer un nom pour votre partie';
+				accueil($twig,  $message);
+			}
+		break;
+
+		case 'accountsupressgame':
+			if (isset($_GET['id']))
+			{
+				$gameId = $_GET['id'];
+				supressGame($gameId, $id);
+			}
+			else
+			{
+				$message='Erreur : partie inexistante';
+				accueil($twig,  $message);
+			}
+		break;
+
+		case 'ingame':
+			checkAuth();
+			if (isset($_GET['id'])){
+				ingame($twig, $id, $_GET['id']);
+			}
+			else
+			{
+				$message="Id incorrect";
+				accueil($twig, $message);
+			}
+		break;
+
+		case 'allsongs':
+			checkAuth();
+			allSongs($twig, $id);
+		break;
+
+
+
+
+		case 'notesEdit':
+		$post_id = $_POST['id'];
+		$title = $_POST['title'];
+		$content = $_POST['content'];
+		$stripContent = strip_tags($content, '<color><h1><h2><br><p><strong><em><u><li><ol><ul>');
+			notesEdit($post_id, $title, $stripContent, $id);
+		break;
+
+
+		case 'searchsong':
+		$term = $_GET['term'];
+		$result = searchSong($term);
+		echo($result);
+		exit;
 
 		case 'jouer':
 			getGamesInfos($twig, $id);
-			break;
+		break;
 
 		/* GESTION DE COMPTE UTILISATEUR */
+
+		case 'resetpassword':
+		if (isset($_POST['mail']) AND $_POST['mail'] != null)
+		{
+			$mail = $_POST['mail'];
+			sendPassword($mail);
+		}
+		else
+		{
+			accueil($twig, $message);
+		}
+		break;
 
 		case 'signup':
 		if (!empty($_POST['password']) && !empty($_POST['mail'])){
@@ -167,10 +183,6 @@ try{
 			}
 				break;
 
-			default:
-				accueil($twig, $message);
-				break;
-
 			case 'account':
 				account($twig, $message);
 				break;
@@ -179,29 +191,31 @@ try{
 				accountChangePassword($_SESSION['id'], $_POST['actualPassword'], $_POST['newPassword']);
 				break;
 
+				default:
+					accueil($twig, $message);
+					break;
 
 
+/* GESTION DES PARTIES */
 
 			case 'accountAddVideo':
-				if(!isset($_POST['videoLink'])){
+				if(!isset($_POST['videoLink']) || !isset($_POST['gameId'])){
 					throw new Exception ("Fumble !");
 				}
 				else{
-				addNewVideo($_POST['videoLink'], $_SESSION['id']);
+				addNewVideo($_POST['videoLink'], $_POST['gameId']);
 				}
 				break;
 
 			case 'accountRemoveVideo':
-			if(!isset($_POST['videoLink'])){
+			if(!isset($_POST['videoLink']) || !isset($_POST['idGame']) || !isset($_POST['videoId'])){
 					throw new Exception ("Fumble !");
 				}
 			else{
-			removeVideo($_POST['videoLink'], $_SESSION['id']);
+			removeVideo($_POST['videoLink'], $_POST['idGame'], $_POST['videoId']);
 			}
 			break;
 
-			case 'songSearch':
-			break;
 
 			case 'accountAddSong':
 

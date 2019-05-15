@@ -17,6 +17,7 @@ Ingame.prototype.init = function(){
 Ingame.prototype.quillStarter = function(){
 
 var options = {
+toolbar: '#toolbar',
 theme: 'snow'
 };
 var container = document.getElementById("notesContentEdit");
@@ -26,9 +27,31 @@ var quill =	document.querySelector('.ql-toolbar');
 quill.parentNode.removeChild(quill);
 }
 
-var quill = new Quill(container, options);
-console.log("Quill démarré");
+var toolbarOptions = [
+  ['bold', 'italic', 'underline', 'strike'],
 
+
+  [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+  [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+  [{ 'direction': 'rtl' }],                         // text direction
+
+  [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+  [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+  [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+  [{ 'font': [] }],
+  [{ 'align': [] }],
+
+  ['clean']                                         // remove formatting button
+];
+
+
+	var quill = new Quill(container, {
+  modules: {
+    toolbar: toolbarOptions
+  },
+  theme: 'snow'
+});
 
   var contents = quill.container.firstChild.innerHTML;
 	var contentHtml = quill.getContents();
@@ -38,8 +61,6 @@ console.log("Quill démarré");
 	var html2 = JSON.stringify(contentHtml);
 	console.log(html2);
 	var tst =  quill.container.firstChild.innerHTML;
-	console.log(tst);
-
 //  container.innerHTML = html;
 //  hljs.highlightBlock(container);
 	return contents;
