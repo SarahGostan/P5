@@ -11,6 +11,11 @@ Ingame.prototype.init = function(){
 		for (var i = 0; i < notes.length; i++){
 				notes[i].addEventListener('click', this.editNotes.bind(this));
 			}
+	var header = document.getElementById('header');
+	header.style.height = '70px';
+	document.getElementById('title').style.display = 'none';
+
+
 
 }
 
@@ -53,17 +58,19 @@ var toolbarOptions = [
   theme: 'snow'
 });
 
-  var contents = quill.container.firstChild.innerHTML;
+if( quill.container !== 'undefined' && quill.container !== null){
+	var contents = quill.container.firstChild.innerHTML;
 	var contentHtml = quill.getContents();
 
   var html = JSON.stringify(contentHtml, null, 2);
-	console.log(html);
+
 	var html2 = JSON.stringify(contentHtml);
-	console.log(html2);
+
 	var tst =  quill.container.firstChild.innerHTML;
 //  container.innerHTML = html;
 //  hljs.highlightBlock(container);
 	return contents;
+}
 
 }
 

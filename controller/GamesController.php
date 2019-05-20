@@ -6,7 +6,6 @@ require_once('model/SongsManager.php');
 function getGamesInfos($twig, $id){
 	$gamesManager = new GamesManager();
 	$gamesInfos = $gamesManager->getGamesInfos($id);
-
 	$songsManager = new SongsManager();
 	$favSongs = $songsManager->getFavSongs($id);
 
@@ -21,21 +20,53 @@ function ingame($twig, $id, $gameId){
 	$videoWay = $video->getVideoWay($gameId);
 	$gamesManager = new GamesManager();
 	$blocNotes = $gamesManager->getGameNotes($gameId, $id);
-	echo $twig->render('ingame.twig',  array('gameSongs' => $gameSongs, 'videos' => $videoWay, 'gameId' => $gameId, 'blocNotes' => $blocNotes));
+	$gameOwner = $gamesManager->checkGameOwner($id, $gameId);
+	$gameInfos = $gamesManager->getGameInfos($gameId);
+	if(is_null($gameOwner))
+	{
+		throw new Exception('Cette partie n\'existe pas');
+	}
+	else{
+	echo $twig->render('ingame.twig',  array(
+	'gameSongs' => $gameSongs,
+	'videos' => $videoWay,
+	'gameId' => $gameId,
+	'blocNotes' => $blocNotes,
+	'gamesInfos' =>$gameOwner,
+	'sessionId' => $id,
+	'gameInfos' => $gameInfos
+));
+}
 }
 
 
-function addNewVideo($link, $id){
+function addNewVideo($link, $gameId, $id){
+	$gamesManager = new GamesManager();
+	$gamesInfos = $gamesManager->checkGameOwner($id, $gameId);
+	if($gamesInfos == true){
 	$video = new VideosManager();
-	$newVideo = $video->addNewVideo($link, $id);
-	header('Location: http://localhost/appliJDR/index?action=ingame&id=' . $id);
-}
-
-
-function removeVideo($link, $gameId, $videoId){
-	$video = new VideosManager();
-	$removeVideo = $video->removeVideoLink($link, $gameId, $videoId);
+	$newVideo = $video->addNewVideo($link, $gameId, $id);
 	header('Location: http://localhost/appliJDR/index?action=ingame&id=' . $gameId);
+}
+	else{
+		throw new Exception('Echec du jet de piratage. Cette partie ne vous appartient pas.');
+	}
+}
+
+
+function removeVideo($link, $gameId, $videoId, $id){
+	$gamesManager = new GamesManager();
+	$gamesInfos = $gamesManager->checkGameOwner($id, $gameId);
+	if($gamesInfos == true)
+	{
+		$video = new VideosManager();
+		$removeVideo = $video->removeVideoLink($link, $gameId, $videoId);
+		header('Location: http://localhost/appliJDR/index?action=ingame&id=' . $gameId);
+	}
+	else
+	{
+		throw new Exception('Echec du jet de piratage. Cette partie ne vous appartient pas.');
+	}
 }
 
 function newGame($id, $gameName){

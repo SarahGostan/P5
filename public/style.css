@@ -4,10 +4,11 @@
 html, body{
 	margin: 0;
 	background-color: grey;
+	font-family: 'Arial', 'sans-serif';
 }
 
 #content{
-	max-width: 90%;
+	width: 99%;
 	border: 1px solid black;
 	margin: auto;
 	background-color: white;
@@ -17,7 +18,6 @@ html, body{
 header{
 	border-bottom: 2px solid black;
 	background-color: white;
-	margin-top: 0;
 }
 
 a{
@@ -25,29 +25,7 @@ a{
 
 }
 
-#notes{
-	display: flex;
-}
-.notes{
-	width: 400px;
-}
 
-.linkGame{
-	text-decoration: none;
-	margin: 5px;
-	background-color: #aaafff;
-	color: white;
-	padding: 5px;
-}
-
-#games{
-	display: flex;
-	flex-direction: column;
-}
-
-#blocNotes{
-	margin: 30px;
-}
 h1{
 	font-family: 'wicked';
 	color: #5b0c9b;
@@ -57,12 +35,8 @@ h1{
 	font-size: 2.2em;
 }
 
-#gamesManager{
-	display: flex;
-}
-#favoris{
-	display: flex;
-	flex-direction: column;
+h3{
+	margin-top: 0;
 }
 
 #ecran{
@@ -85,6 +59,59 @@ h1{
 	left: 280px;
 }
 
+
+#menu{
+		display: flex;
+		list-style-type:none;
+		justify-content: space-around;
+		align-items: stretch;
+		margin: 0;
+		padding: 0;
+}
+
+
+#accountMenu{
+	background-color: rgb(22, 107, 162);
+}
+
+/******* INGAME ********/
+
+#notes{
+	display: flex;
+}
+.notes{
+	width: 400px;
+}
+
+
+.linkGame{
+	text-decoration: none;
+	margin: 5px;
+	background-color: #aaafff;
+	color: white;
+	padding: 5px;
+}
+
+#games{
+	display: flex;
+	flex-direction: column;
+}
+
+#blocNotes{
+	margin: 30px;
+}
+
+
+#gamesManager{
+	display: flex;
+}
+#favoris{
+	display: flex;
+	flex-direction: column;
+}
+
+
+
 .favSongs{
 	display: flex;
 	width: 330px;
@@ -105,15 +132,6 @@ h1{
 	height: 30px;
 }
 
-
-#menu{
-		display: flex;
-		list-style-type:none;
-		justify-content: space-around;
-		align-items: stretch;
-		margin: 0;
-		padding: 0;
-}
 
 
 
@@ -144,9 +162,6 @@ h1{
 	transition: 1s;
 }
 
-#accountMenu{
-	background-color: rgb(22, 107, 162);
-}
 
 #gamesMenu{
 	background-color:  rgb(208, 101, 3);
@@ -170,119 +185,163 @@ width: 33%;
 	flex-direction: column;
 	position: absolute;
 	right: 0;
-	width: 200px;
-	margin: 30px;
-	top: 0;
+	margin: 10px;
+	top: 25px;
+}
+
+#diceRollContainer{
+	width: 25%;
+	max-width: 378px;
 }
 
 #diceRoll{
-	display: flex;
-	flex-direction: column;
-	border: none;
-	position: relative;
-	margin-top: calc(1px + 1.1%);
-	display: inline-block;
-	transform: skewY(-0);
+	background: url('images/logo_droite.png') no-repeat;
+	background-size: contain;
+	width: 100%;
+	height: 100%;
 }
 
-#diceRoll:before {
-  content: " ";
-  background-image:linear-gradient(to right, #f9f3e8, white);
-  position: absolute;
-  top:0;
-  left:-1px;
-  right:0px;
-  bottom:0;
-  z-index: -1;
-  transform: skewY(4deg);
-  border: 1px solid black;
-  box-sizing: content-box;
+#diceRollContent{
+		transform: skewY(11deg);
 }
 
-#ambianceSong:before {
-  content: " ";
-  background-image:linear-gradient(to right, white, #f9f3e8);
-  position: absolute;
-  top:0;
-  left:0px;
-  right:-1px;
-  bottom:0;
-  z-index: -1;
-  transform: skewY(-4deg);
-  border: 1px solid black;
-  box-sizing: content-box;
+#ambianceSongContainer{
+	max-width: 378px;
+		width: 25%;
 }
-
 
 #ambianceSong{
-	border: none;
-	position: relative;
-	margin-top: calc(1px + 1.1%);
-	display: inline-block;
-	transform: skewY(-0);
-	display: flex;
-	flex-direction: column;
+	background: url('images/logo_gauche.png') no-repeat;
+	background-size: contain;
+	width: 100%;
+	height: 100%;
+
 }
-.songInGame{
-	width: 250px;
-	height: 20px;
+
+#ambianceSongContent{
+		transform: skewY(-11deg);
+
 }
+
+
+#ambianceMusiqueContainer{
+	max-width: 756px;
+	width: 50%;
+	height: 723px;
+}
+
 #ambianceMusique{
-	background-image: radial-gradient(circle at center, white, #f9f3e8);
-	border-right: 3px solid black;
-	border-left: 3px solid black;
+		background: url('images/logo_middle.png') no-repeat;
+		background-size: contain;
+		width: 100%;
+  	height: 100%;
+		position: relative;
+		top: -12px;
 }
 
 
 #ingameContent{
 	display: flex;
 	align-items: flex-start;
-
+	justify-content: center;
 }
 
-.removeSong, .addSong{
+#ambianceMusiqueContent{
+	top: 3%;
+}
+
+#roll input{
 	width: 50px;
-	height: 70px;
-	border-style: none;
+	height: 25px;
 }
 
-.addSong{
-	background: url("http://localhost/appliJDR/public/images/icone_add_resize.png") no-repeat;
+.sectionContent{
+	position: relative;
+	top: 7%;
+	left: 30px;
+	margin: 5px;
+	width: 87%;
 }
 
-.removeSong{
-	background: url("http://localhost/appliJDR/public/images/icone_remove_resize.png") no-repeat;
+.ingameContainer{
+	height: 723px;
+	margin: -1px;
 }
 
+.songInGame{
+	width: 250px;
+	height: 20px;
+}
+
+
+/******* ALLSONGS ********/
 
 .songs{
 	display: flex;
 	flex-direction: column;
-	border: 1px solid red;
-
+	margin: 10px;
 }
 
 #allSongs{
 	display: flex;
+	flex-direction: column;
+padding: 10px;
+margin: 10px;
+
+}
+.songByTheme{
+	display: flex;
+	flex-direction: column;
+}
+.songsInTheme{
+	display: flex;
 	flex-wrap: wrap;
 }
 
-
-
-.ingame{
-	width: 33%;
-	border: 1px solid black;
-	height: 400px;
-
+.removeSong, .addSong{
+	width: 25px;
+	height: 34px;
+	border-style: none;
 }
 
+.songAdd, .songAddSearch{
+	height: 40px;
+	display: flex;
+	align-items: center;
+	font-weight: bold;
+	padding: 10px;
+	width: 400px;
+}
 
+#gameTitle{
+	position: absolute;
+	top: 20px;
+	left: 45%;
+}
 
+#songSearch{
+	width: 100px;
+}
+h5{
+	width: 100px;
+	font-size: 14px;
+	margin-right: 5px;
+}
+audio{
+	width: 250px;
+}
+.addSong{
+	background: url("http://localhost/appliJDR/public/images/icone_add_small.png") no-repeat;
+}
 
+.removeSong{
+	background: url("http://localhost/appliJDR/public/images/icone_remove_small.png") no-repeat;
+}
 
 
 #diceResult{
 	height: 250px;
+	width: 85%;
 	overflow-y: auto;
 }
 
@@ -347,6 +406,9 @@ video{
 }
 
 
+/******* FONT ********/
+
+
 @font-face{
 	font-family: 'Animalia';
 	src: url('font/animalia/animal.otf');
@@ -356,6 +418,20 @@ video{
 	src: url('font/death_font_ver1_0/DEATH_FONT.ttf')
 }
 
+@font-face{
+	font-family: 'cartoon';
+	src: url('font/bd_cartoon_shout/BD_Cartoon_Shout.ttf')
+}
+@font-face{
+	font-family: 'babiole';
+	src:
+	url('font/babiole/BABIB___.ttf'),
+	url('font/babiole/BABIE___.ttf'),
+	url('font/babiole/BABII___.ttf'),
+	url('font/babiole/BABIL___.ttf'),
+	url('font/babiole/BABIN___.ttf'),
+	url('font/babiole/BABIRG___.ttf');
+}
 @font-face{
 	font-family: 'wicked';
 	src: url('font/wicked_grit/WickedGrit.ttf');

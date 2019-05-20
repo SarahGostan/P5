@@ -27,6 +27,35 @@ public function newNotes($id, $gameId){
 	));
 }
 
+public function checkGameOwner($id, $game_id){
+	$query = $this->db->prepare('SELECT owner_id FROM games WHERE game_id = ?');
+	$query->execute(array($game_id));
+	$gamesOwner = $query->fetchAll();
+	if(!isset($gamesOwner[0]))
+	{
+		return null;
+	}
+	else
+	{
+		$result = $gamesOwner[0];
+		if ($result[0] == $id)
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+}
+
+public function getGameInfos($gameId){
+	$query = $this->db->prepare('SELECT * FROM games WHERE game_id = ?');
+	$query->execute(array($gameId));
+	$gameInfos = $query->fetchAll();
+	return $gameInfos;
+}
+
 	public function getGamesInfos($userId){
 			$query = $this->db->prepare('SELECT name, game_id FROM games WHERE owner_id = ?');
 			$query->execute(array($userId));

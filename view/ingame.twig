@@ -5,15 +5,25 @@
 <script src="public/js/Ingame.js"></script>
 <script src="public/js/Manage.js"></script>
 <script src="public/js/VideoPlayer.js"></script>
+<script src="public/js/Songs.js"></script>
 {% endblock %}
-
-{% block header %}Ici, plusieurs onglets permettront de passer plus facilement d'une fonctionnalité à l'autre{% endblock %}
+{% block header %}			{% for gameInfos in gameInfos %}
+				<h2 id="gameTitle">{{ gameInfos['name'] }}</h2>
+			{% endfor %}
+			{% endblock %}
 {% block content %}
 
 <div id="ingameContent">
-		<section id="ambianceSong" class="ingame">
 
-			<h3>Bruitages</h3>
+		<section id="ambianceSongContainer" class="ingameContainer">
+			<div id='ambianceSong' class="ingame">
+
+				<div class='sectionContent' id="ambianceSongContent">
+					<form action="?action=sons" id='songSearchForm' method="post">
+							<label for="songTerm">Rechercher un son</label>
+							<input type=text name="songTerm" id="songTerm">
+							<input type="submit" id="searchASong" value="Rechercher">
+							<div id="resultSongSearch"></div>
 			{% if gameSongs %}
 
 			{% for gameSongs in gameSongs %}
@@ -28,36 +38,43 @@
 			{% else %}
 			Votre liste de sons est vide ! Ajoutez en <a href="?action=allsongs">ici</a>
 			{% endif %}
+		</div>
 
-
+		</div>
 		</section>
 
-		<section id="ambianceMusique" class="ingame">
+		<section id="ambianceMusiqueContainer" class="ingameContainer">
+			<div id="ambianceMusique" class="ingame">
+					<div class='sectionContent' id="ambianceMusiqueContent">
+		 {% if gamesInfos is same as(true) and sessionId != 0 %}
+				<p>Pour ajouter une vidéo youtube, ajoutez l'identifiant de la vidéo (ex : dQw4w9WgXcQ) ci-dessous</p>
+				<form id="videoAdd" action="index.php?action=accountAddVideo" method="post">
+					<input type="texte" name="videoLink" id="videoLink" required>
+					<input type="hidden" name="gameId" id="gameId" value="{{ gameId }}">
+					<input type="submit" id="addVideoLink" value="Ajouter">
+				</form>
+			 {% endif %}
 
-			<p>Pour ajouter une vidéo youtube, ajoutez l'identifiant de la vidéo (ex : dQw4w9WgXcQ) ci-dessous</p>
-			<form id="videoAdd" action="index.php?action=accountAddVideo" method="post">
-				<input type="texte" name="videoLink" id="videoLink" required>
-				<input type="hidden" name="gameId" id="gameId" value="{{ gameId }}">
-				<input type="submit" id="addVideoLink" value="Ajouter">
-			</form>
-
-			{% for videos in videos %}
-			<iframe id="player" type="text/html" width="240" height="135"
-	  	 src="http://www.youtube.com/embed/{{ videos['video_link'] }}?enablejsapi=1&origin=http://localhost/appliJDR"
-			 frameborder="0"></iframe>
-
-		  <form id="videoRemove" action="index.php?action=accountRemoveVideo" method="post">
-				<input type="hidden" name="videoLink" id="videoLink" value="{{ videos['video_link'] }}">
-				<input type="hidden" name="idGame" id="idGame" value="{{ gameId }}">
-				<input type="hidden" name="videoId" id="videoId" value="{{ videos[id] }}">
-				<input type="submit" id="removeVideo" value="x">
-		  </form>
-			{% endfor %}
-
+				{% for videos in videos %}
+				<iframe id="player" type="text/html" width="22%" height="80"
+		  	 src="http://www.youtube.com/embed/{{ videos['video_link'] }}?enablejsapi=1&origin=http://localhost/appliJDR"
+				 frameborder="0"></iframe>
+				 {% if gamesInfos is same as(true) and sessionId != 0 %}
+			  <form id="videoRemove" action="index.php?action=accountRemoveVideo" method="post">
+					<input type="hidden" name="videoLink" id="videoLink" value="{{ videos['video_link'] }}">
+					<input type="hidden" name="idGame" id="idGame" value="{{ gameId }}">
+					<input type="hidden" name="videoId" id="videoId" value="{{ videos[id] }}">
+					<input type="submit" id="removeVideo" value="x">
+			  </form>
+				 {% endif %}
+				{% endfor %}
+			</div>
+		</div>
 		</section>
 
-		<section id="diceRoll" class="ingame">
-
+		<section id="diceRollContainer" class="ingameContainer">
+			<div id="diceRoll" class='ingame'>
+					<div class='sectionContent' id="diceRollContent">
 			<div id="diceResult">
 				<div id="last">
 				</div>
@@ -68,20 +85,27 @@
 					<input type="text" name="diceNumber" id="diceNumber" required>
 						Dés
 					<input type="text" name="diceFaces" id="diceFaces" required>
-				  <input type="button" id="rollDices" value="Envoyer">
+				  <input type="button" id="rollDices" value="Jeter !">
 				</form>
 			</div>
-
+		</div>
+	</div>
 		</section>
 </div>
 
+<div id="gameOwner">
+	<p>
 
+	</p>
+
+</div>
 
 		<section id="blocNotes">
 
-
 				<div class="notes">
+						{% if blocNotes %}
 				<form  id="notesGameEdit">
+
 						{% for blocNotes in blocNotes %}
 			<fieldset id="fieldNotes"  data-id="{{ blocNotes['id'] }}">
 				<legend name="title" class="title" id="notesTitle">{{ blocNotes['title'] }}</legend>
@@ -97,6 +121,10 @@
 			<input type="button" class="editNotes" value ="Sauvegarder"/>
 			{% endfor %}
 			</form>
+
+			{% else %}
+<p>Aucun bloc note existant</p>
+			{% endif %}
 						<button id="switchEdit">+</button>
 				</div>
 

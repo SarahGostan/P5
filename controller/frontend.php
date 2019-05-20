@@ -15,30 +15,6 @@ function accueil($twig, $message){
 
 
 
-function addSongToGame($id, $gameId, $songId){
-	$gamesManager = new GamesManager();
-	$checkGame = $gamesManager->checkGameId($id, $gameId);
-	if ($checkGame > 0){
-	$addSongToGame = $gamesManager->addSongToGame($gameId, $songId);
-	}
-	else{
-
-		exit();
-	}
-
-}
-
-function removeSongFromGame($id,  $gameId, $songId){
-	$gamesManager = new GamesManager();
-	$checkGame = $gamesManager->checkGameId($id, $gameId);
-	if ($checkGame > 0){
-		$removeSongFromGame = $gamesManager->removeSongFromGame($gameId, $songId);
-	}
-	else{
-		exit();
-	}
-}
-
 function error($twig, $errorMessage){
 	echo $twig->render('erreur.twig',  array('errorMessage' => $errorMessage));
 }

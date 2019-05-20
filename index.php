@@ -118,9 +118,6 @@ try{
 			allSongs($twig, $id);
 		break;
 
-
-
-
 		case 'notesEdit':
 		$post_id = $_POST['id'];
 		$title = $_POST['title'];
@@ -129,6 +126,16 @@ try{
 			notesEdit($post_id, $title, $stripContent, $id);
 		break;
 
+
+		case 'sons':
+		if (!empty($_POST['songTerm'])){
+			$keyword = $_POST['songTerm'];
+			getSongsByKeyWord($twig, $keyword);
+	}
+		else{
+				allSongs($twig, $id);
+		}
+		break;
 
 		case 'searchsong':
 		$term = $_GET['term'];
@@ -203,7 +210,7 @@ try{
 					throw new Exception ("Fumble !");
 				}
 				else{
-				addNewVideo($_POST['videoLink'], $_POST['gameId']);
+				addNewVideo($_POST['videoLink'], $_POST['gameId'], $id);
 				}
 				break;
 
@@ -212,7 +219,7 @@ try{
 					throw new Exception ("Fumble !");
 				}
 			else{
-			removeVideo($_POST['videoLink'], $_POST['idGame'], $_POST['videoId']);
+			removeVideo($_POST['videoLink'], $_POST['idGame'], $_POST['videoId'], $id);
 			}
 			break;
 
@@ -235,7 +242,6 @@ try{
 
 		}
 	}
-
 
 		/* Page d'index par d�faut */
 	else

@@ -10,14 +10,20 @@ function allSongs($twig, $userId){
 	$songsManager = new SongsManager();
 	$allSongs = $songsManager->getAllSongs();
 	$favSongs = $songsManager->getFavSongs($userId);
+	$thematics = $songsManager->getThematics();
 	$favSongsId = [];
 	foreach($favSongs as $favSong){
 	$favSongsId[] = $favSong['id'];
 	}
 
-	echo $twig->render('allsongs.twig', array('allSongs' => $allSongs, 'favSongs' => $favSongsId));
+	echo $twig->render('allsongs.twig', array('allSongs' => $allSongs, 'favSongs' => $favSongsId, 'thematics' => $thematics));
 }
 
+function getSongsByKeyWord($twig, $keyword){
+	$songsManager = new SongsManager();
+	$allSongs = $songsManager->getSongsByKeyWord($keyword);
+	echo $twig->render('songsbykeyword.twig', array('allSongs' => $allSongs, 'keyword' => $keyword));
+}
 
 function checkSong($userId, $songId){
 	$songsManager = new SongsManager();
@@ -29,6 +35,7 @@ function checkSong($userId, $songId){
 		return false;
 	}
 }
+
 
 function addSong($userId, $songId){
 	$songsManager = new SongsManager();
@@ -56,4 +63,5 @@ function searchSong($term){
 	$songManager = new SongsManager();
 	$searchSong = $songManager->searchSong($term);
 	return $searchSong;
+
 }

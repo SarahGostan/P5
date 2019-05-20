@@ -21,9 +21,8 @@ AllSongs.prototype.addRemoveFav = function(){
 		url: "?action=accountAddSong",
 		 dataType: 'html',
 		data : 'songId=' + idElt,
-
-			success: function(){
-				return true;
+		success: function(){
+			return true;
 		}
 
 	});
@@ -53,23 +52,15 @@ AllSongs.prototype.addRemoveFav = function(){
 		}
 	}
 
-
 }
 
 AllSongs.prototype.autoSearch = function(){
-
-var song = $('#songSearch').autocomplete({
+$('#songTerm').autocomplete({
 	source: '?action=searchsong',
-	 minLength : 3,
-	 select : function(event, ui){
-		var result = ui.item.value;
-		console.log( ui.item.value ); // lance une alerte indiquant la valeur de la proposition
-		return result;
-	},
-	select : function(event, ui){ // lors de la sélection d'une proposition
-        $('#resultSongSearch').html( ui.item.desc ); // on ajoute la description de l'objet dans un bloc
-				console.log(ui.item.desc);
-    }
+	minLength : 2,
+	select: function(event, ui) {
+		console.log(ui.item.id);
+						document.getElementById('resultSongSearch').innerHTML = "<span class='songAddSearch'><h5>" + ui.item.value + "</h5><button class='removeSong' id='" + ui.item.id + "'></button><button class='addSong' id='" + ui.item.id + "'></button></span><audio src='public/songs/" + ui.item.desc + "' controls></audio><button>x</button>";
+						},
 });
-
 }

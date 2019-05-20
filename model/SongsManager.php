@@ -17,6 +17,12 @@ class SongsManager extends Manager{
 		return $favSongs;
 	}
 
+	public function getThematics(){
+			$req = $this->db->query('SELECT name, id FROM thematics');
+			$themes = $req->fetchAll();
+			return $themes;
+	}
+
 
 		public function getGameSongs($gameId){
 		$query = $this->db->prepare('SELECT s.name, s.access, s.id, gs.game_id
@@ -30,7 +36,7 @@ class SongsManager extends Manager{
 	}
 
 	public function searchSong($term){
-			$req = $this->db->prepare('SELECT name, id, access FROM songs WHERE name LIKE :term');
+			$req = $this->db->prepare('SELECT name, access, id FROM songs WHERE name LIKE :term');
 			$req->execute(array('term' => '%'.$term.'%'));
 			$array = array();
 			while($donnee = $req->fetch())
@@ -38,23 +44,30 @@ class SongsManager extends Manager{
 				array_push($array, array(
 					'value' => $donnee['name'],
 					'label' => $donnee['name'],
-					'desc' => '<audio src="public/songs/' . $donnee['access'] . '" controls></audio><button class="addSong" id="' . $donnee['name'] . '"></button></div>'
+					'desc' => $donnee['access'],
+					'id' => $donnee['id']
 				));
 			}
-			$result = json_encode($array);
 
+			$result = json_encode($array);
 			return $result;
 	}
 
 
 	public function getAllSongs(){
-		$req = $this->db->query('SELECT name,access,id
+		$req = $this->db->query('SELECT name,access,id,principal_theme
 					FROM songs
 					ORDER BY principal_theme');
 		$allSongs = $req->fetchAll();
 		return $allSongs;
 	}
 
+	public function getSongsByKeyWord($keyword){
+		$req = $this->db->prepare('SELECT name, id, access FROM songs WHERE (keyword LIKE :keyword) OR (name LIKE :keyword)');
+		$req->execute(array('keyword' => '%'.$keyword.'%'));
+		$allSongs = $req->fetchAll();
+		return $allSongs;
+	}
 
 
 	public function checkFavSongs($userId, $songId){

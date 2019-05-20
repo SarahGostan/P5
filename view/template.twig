@@ -14,6 +14,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/go.min.js"></script>
 
+
 		{% block script %}{% endblock %}
 
 
@@ -21,7 +22,7 @@
 	<body>
 
 
-		<header>
+		<header id="header">
 
 		<a href="index.php" id="title"><img src="public/images/resize_logo.png" alt="logo" /><h1><div id="ecran">L'ecran</div><div id="du">du</div><div id="mj">MJ</div></h1></a>
 	<nav>
@@ -51,7 +52,6 @@
 
 	<div id="connexion">
 	{% if id is not null %}
-	<p>Bienvenue</p>
 	<a href="index?action=logout">Déconnexion</a>
 	{% else %}
 	<a href="index?action=login">Connexion</a>

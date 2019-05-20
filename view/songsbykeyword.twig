@@ -4,23 +4,20 @@
 {% block header %}{% endblock %}
 {% block content %}
 
+
 <form action="?action=sons" id='songSearchForm' method="post">
-		<label for="songTerm">Rechercher un son</label>
-		<input type=text name="songTerm" id="songTerm">
+		<label for="term">Rechercher un son</label>
+		<input type=text name="term" id="term">
 		<input type="submit" id="searchASong" value="Rechercher">
 		<div id="resultSongSearch"></div>
 
 
 
-
+<p>Ces résultats peuvent être en proche de votre recherche "<b>{{ keyword }}</b>"</p>
 <div id="allSongs">
 
-{% for thematics in thematics %}
-	<div class="songByTheme">
-		<h3>{{ thematics['name'] }}</h3>
-			<div class="songsInTheme">
+
 		{% for allSongs in allSongs %}
-			{% if allSongs['principal_theme'] == thematics['id'] %}
 				<div class="songs"><span class="songAdd"><h5>{{ allSongs['name'] }}</h5>
 					{% if allSongs['id'] in favSongs %}
 						{% if id is not null %}
@@ -29,15 +26,12 @@
 					{% else %}
 						{% if id is not null %}
 							<button class="addSong" id="{{ allSongs['id'] }}"></button></span>
-						{% endif %}
-					{% endif %}
+					  {% endif %}
+				{% endif %}
 					<audio src="public/songs/{{ allSongs['access'] }}" controls></audio>
 					</div>
-			{% endif %}
 
-{% endfor %}
-</div>
-</div>
+
 {% endfor %}
 </div>
 

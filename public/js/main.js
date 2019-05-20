@@ -5,9 +5,12 @@ document.addEventListener('DOMContentLoaded', function(){
 	if(typeof Ingame != 'undefined'){
 	var ingame = new Ingame();
 	}
-	if(typeof Manage != 'undefined'){
-	var ingame = new Manage();
-	}
+	if(typeof AllSongs != 'undefined'){
+	var allSongs = new AllSongs();
+}
+if(typeof Manage != 'undefined'){
+var manage = new Manage();
+}
 loaded = 1;
 return loaded;
 }
