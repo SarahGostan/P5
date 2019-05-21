@@ -6,17 +6,18 @@ require_once('model/SongsManager.php');
 
 
 
-function allSongs($twig, $userId){
+function allSongs($twig, $userId, $page){
 	$songsManager = new SongsManager();
-	$allSongs = $songsManager->getAllSongs();
+	$limit = 4;
+	$allSongs = $songsManager->getAllSongs($page, $limit);
+	$pageNumber = $songsManager->pageNumber($limit);
 	$favSongs = $songsManager->getFavSongs($userId);
 	$thematics = $songsManager->getThematics();
 	$favSongsId = [];
 	foreach($favSongs as $favSong){
 	$favSongsId[] = $favSong['id'];
 	}
-
-	echo $twig->render('allsongs.twig', array('allSongs' => $allSongs, 'favSongs' => $favSongsId, 'thematics' => $thematics));
+	echo $twig->render('allsongs.twig', array('allSongs' => $allSongs, 'favSongs' => $favSongsId, 'thematics' => $thematics, 'pageNumber' => $pageNumber, 'page' => $page));
 }
 
 function getSongsByKeyWord($twig, $keyword){

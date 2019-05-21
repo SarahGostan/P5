@@ -115,7 +115,16 @@ try{
 
 		case 'allsongs':
 			checkAuth();
-			allSongs($twig, $id);
+			if(isset($_GET['page'])){
+				$page = (int) $_GET['page'];
+				if($page < 1){
+					$page = 1;
+				}
+			}
+			else{
+				$page = 1;
+			}
+			allSongs($twig, $id, $page);
 		break;
 
 		case 'notesEdit':

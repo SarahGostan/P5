@@ -18,7 +18,7 @@ class SongsManager extends Manager{
 	}
 
 	public function getThematics(){
-			$req = $this->db->query('SELECT name, id FROM thematics');
+			$req = $this->db->query('SELECT name, id FROM thematics ORDER BY id');
 			$themes = $req->fetchAll();
 			return $themes;
 	}
@@ -54,13 +54,38 @@ class SongsManager extends Manager{
 	}
 
 
-	public function getAllSongs(){
-		$req = $this->db->query('SELECT name,access,id,principal_theme
-					FROM songs
-					ORDER BY principal_theme');
+	public function getAllSongs($page, $limit){
+		$firstElement = ($page - 1) * $limit;
+		$req = $this->db->prepare(
+			'SELECT SQL_CALC_FOUND_ROWS
+			s.name AS song_name,
+			s.id AS song_id,
+			s.access AS song_access,
+			s.principal_theme AS song_principal_theme,
+			t.id AS thematic_id,
+			t.name AS thematic_name
+			FROM songs s
+			INNER JOIN thematics t
+			ON s.principal_theme = t.id
+			ORDER BY s.principal_theme
+			LIMIT :firstElement, :limite');
+		$req->bindParam(':firstElement', $firstElement, PDO::PARAM_INT);
+		$req->bindParam(':limite', $limit, PDO::PARAM_INT);
+		$req->execute();
 		$allSongs = $req->fetchAll();
 		return $allSongs;
 	}
+
+
+	public function pageNumber($limit){
+	$req = $this->db->query('SELECT COUNT(*) AS song_number FROM songs');
+	while ($songsNumber = $req->fetch()){
+		$songsNumber = $songsNumber['song_number'];
+		$page_number = ceil($songsNumber/$limit);
+	return $page_number;
+	}
+ }
+
 
 	public function getSongsByKeyWord($keyword){
 		$req = $this->db->prepare('SELECT name, id, access FROM songs WHERE (keyword LIKE :keyword) OR (name LIKE :keyword)');
