@@ -1,12 +1,7 @@
 {
     "name": "utilisateur/p5",
-    "require": {
-      "twig/extensions":"~1.0"
-    },
+    "require": {},
     "autoload": {
-    "psr-0": { "": "src/", "SymfonyStandard": "app/",
-      "VotreNamespace": "chemin/vers/la/bibliotheque"
-    }
-  }
-
+    "psr-4" : {"App\\" : "App"}
+}
 }
