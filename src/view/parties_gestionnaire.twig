@@ -1,0 +1,70 @@
+{% extends 'template.twig' %}
+{% block title %}Parties{% endblock %}
+{% block script %}<script src="public/js/Manage.js"></script><script src="public/js/Songs.js"></script>
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block content %}
+<div id="gamesManager">
+	<div id="games">
+		<h2>Mes parties</h2>
+		{% for gamesInfos in gamesInfos %}
+				<img src="{{ gamesInfos['icone'] }}" alt="icone" id="icone">
+				<a class="linkGame" href="?action=ingame&id={{ gamesInfos['game_id'] }}">{{ gamesInfos['name'] }}</a>
+				<a href="index.php?action=accountsupressgame&id={{ gamesInfos['game_id'] }}">Supprimer cette partie</a>
+
+			{% endfor %}
+
+			<div>
+			<form method="post" action="?action=accountnewgame" id="newGameForm" enctype="multipart/form-data">
+				<h3>Créer une partie</h3>
+				<label for="gameName">Nommer la partie</label>
+				<input type="varchar" name="gameName" id="gameName" required>
+				<label for="image">Ajouter une icone à votre partie</label>
+				<input type="file" name="image" id="image">
+				<input type="hidden" name="MAX_FILE_SIZE" value="64000">
+				<input type="submit" value="Créer la partie">
+				</form>
+
+
+		</div>
+	</div>
+	<div id="favoris">
+		{% if favSongs %}
+
+			{% for favSongs in favSongs %}
+				<div class="favSongs">
+				<div>	<p>{{ favSongs['name'] }}</p>
+					<audio class="songInFav" src="public/songs/{{ favSongs['access'] }}" controls></audio>
+				</div>
+					<fieldset>
+						<legend>Ajouter à :</legend>
+
+							{% for gamesInfos in gamesInfos %}
+								<button id="{{favSongs['id']}}" class="addSongToGame" name="{{gamesInfos['game_id']}}">{{ gamesInfos['name'] }}</button>
+							{% endfor %}
+						</fieldset>
+				<button class="removeSong" id="{{ favSongs['id'] }}"></button>
+				</div>
+			{% endfor %}
+
+
+			{% else %}
+				Votre liste de sons favoris est vide ! Ajoutez en <a href="?action=allsongs">ici</a>
+			{% endif %}
+	</div>
+
+
+
+
+
+
+
+
+
+{% endblock %}
+
+{% block script_bottom %}
+{% endblock %}

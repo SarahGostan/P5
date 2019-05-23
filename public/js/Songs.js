@@ -4,7 +4,6 @@ var AllSongs = function(){
 
 AllSongs.prototype.init = function(){
 	this.autoSearch();
-
 	var addSong = document.querySelectorAll(".addSong, .removeSong");
 	for (var i = 0; i < addSong.length; i++){
 	addSong[i].addEventListener('click', this.addRemoveFav);
@@ -59,7 +58,6 @@ $('#songTerm').autocomplete({
 	source: '?action=searchsong',
 	minLength : 2,
 	select: function(event, ui) {
-		console.log(ui.item.id);
 						document.getElementById('resultSongSearch').innerHTML = "<span class='songAddSearch'><h5>" + ui.item.value + "</h5><button class='removeSong' id='" + ui.item.id + "'></button><button class='addSong' id='" + ui.item.id + "'></button></span><audio src='public/songs/" + ui.item.desc + "' controls></audio><button>x</button>";
 						},
 });

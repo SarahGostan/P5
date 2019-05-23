@@ -1,0 +1,10 @@
+Perspectives d'évolution :
+
+Proposer une banque d'icones pour la création de partie
+Ajouter une image après création de la partie (modification de base)
+Ajout d'autres images stockées dans une partie (attention au poids sur le serveur)
+L'ajout de sons à une partie ne fonctionne pas (ni depuis le champ de recherche, ni depuis le gestionnaire)
+Ajouter un icone de fumble à la page d'erreur
+Gestionnaire de fav : JS pour supprimer les sons fav (avec bouton "annuler")
+Permettre de prendre des notes sur des parties d'autres (notes liées au compte et non à la partie)
+Banque de son : cliquer sur un thème pour avoir tous les sons du thème

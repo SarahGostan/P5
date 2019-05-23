@@ -1,7 +1,11 @@
 {
     "name": "utilisateur/p5",
-    "require": {},
+    "require": {
+        "twig/twig": "^1.41"
+    },
     "autoload": {
-    "psr-4" : {"App\\" : "App"}
-}
+    "psr-4" : {
+        "App\\": "src/"
+      }
+    }
 }

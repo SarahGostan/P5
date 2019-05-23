@@ -1,16 +1,29 @@
 <?php
+ob_start();
 
-require 'vendor/autoload.php';
-require 'class/global.php';
-require 'controller/LogsController.php';
-require 'controller/SongsController.php';
-require 'controller/GamesController.php';
-require 'controller/frontend.php';
+include __DIR__ . '/vendor/autoload.php';
+use \App\Model\Manager;
+$manager = new Manager();
+use App\Model\UsersManager;
+$usersManager = new UsersManager();
+use App\Model\SongsManager;
+$songsManager = new SongsManager();
+use App\Model\GamesManager;
+$gamesManager = new GamesManager();
+
+
+require 'src/Others/global.php';
+require 'src/Controller/LogsController.php';
+require 'src/Controller/SongsController.php';
+require 'src/Controller/GamesController.php';
+require 'src/Controller/frontend.php';
+
+
 
 checkAuth();
-$loader = new Twig_Loader_Filesystem(__DIR__ . '/view');
+$loader = new Twig_Loader_Filesystem(__DIR__ . '/src/view');
 $twig = new Twig_Environment($loader, [
-	'cache' => false, //__DIR__ . '/tmp'
+	'cache' => __DIR__ . '/tmp',
 	'debug' => true
 ]);
 $twig->addExtension(new Twig_Extension_Debug);
@@ -77,16 +90,56 @@ try{
 		break;
 
 		case 'accountnewgame':
-			if (isset ($_POST['gameName']))
+		$maxsize = 64000;
+		$formats = array( 'jpg' , 'jpeg' , 'png' );
+
+		if(empty($_POST['gameName']))
+		{
+		 Throw new Exception('Echec de la création de votre partie. Utilisez un point de fortune, réessayez !');
+		}
+		else
+		{
+
+			if (empty($_FILES['image']['name']))
 			{
-				newgame($id, $_POST['gameName']);
+				$image = false;
+
 			}
 			else
 			{
-				$message='Veuillez rentrer un nom pour votre partie';
-				accueil($twig,  $message);
+				$image = $_FILES['image'];
+				var_dump($image);
+				$image_sizes = getimagesize($_FILES['image']['tmp_name']);
+				$format_upload = strtolower(  substr(  strrchr($_FILES['image']['name'], '.')  ,1)  );
+				if(! in_array($format_upload,$formats))
+				{
+					Throw new Exception("Ce format de fichier (" . $format_upload . ") n'est pas accepté");
+				}
+				else if($_FILES['image']['size'] > $maxsize)
+				{
+					Throw new Exception("Force insuffisante pour supporter ce poids de fichier (" . $_FILES['image']['size'] . "). Selectionnez un fichier moins encombrant.");
+				}
 			}
-		break;
+			newgame($id, $_POST['gameName'], $image);
+		}
+
+			break;
+
+
+
+			case 'uploadimage':
+
+			$image_sizes = getimagesize($_FILES['image']['tmp_name']);
+			$format_upload = strtolower(  substr(  strrchr($_FILES['image']['name'], '.')  ,1)  );
+			if ($_FILES['image']['error'] > 0) {
+			Throw new Exception("Erreur lors du transfert");
+			}
+			else{
+			echo($_FILES['image']['size']);
+			echo($_FILES['image']['type']);
+			print_r($image_sizes);
+			}
+			break;
 
 		case 'accountsupressgame':
 			if (isset($_GET['id']))
@@ -142,7 +195,8 @@ try{
 			getSongsByKeyWord($twig, $keyword);
 	}
 		else{
-				allSongs($twig, $id);
+			$page = 1;
+				allSongs($twig, $id, $page);
 		}
 		break;
 
