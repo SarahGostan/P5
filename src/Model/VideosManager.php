@@ -7,6 +7,7 @@ class VideosManager extends Manager{
 		$req->execute(array($id));
 		$donnee = $req->fetchAll();
 		return $donnee;
+		var_dump($donnee);
 	}
 
 	public function addNewVideo($link, $id){

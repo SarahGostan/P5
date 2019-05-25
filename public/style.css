@@ -23,7 +23,10 @@ header{
 
 a{
 	text-decoration: none;
+}
 
+#predefGames{
+	width: 750px;
 }
 
 #icone{
@@ -82,13 +85,6 @@ h3{
 
 /******* INGAME ********/
 
-#notes{
-	display: flex;
-}
-.notes{
-	width: 400px;
-}
-
 
 .linkGame{
 	text-decoration: none;
@@ -105,6 +101,9 @@ h3{
 
 #blocNotes{
 	margin: 30px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
 }
 
 
@@ -139,7 +138,9 @@ h3{
 }
 
 
-
+#notesGameEdit{
+	width: 600px;
+}
 
 #fieldNotesEdit{
 	display: none;
@@ -208,7 +209,6 @@ width: 33%;
 }
 
 #diceRollContent{
-		transform: skewY(11deg);
 }
 
 #ambianceSongContainer{

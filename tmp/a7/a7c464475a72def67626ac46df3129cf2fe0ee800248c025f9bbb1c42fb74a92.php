@@ -42,7 +42,8 @@ class __TwigTemplate_7488a4a94a14e6aff9e1ed58cd473ea0bd206c1c0b6f7ad373046ef0928
         $this->displayBlock('title', $context, $blocks);
         echo "</title>
         <link href=\"public/style.css\" rel=\"stylesheet\" />
-          <link rel=\"stylesheet\" href=\"//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css\">
+        <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\" integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\">
+        <link rel=\"stylesheet\" href=\"//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css\">
         <link href=\"https://cdn.quilljs.com/1.3.6/quill.snow.css\" rel=\"stylesheet\">
         <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.8.1/css/all.css\" integrity=\"sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf\" crossorigin=\"anonymous\">
         <link rel=\"icon\" type=\"image/png\" href=\"public/images/head_resize.png\" />
@@ -51,12 +52,13 @@ class __TwigTemplate_7488a4a94a14e6aff9e1ed58cd473ea0bd206c1c0b6f7ad373046ef0928
   \t<script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js\"></script>
     <script src=\"//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js\"></script>
     <script src=\"//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/go.min.js\"></script>
+    <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js\" integrity=\"sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl\" crossorigin=\"anonymous\"></script>
 
 
 \t\t";
-        // line 18
+        // line 20
         $this->displayBlock('script', $context, $blocks);
-        // line 19
+        // line 21
         echo "
 
     </head>
@@ -81,9 +83,9 @@ class __TwigTemplate_7488a4a94a14e6aff9e1ed58cd473ea0bd206c1c0b6f7ad373046ef0928
         </a>
       </li>
 \t\t\t";
-        // line 42
+        // line 44
         if ( !(null === (isset($context["id"]) ? $context["id"] : null))) {
-            // line 43
+            // line 45
             echo "\t\t\t<li class=\"links\" id=\"accountMenu\">
         <a href=\"?action=account\">
           <span class)\"icon\"><i class=\"fas fa-user-circle\"></i>
@@ -92,40 +94,40 @@ class __TwigTemplate_7488a4a94a14e6aff9e1ed58cd473ea0bd206c1c0b6f7ad373046ef0928
       </li>
 \t\t\t";
         }
-        // line 50
+        // line 52
         echo "\t\t</ul>
 \t</nav>
 
 \t<div id=\"connexion\">
 \t";
-        // line 54
+        // line 56
         if ( !(null === (isset($context["id"]) ? $context["id"] : null))) {
-            // line 55
+            // line 57
             echo "\t<a href=\"index?action=logout\">Déconnexion</a>
 \t";
         } else {
-            // line 57
+            // line 59
             echo "\t<a href=\"index?action=login\">Connexion</a>
 \t<a href=\"index?action=inscription\">Inscription</a>
 
 \t";
         }
-        // line 61
+        // line 63
         echo "\t</div>
 \t\t\t";
-        // line 62
+        // line 64
         $this->displayBlock('message', $context, $blocks);
-        // line 63
+        // line 65
         echo "\t\t\t\t";
         $this->displayBlock('header', $context, $blocks);
-        // line 64
+        // line 66
         echo "\t\t</header>
 
 \t\t <div id=\"content\">
 \t\t\t";
-        // line 67
+        // line 69
         $this->displayBlock('content', $context, $blocks);
-        // line 68
+        // line 70
         echo "\t\t</div>
 
 \t\t<footer>
@@ -135,9 +137,9 @@ class __TwigTemplate_7488a4a94a14e6aff9e1ed58cd473ea0bd206c1c0b6f7ad373046ef0928
 
 <script src=\"public/js/main.js\"></script>
 ";
-        // line 76
+        // line 78
         $this->displayBlock('script_bottom', $context, $blocks);
-        // line 77
+        // line 79
         echo "
 \t</body>
 </html>
@@ -149,28 +151,28 @@ class __TwigTemplate_7488a4a94a14e6aff9e1ed58cd473ea0bd206c1c0b6f7ad373046ef0928
     {
     }
 
-    // line 18
+    // line 20
     public function block_script($context, array $blocks = [])
     {
     }
 
-    // line 62
+    // line 64
     public function block_message($context, array $blocks = [])
     {
         echo twig_escape_filter($this->env, (isset($context["message"]) ? $context["message"] : null), "html", null, true);
     }
 
-    // line 63
+    // line 65
     public function block_header($context, array $blocks = [])
     {
     }
 
-    // line 67
+    // line 69
     public function block_content($context, array $blocks = [])
     {
     }
 
-    // line 76
+    // line 78
     public function block_script_bottom($context, array $blocks = [])
     {
     }
@@ -187,7 +189,7 @@ class __TwigTemplate_7488a4a94a14e6aff9e1ed58cd473ea0bd206c1c0b6f7ad373046ef0928
 
     public function getDebugInfo()
     {
-        return array (  174 => 76,  169 => 67,  164 => 63,  158 => 62,  153 => 18,  148 => 5,  141 => 77,  139 => 76,  129 => 68,  127 => 67,  122 => 64,  119 => 63,  117 => 62,  114 => 61,  108 => 57,  104 => 55,  102 => 54,  96 => 50,  87 => 43,  85 => 42,  60 => 19,  58 => 18,  42 => 5,  36 => 1,);
+        return array (  176 => 78,  171 => 69,  166 => 65,  160 => 64,  155 => 20,  150 => 5,  143 => 79,  141 => 78,  131 => 70,  129 => 69,  124 => 66,  121 => 65,  119 => 64,  116 => 63,  110 => 59,  106 => 57,  104 => 56,  98 => 52,  89 => 45,  87 => 44,  62 => 21,  60 => 20,  42 => 5,  36 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -206,7 +208,8 @@ class __TwigTemplate_7488a4a94a14e6aff9e1ed58cd473ea0bd206c1c0b6f7ad373046ef0928
         <meta charset=\"utf-8\" />
         <title>{% block title %}{% endblock %}</title>
         <link href=\"public/style.css\" rel=\"stylesheet\" />
-          <link rel=\"stylesheet\" href=\"//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css\">
+        <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\" integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\">
+        <link rel=\"stylesheet\" href=\"//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css\">
         <link href=\"https://cdn.quilljs.com/1.3.6/quill.snow.css\" rel=\"stylesheet\">
         <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.8.1/css/all.css\" integrity=\"sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf\" crossorigin=\"anonymous\">
         <link rel=\"icon\" type=\"image/png\" href=\"public/images/head_resize.png\" />
@@ -215,6 +218,7 @@ class __TwigTemplate_7488a4a94a14e6aff9e1ed58cd473ea0bd206c1c0b6f7ad373046ef0928
   \t<script type=\"text/javascript\" src=\"http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js\"></script>
     <script src=\"//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js\"></script>
     <script src=\"//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/go.min.js\"></script>
+    <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js\" integrity=\"sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl\" crossorigin=\"anonymous\"></script>
 
 
 \t\t{% block script %}{% endblock %}

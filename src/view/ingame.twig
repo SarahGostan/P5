@@ -6,6 +6,7 @@
 <script src="public/js/Manage.js"></script>
 <script src="public/js/VideoPlayer.js"></script>
 <script src="public/js/Songs.js"></script>
+
 {% endblock %}
 {% block header %}			{% for gameInfos in gameInfos %}
 				<h2 id="gameTitle">{{ gameInfos['name'] }}</h2>
@@ -57,14 +58,14 @@
 			 {% endif %}
 
 				{% for videos in videos %}
-				<iframe id="player" type="text/html" width="22%" height="80"
+				<iframe id="videoPlayer" type="text/html" width="22%" height="80"
 		  	 src="http://www.youtube.com/embed/{{ videos['video_link'] }}?enablejsapi=1&origin=http://localhost/appliJDR"
 				 frameborder="0"></iframe>
 				 {% if gamesInfos is same as(true) and sessionId != 0 %}
 			  <form id="videoRemove" action="index.php?action=accountRemoveVideo" method="post">
 					<input type="hidden" name="videoLink" id="videoLink" value="{{ videos['video_link'] }}">
 					<input type="hidden" name="idGame" id="idGame" value="{{ gameId }}">
-					<input type="hidden" name="videoId" id="videoId" value="{{ videos[id] }}">
+					<input type="hidden" name="videoId" id="videoId" value="{{ videos['id'] }}">
 					<input type="submit" id="removeVideo" value="x">
 			  </form>
 				 {% endif %}
@@ -75,21 +76,7 @@
 
 		<section id="diceRollContainer" class="ingameContainer">
 			<div id="diceRoll" class='ingame'>
-					<div class='sectionContent' id="diceRollContent">
-			<div id="diceResult">
-				<div id="last">
-				</div>
-			</div>
 
-			<div>
-				<form id="roll">
-					<input type="text" name="diceNumber" id="diceNumber" required>
-						Dés
-					<input type="text" name="diceFaces" id="diceFaces" required>
-				  <input type="button" id="rollDices" value="Jeter !">
-				</form>
-			</div>
-		</div>
 	</div>
 		</section>
 </div>
@@ -103,7 +90,7 @@
 
 		<section id="blocNotes">
 
-				<div class="notes">
+				<div id="notes">
 						{% if blocNotes %}
 				<form  id="notesGameEdit">
 
@@ -129,18 +116,30 @@
 						<button id="switchEdit">+</button>
 				</div>
 
-				
 
 
+			<div id="diceRollContent">
+			<div id="diceResult" class="roll">
+			<div id="last">
+			</div>
+			</div>
 
-
+			<div>
+			<form id="roll">
+				<input type="text" name="diceNumber" id="diceNumber" required>
+					Dés
+				<input type="text" name="diceFaces" id="diceFaces" required>
+				<input type="button" id="rollDices" value="Jeter !">
+			</form>
+			</div>
+			</div>
 
 		</section>
+
 
 
 {% endblock %}
 
 
 {% block script_bottom %}
-
 {% endblock %}

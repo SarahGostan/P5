@@ -286,6 +286,16 @@ try{
 			}
 			break;
 
+			case 'getGameVideos':
+			if(isset($_GET['gameId'])){
+				$gameId = $_GET['gameId'];
+				$videoLink = getGameVideos($gameId);
+				echo($videoLink);
+		}
+		else{
+			throw new Exception("Vous n'êtes pas supposé être ici. Ouste !");
+		}
+			break;
 
 			case 'accountAddSong':
 

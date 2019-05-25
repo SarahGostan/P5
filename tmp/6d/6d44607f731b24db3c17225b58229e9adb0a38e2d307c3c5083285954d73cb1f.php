@@ -72,8 +72,64 @@ Pas le temps de créez vos parties ? Essayez l'une de nos <a href=\"\">parties p
         }
         // line 23
         echo "
+
 <div id=\"predefGames\">
 \t<p>Ici, une liste des dernières games prédéfinies en exemple</p>
+\t<div id=\"carouselExampleIndicators\" class=\"carousel slide\" data-ride=\"carousel\">
+  <ol class=\"carousel-indicators\">
+    <li data-target=\"#carouselExampleIndicators\" data-slide-to=\"0\" class=\"active\"></li>
+    <li data-target=\"#carouselExampleIndicators\" data-slide-to=\"1\"></li>
+    <li data-target=\"#carouselExampleIndicators\" data-slide-to=\"2\"></li>
+\t\t<li data-target=\"#carouselExampleIndicators\" data-slide-to=\"3\"></li>
+  </ol>
+  <div class=\"carousel-inner\">
+    <div class=\"carousel-item active\">
+      <img class=\"d-block w-100\" src=\"public/images/carousel_1.png\" alt=\"First slide\">
+\t\t\t<a href='index.php'>
+\t\t\t\t<div class=\"carousel-caption d-none d-md-block\">
+\t\t\t\t\t<h5>Partie démo 1</h5>
+\t\t\t\t\t<p>Bla bla bla</p>
+\t\t\t\t</div>
+\t\t\t</a>
+    </div>
+    <div class=\"carousel-item\">
+      <img class=\"d-block w-100\" src=\"public/images/carousel_2.png\" alt=\"Second slide\">
+\t\t\t<a href='index.php'>
+\t\t\t\t<div class=\"carousel-caption d-none d-md-block\">
+\t\t\t\t\t<h5>Partie démo 2</h5>
+\t\t\t\t\t<p>Bla bla bla</p>
+\t\t\t\t</div>
+\t\t\t</a>
+    </div>
+    <a href='index.php'>
+\t\t<div class=\"carousel-item\">
+      <img class=\"d-block w-100\" src=\"public/images/carousel_3.png\" alt=\"Third slide\">
+\t\t\t<a href='index.php'>
+\t\t\t\t<div class=\"carousel-caption d-none d-md-block\">
+\t\t\t\t\t<h5>Partie démo 3</h5>
+\t\t\t\t\t<p>Bla bla bla</p>
+\t\t\t\t</div>
+\t\t\t</a>
+    </div>
+\t\t<div class=\"carousel-item\">
+\t\t\t<img class=\"d-block w-100\" src=\"public/images/carousel_2.png\" alt=\"Forth slide\">
+\t\t\t<a href='index.php'>
+\t\t\t\t<div class=\"carousel-caption d-none d-md-block\">
+\t\t\t\t\t<h5>Partie démo 4</h5>
+\t\t\t\t\t<p>Bla bla bla</p>
+\t\t\t\t</div>
+\t\t\t</a>
+\t\t</div>
+  </div>
+  <a class=\"carousel-control-prev\" href=\"#carouselExampleIndicators\" role=\"button\" data-slide=\"prev\">
+    <span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span>
+    <span class=\"sr-only\">Previous</span>
+  </a>
+  <a class=\"carousel-control-next\" href=\"#carouselExampleIndicators\" role=\"button\" data-slide=\"next\">
+    <span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span>
+    <span class=\"sr-only\">Next</span>
+  </a>
+</div>
 </div>
 </div>
 
@@ -128,8 +184,64 @@ Pas le temps de créez vos parties ? Essayez l'une de nos <a href=\"\">parties p
 <button id=\"accountCreate\">CRÉER VOTRE COMPTE</button>
 {% endif %}
 
+
 <div id=\"predefGames\">
 \t<p>Ici, une liste des dernières games prédéfinies en exemple</p>
+\t<div id=\"carouselExampleIndicators\" class=\"carousel slide\" data-ride=\"carousel\">
+  <ol class=\"carousel-indicators\">
+    <li data-target=\"#carouselExampleIndicators\" data-slide-to=\"0\" class=\"active\"></li>
+    <li data-target=\"#carouselExampleIndicators\" data-slide-to=\"1\"></li>
+    <li data-target=\"#carouselExampleIndicators\" data-slide-to=\"2\"></li>
+\t\t<li data-target=\"#carouselExampleIndicators\" data-slide-to=\"3\"></li>
+  </ol>
+  <div class=\"carousel-inner\">
+    <div class=\"carousel-item active\">
+      <img class=\"d-block w-100\" src=\"public/images/carousel_1.png\" alt=\"First slide\">
+\t\t\t<a href='index.php'>
+\t\t\t\t<div class=\"carousel-caption d-none d-md-block\">
+\t\t\t\t\t<h5>Partie démo 1</h5>
+\t\t\t\t\t<p>Bla bla bla</p>
+\t\t\t\t</div>
+\t\t\t</a>
+    </div>
+    <div class=\"carousel-item\">
+      <img class=\"d-block w-100\" src=\"public/images/carousel_2.png\" alt=\"Second slide\">
+\t\t\t<a href='index.php'>
+\t\t\t\t<div class=\"carousel-caption d-none d-md-block\">
+\t\t\t\t\t<h5>Partie démo 2</h5>
+\t\t\t\t\t<p>Bla bla bla</p>
+\t\t\t\t</div>
+\t\t\t</a>
+    </div>
+    <a href='index.php'>
+\t\t<div class=\"carousel-item\">
+      <img class=\"d-block w-100\" src=\"public/images/carousel_3.png\" alt=\"Third slide\">
+\t\t\t<a href='index.php'>
+\t\t\t\t<div class=\"carousel-caption d-none d-md-block\">
+\t\t\t\t\t<h5>Partie démo 3</h5>
+\t\t\t\t\t<p>Bla bla bla</p>
+\t\t\t\t</div>
+\t\t\t</a>
+    </div>
+\t\t<div class=\"carousel-item\">
+\t\t\t<img class=\"d-block w-100\" src=\"public/images/carousel_2.png\" alt=\"Forth slide\">
+\t\t\t<a href='index.php'>
+\t\t\t\t<div class=\"carousel-caption d-none d-md-block\">
+\t\t\t\t\t<h5>Partie démo 4</h5>
+\t\t\t\t\t<p>Bla bla bla</p>
+\t\t\t\t</div>
+\t\t\t</a>
+\t\t</div>
+  </div>
+  <a class=\"carousel-control-prev\" href=\"#carouselExampleIndicators\" role=\"button\" data-slide=\"prev\">
+    <span class=\"carousel-control-prev-icon\" aria-hidden=\"true\"></span>
+    <span class=\"sr-only\">Previous</span>
+  </a>
+  <a class=\"carousel-control-next\" href=\"#carouselExampleIndicators\" role=\"button\" data-slide=\"next\">
+    <span class=\"carousel-control-next-icon\" aria-hidden=\"true\"></span>
+    <span class=\"sr-only\">Next</span>
+  </a>
+</div>
 </div>
 </div>
 

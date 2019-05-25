@@ -10,6 +10,13 @@ function getGamesInfos($twig, $id){
 	echo $twig->render('parties_gestionnaire.twig', array('gamesInfos' => $gamesInfos, 'favSongs' => $favSongs));
 }
 
+function 	getGameVideos($gameId){
+	$videoWay = new App\Model\VideosManager();
+	$videos = $videoWay->getVideoWay($gameId);
+	$videosLink = array_column($videos, 'video_link');
+	$result = json_encode($videosLink);
+	return $result;
+}
 
 function ingame($twig, $id, $gameId){
 	$songsManager = new App\Model\SongsManager();
@@ -45,7 +52,8 @@ function addNewVideo($link, $gameId, $id){
 	if($gamesInfos == true){
 	$video = new App\Model\VideosManager();
 	$newVideo = $video->addNewVideo($link, $gameId, $id);
-	header('Location: http://localhost/appliJDR/index?action=ingame&id=' . $gameId);
+	header('Location: index?action=ingame&id=' . $gameId);
+	exit();
 }
 	else{
 		throw new Exception('Echec du jet de piratage. Cette partie ne vous appartient pas.');
@@ -83,7 +91,8 @@ function removeVideo($link, $gameId, $videoId, $id){
 	{
 		$video = new App\Model\VideosManager();
 		$removeVideo = $video->removeVideoLink($link, $gameId, $videoId);
-		header('Location: http://localhost/appliJDR/index?action=ingame&id=' . $gameId);
+		header('Location: index?action=ingame&id=' . $gameId);
+		exit();
 	}
 	else
 	{

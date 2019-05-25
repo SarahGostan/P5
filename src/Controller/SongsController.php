@@ -5,7 +5,8 @@
 function allSongs($twig, $userId, $page){
 	$songsManager = new App\Model\SongsManager();
 	$limit = 4;
-	$allSongs = $songsManager->getAllSongs($page, $limit);
+	$firstElement = ($page - 1) * $limit;
+	$allSongs = $songsManager->getAllSongs($firstElement, $limit);
 	$pageNumber = $songsManager->pageNumber($limit);
 	$favSongs = $songsManager->getFavSongs($userId);
 	$thematics = $songsManager->getThematics();

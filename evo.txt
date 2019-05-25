@@ -3,8 +3,27 @@ Perspectives d'évolution :
 Proposer une banque d'icones pour la création de partie
 Ajouter une image après création de la partie (modification de base)
 Ajout d'autres images stockées dans une partie (attention au poids sur le serveur)
-L'ajout de sons à une partie ne fonctionne pas (ni depuis le champ de recherche, ni depuis le gestionnaire)
 Ajouter un icone de fumble à la page d'erreur
 Gestionnaire de fav : JS pour supprimer les sons fav (avec bouton "annuler")
 Permettre de prendre des notes sur des parties d'autres (notes liées au compte et non à la partie)
 Banque de son : cliquer sur un thème pour avoir tous les sons du thème
+
+
+Points à finaliser :
+
+- Création de compte utilisateur
+- Media Queries
+- Deboggage (autocomplete, ...
+- Suppression des fonctionnalités indisponibles sans être connecté (ex : recherche de son dans les parties démo)
+
+
+API, dés visuels ?
+babylon.js
+
+Evaluation : responsive même smartphone
+Animista : animations css
+Interface admin
+
+Pagination sur les volets de l'écran MJ
+Changement de titre de partie
+Changement de titre de page de note

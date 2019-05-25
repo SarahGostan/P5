@@ -51,8 +51,7 @@ class SongsManager extends Manager{
 	}
 
 
-	public function getAllSongs($page, $limit){
-		$firstElement = ($page - 1) * $limit;
+	public function getAllSongs($firstElement, $limit){
 		$req = $this->db->prepare(
 			'SELECT SQL_CALC_FOUND_ROWS
 			s.name AS song_name,
