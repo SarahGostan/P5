@@ -13,7 +13,7 @@ Points à finaliser :
 
 - Création de compte utilisateur
 - Media Queries
-- Deboggage (autocomplete, ...
+- Deboggage (...
 - Suppression des fonctionnalités indisponibles sans être connecté (ex : recherche de son dans les parties démo)
 
 
@@ -27,3 +27,25 @@ Interface admin
 Pagination sur les volets de l'écran MJ
 Changement de titre de partie
 Changement de titre de page de note
+
+Gestion des blocs notes :
+
+Verifier si un bloc note existe pour cet ID et cette partie.
+Si oui, l'afficher
+Sinon, afficher un bloc vierge, qui puisse être enregistré
+Reprendre la possibilité de plusieurs pages, en se servant du data-set ?
+
+Faire une section "epingle", règles en accès rapide
+
+Changer le titre d'une partie, depuis la partie ou le manager
+
+Ajouter une option pour rendre une partie privée
+
+Acceder en archives aux notes des parties supprimées
+
+
+
+
+Identation
+mettre les controleurs dans des class
+w3c

@@ -131,6 +131,9 @@ Pas le temps de créez vos parties ? Essayez l'une de nos <a href=\"\">parties p
   </a>
 </div>
 </div>
+
+
+<p>Besoin d'aide ? <a href=\"index.php?action=guide\">Suivez le guide</a></p>
 </div>
 
 ";
@@ -243,6 +246,9 @@ Pas le temps de créez vos parties ? Essayez l'une de nos <a href=\"\">parties p
   </a>
 </div>
 </div>
+
+
+<p>Besoin d'aide ? <a href=\"index.php?action=guide\">Suivez le guide</a></p>
 </div>
 
 {% endblock %}

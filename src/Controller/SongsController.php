@@ -1,13 +1,15 @@
 <?php
-
-
-
-function allSongs($twig, $userId, $page){
+ob_start();
+function allSongs($twig, $userId, $page, $keyword){
 	$songsManager = new App\Model\SongsManager();
 	$limit = 4;
 	$firstElement = ($page - 1) * $limit;
-	$allSongs = $songsManager->getAllSongs($firstElement, $limit);
 	$pageNumber = $songsManager->pageNumber($limit);
+	if ($keyword != '%'){
+	$keyword = '%'.$keyword.'%';
+	$pageNumber = 0;
+}
+	$allSongs = $songsManager->getAllSongs($firstElement, $limit, $keyword);
 	$favSongs = $songsManager->getFavSongs($userId);
 	$thematics = $songsManager->getThematics();
 	$favSongsId = [];
@@ -17,10 +19,18 @@ function allSongs($twig, $userId, $page){
 	echo $twig->render('allsongs.twig', array('allSongs' => $allSongs, 'favSongs' => $favSongsId, 'thematics' => $thematics, 'pageNumber' => $pageNumber, 'page' => $page));
 }
 
-function getSongsByKeyWord($twig, $keyword){
+function songFavStatut($songId, $id){
 	$songsManager = new App\Model\SongsManager();
-	$allSongs = $songsManager->getSongsByKeyWord($keyword);
-	echo $twig->render('songsbykeyword.twig', array('allSongs' => $allSongs, 'keyword' => $keyword));
+	$checkSongs = $songsManager->checkFavSongs($id, $songId);
+	if($checkSongs['total'] > 0){
+		$result = 0;
+
+	}
+	else{
+		$result = 1;
+
+	}
+	return $result;
 }
 
 function checkSong($userId, $songId){
@@ -33,7 +43,6 @@ function checkSong($userId, $songId){
 		return false;
 	}
 }
-
 
 function addSong($userId, $songId){
 	$songsManager = new App\Model\SongsManager();
@@ -59,7 +68,6 @@ function removeSong($userId, $songId){
 
 function searchSong($term){
 	$songManager = new App\Model\SongsManager();
-	$searchSong = $songManager->searchSong($term);
+	$searchSong = $songManager->searchASong($term);
 	return $searchSong;
-
 }

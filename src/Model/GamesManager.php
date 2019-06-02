@@ -22,17 +22,6 @@ class GamesManager extends Manager{
 			));
 	}
 
-public function newNotes($id, $gameId){
-	$chapter = 1;
-	$req = $this->db->prepare('INSERT INTO game_notes(chapter, title, content, game_id, owner_id) VALUES (:chapter, :title, :content, :gameId, :id)');
-	$req->execute(array(
-		'chapter' => $chapter,
-		'title' => 'Page ' . $chapter,
-		'content' => 'Ecrivez ici vos notes de jeu',
-		'gameId' => $gameId,
-		'id' => $id,
-	));
-}
 
 public function checkGameOwner($id, $game_id){
 	$query = $this->db->prepare('SELECT owner_id FROM games WHERE game_id = ?');
@@ -71,7 +60,7 @@ public function getGameInfos($gameId){
 	}
 
 	public function getGameNotes($gameId, $userId){
-			$query = $this->db->prepare('SELECT chapter, title, content, id FROM game_notes WHERE owner_id = :userId AND game_id = :gameId');
+			$query = $this->db->prepare('SELECT title, content, id FROM game_notes WHERE owner_id = :userId AND game_id = :gameId');
 			$query->execute(array(
 			'userId' => $userId,
 			'gameId' => $gameId,
@@ -138,8 +127,26 @@ public function getGameInfos($gameId){
 		return $total;
 	}
 
+	public function checkNoteExist($gameId, $ownerId){
+		$req = $this->db->prepare('SELECT * FROM game_notes WHERE game_id = :gameId AND owner_id = :ownerId');
+		$req->execute(array(
+		'gameId' => $gameId,
+		'ownerId' =>$ownerId));
+		$donnee = $req->fetchAll();
+		return $donnee;
+	}
 
-	public function editeNotes($title, $content, $id){
+public function createNewNote($content, $title, $gameId, $id){
+	$req = $this->db->prepare('INSERT INTO game_notes(title, content, game_id, owner_id) VALUES (:title, :content, :gameId, :id)');
+	$req->execute(array(
+		'title' => $title,
+		'content' => $content,
+		'gameId' => $gameId,
+		'id' => $id,
+	));
+}
+
+	public function editNotes($title, $content, $id){
 		$req = $this->db->prepare('UPDATE game_notes SET title = :title, content = :content WHERE id = :id');
 		$req->execute(array(
 		'title' => $title,

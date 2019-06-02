@@ -60,64 +60,74 @@ class __TwigTemplate_46972291605a20009d966c44ca7d03d85e96e8c152250262b7decd077d5
     // line 11
     public function block_header($context, array $blocks = [])
     {
-        echo "\t\t\t";
+        // line 12
+        echo "\t";
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable($context["gameInfos"]);
         foreach ($context['_seq'] as $context["_key"] => $context["gameInfos"]) {
-            // line 12
-            echo "\t\t\t\t<h2 id=\"gameTitle\">";
+            // line 13
+            echo "\t\t<h2 id=\"gameTitle\">";
             echo twig_escape_filter($this->env, $this->getAttribute($context["gameInfos"], "name", [], "array"), "html", null, true);
             echo "</h2>
-\t\t\t";
+\t";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['gameInfos'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 14
-        echo "\t\t\t";
     }
 
-    // line 15
+    // line 18
     public function block_content($context, array $blocks = [])
     {
-        // line 16
+        // line 19
         echo "
 <div id=\"ingameContent\">
 
-\t\t<section id=\"ambianceSongContainer\" class=\"ingameContainer\">
+
+";
+        // line 24
+        echo "
+\t<section id=\"ambianceSongContainer\" class=\"ingameContainer\">
 \t\t\t<div id='ambianceSong' class=\"ingame\">
 
 \t\t\t\t<div class='sectionContent' id=\"ambianceSongContent\">
-\t\t\t\t\t<form action=\"?action=sons\" id='songSearchForm' method=\"post\">
+
+";
+        // line 30
+        if ((((isset($context["gamesInfos"]) ? $context["gamesInfos"] : null) === true) && ((isset($context["sessionId"]) ? $context["sessionId"] : null) != 0))) {
+            // line 31
+            echo "\t\t\t\t\t<form action=\"?action=sons\" id='songSearchForm' method=\"post\">
 \t\t\t\t\t\t\t<label for=\"songTerm\">Rechercher un son</label>
 \t\t\t\t\t\t\t<input type=text name=\"songTerm\" id=\"songTerm\">
 \t\t\t\t\t\t\t<input type=\"submit\" id=\"searchASong\" value=\"Rechercher\">
 \t\t\t\t\t\t\t<div id=\"resultSongSearch\"></div>
 \t\t\t\t\t\t</form>
-\t\t\t";
-        // line 29
+";
+        }
+        // line 38
+        echo "\t\t\t";
         if ((isset($context["gameSongs"]) ? $context["gameSongs"] : null)) {
-            // line 30
+            // line 39
             echo "
 \t\t\t";
-            // line 31
+            // line 40
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable($context["gameSongs"]);
             foreach ($context['_seq'] as $context["_key"] => $context["gameSongs"]) {
-                // line 32
+                // line 41
                 echo "\t\t\t<div id=\"song";
                 echo twig_escape_filter($this->env, $this->getAttribute($context["gameSongs"], "id", [], "array"), "html", null, true);
                 echo "\">
 \t\t\t\t";
-                // line 33
+                // line 42
                 echo twig_escape_filter($this->env, $this->getAttribute($context["gameSongs"], "name", [], "array"), "html", null, true);
                 echo "
 \t\t\t\t<audio class=\"songInGame\" src=\"public/songs/";
-                // line 34
+                // line 43
                 echo twig_escape_filter($this->env, $this->getAttribute($context["gameSongs"], "access", [], "array"), "html", null, true);
                 echo "\" controls></audio>
 \t\t\t\t";
-                // line 35
+                // line 44
                 if ( !(null === (isset($context["id"]) ? $context["id"] : null))) {
                     echo "<button class=\"removeSongFromGame\" id=\"";
                     echo twig_escape_filter($this->env, $this->getAttribute($context["gameSongs"], "id", [], "array"), "html", null, true);
@@ -125,96 +135,111 @@ class __TwigTemplate_46972291605a20009d966c44ca7d03d85e96e8c152250262b7decd077d5
                     echo twig_escape_filter($this->env, (isset($context["gameId"]) ? $context["gameId"] : null), "html", null, true);
                     echo "\">Supprimer</button>";
                 }
-                // line 36
+                // line 45
                 echo "\t\t\t</div>
 \t\t\t";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['gameSongs'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 38
+            // line 47
             echo "
 
 \t\t\t";
         } else {
-            // line 41
+            // line 50
             echo "\t\t\tVotre liste de sons est vide ! Ajoutez en <a href=\"?action=allsongs\">ici</a>
 \t\t\t";
         }
-        // line 43
+        // line 52
         echo "\t\t</div>
 
 \t\t</div>
-\t\t</section>
+\t</section>
+
+";
+        // line 58
+        echo "
 
 \t\t<section id=\"ambianceMusiqueContainer\" class=\"ingameContainer\">
 \t\t\t<div id=\"ambianceMusique\" class=\"ingame\">
 \t\t\t\t\t<div class='sectionContent' id=\"ambianceMusiqueContent\">
 \t\t ";
-        // line 51
+        // line 63
         if ((((isset($context["gamesInfos"]) ? $context["gamesInfos"] : null) === true) && ((isset($context["sessionId"]) ? $context["sessionId"] : null) != 0))) {
-            // line 52
+            // line 64
             echo "\t\t\t\t<span>Pour ajouter une vidéo youtube, ajoutez l'identifiant de la vidéo (ex : dQw4w9WgXcQ) ci-dessous</span>
 \t\t\t\t<form id=\"videoAdd\" action=\"index.php?action=accountAddVideo\" method=\"post\">
 \t\t\t\t\t<input type=\"texte\" name=\"videoLink\" id=\"videoLink\" required>
 \t\t\t\t\t<input type=\"hidden\" name=\"gameId\" id=\"gameId\" value=\"";
-            // line 55
+            // line 67
             echo twig_escape_filter($this->env, (isset($context["gameId"]) ? $context["gameId"] : null), "html", null, true);
             echo "\">
 \t\t\t\t\t<input type=\"submit\" id=\"addVideoLink\" value=\"Ajouter\">
 \t\t\t\t</form>
 \t\t\t ";
         }
-        // line 59
+        // line 71
         echo "
 \t\t\t\t";
-        // line 60
+        // line 72
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable($context["videos"]);
         foreach ($context['_seq'] as $context["_key"] => $context["videos"]) {
-            // line 61
+            // line 73
             echo "\t\t\t\t<iframe id=\"videoPlayer\" type=\"text/html\" width=\"22%\" height=\"80\"
 \t\t  \t src=\"http://www.youtube.com/embed/";
-            // line 62
+            // line 74
             echo twig_escape_filter($this->env, $this->getAttribute($context["videos"], "video_link", [], "array"), "html", null, true);
             echo "?enablejsapi=1&origin=http://localhost/appliJDR\"
 \t\t\t\t frameborder=\"0\"></iframe>
 \t\t\t\t ";
-            // line 64
+            // line 76
             if ((((isset($context["gamesInfos"]) ? $context["gamesInfos"] : null) === true) && ((isset($context["sessionId"]) ? $context["sessionId"] : null) != 0))) {
-                // line 65
+                // line 77
                 echo "\t\t\t  <form id=\"videoRemove\" action=\"index.php?action=accountRemoveVideo\" method=\"post\">
 \t\t\t\t\t<input type=\"hidden\" name=\"videoLink\" id=\"videoLink\" value=\"";
-                // line 66
+                // line 78
                 echo twig_escape_filter($this->env, $this->getAttribute($context["videos"], "video_link", [], "array"), "html", null, true);
                 echo "\">
 \t\t\t\t\t<input type=\"hidden\" name=\"idGame\" id=\"idGame\" value=\"";
-                // line 67
+                // line 79
                 echo twig_escape_filter($this->env, (isset($context["gameId"]) ? $context["gameId"] : null), "html", null, true);
                 echo "\">
 \t\t\t\t\t<input type=\"hidden\" name=\"videoId\" id=\"videoId\" value=\"";
-                // line 68
+                // line 80
                 echo twig_escape_filter($this->env, $this->getAttribute($context["videos"], "id", [], "array"), "html", null, true);
                 echo "\">
 \t\t\t\t\t<input type=\"submit\" id=\"removeVideo\" value=\"x\">
 \t\t\t  </form>
 \t\t\t\t ";
             }
-            // line 72
+            // line 84
             echo "\t\t\t\t";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['videos'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 73
+        // line 85
         echo "\t\t\t</div>
 \t\t</div>
 \t\t</section>
 
+
+";
+        // line 91
+        echo "
+
+";
+        // line 94
+        echo "
+";
+        // line 96
+        echo "
 \t\t<section id=\"diceRollContainer\" class=\"ingameContainer\">
 \t\t\t<div id=\"diceRoll\" class='ingame'>
 
-\t</div>
+\t\t\t</div>
 \t\t</section>
 </div>
 
@@ -229,63 +254,76 @@ class __TwigTemplate_46972291605a20009d966c44ca7d03d85e96e8c152250262b7decd077d5
 
 \t\t\t\t<div id=\"notes\">
 \t\t\t\t\t\t";
-        // line 94
+        // line 114
         if ((isset($context["blocNotes"]) ? $context["blocNotes"] : null)) {
-            // line 95
+            // line 115
             echo "\t\t\t\t<form  id=\"notesGameEdit\">
-
 \t\t\t\t\t\t";
-            // line 97
+            // line 116
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable($context["blocNotes"]);
             foreach ($context['_seq'] as $context["_key"] => $context["blocNotes"]) {
-                // line 98
+                // line 117
                 echo "\t\t\t<fieldset id=\"fieldNotes\"  data-id=\"";
                 echo twig_escape_filter($this->env, $this->getAttribute($context["blocNotes"], "id", [], "array"), "html", null, true);
                 echo "\">
 \t\t\t\t<legend name=\"title\" class=\"title\" id=\"notesTitle\">";
-                // line 99
+                // line 118
                 echo twig_escape_filter($this->env, $this->getAttribute($context["blocNotes"], "title", [], "array"), "html", null, true);
                 echo "</legend>
 \t\t\t\t<div id=\"notesContent\">";
-                // line 100
+                // line 119
                 echo $this->getAttribute($context["blocNotes"], "content", [], "array");
                 echo "</strong></em></color></u></p></div>
 \t\t\t</fieldset>
 
 \t\t\t<fieldset id=\"fieldNotesEdit\"  data-id=\"";
-                // line 103
+                // line 122
                 echo twig_escape_filter($this->env, $this->getAttribute($context["blocNotes"], "id", [], "array"), "html", null, true);
                 echo "\">
 \t\t\t\t<input id=\"notesTitleEdit\" value='";
-                // line 104
+                // line 123
                 echo twig_escape_filter($this->env, $this->getAttribute($context["blocNotes"], "title", [], "array"), "html", null, true);
                 echo "'>
 \t\t\t\t<div class=\"container\" id=\"notesContentEdit\">";
-                // line 105
+                // line 124
                 echo $this->getAttribute($context["blocNotes"], "content", [], "array");
                 echo "</strong></em></color></u></p></div>
 \t\t\t\t<div class=\"container javascript\" id=\"delta-container\"></div>
 \t\t\t</fieldset>
 
 \t\t\t<input type=\"button\" class=\"editNotes\" value =\"Sauvegarder\"/>
-\t\t\t";
+\t\t\t\t";
             }
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['blocNotes'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 111
+            // line 130
             echo "\t\t\t</form>
 
 \t\t\t";
         } else {
-            // line 114
-            echo "<p>Aucun bloc note existant</p>
+            // line 133
+            echo "\t\t";
+            if (((isset($context["sessionId"]) ? $context["sessionId"] : null) != 0)) {
+                // line 134
+                echo "\t\t\t<form id=\"newNote\" data-id='";
+                echo twig_escape_filter($this->env, (isset($context["gameId"]) ? $context["gameId"] : null), "html", null, true);
+                echo "'>
+\t\t\t\t<input id=\"notesTitleEdit\" value=''>
+\t\t\t\t<div class=\"container\" id=\"notesContentEdit\"></strong></em></color></u></p></div>
+\t\t\t\t<div class=\"container javascript\" id=\"delta-container\"></div>
+
+\t\t\t<input type=\"button\" id=\"createNewNote\" value =\"Sauvegarder\"/>
+\t\t</form>
+\t\t\t";
+            }
+            // line 142
+            echo "\t\t\t\t\t\t<button id=\"switchEdit\">+</button>
 \t\t\t";
         }
-        // line 116
-        echo "\t\t\t\t\t\t<button id=\"switchEdit\">+</button>
-\t\t\t\t</div>
+        // line 144
+        echo "\t\t\t\t</div>
 
 
 
@@ -312,7 +350,7 @@ class __TwigTemplate_46972291605a20009d966c44ca7d03d85e96e8c152250262b7decd077d5
 ";
     }
 
-    // line 144
+    // line 171
     public function block_script_bottom($context, array $blocks = [])
     {
     }
@@ -329,7 +367,7 @@ class __TwigTemplate_46972291605a20009d966c44ca7d03d85e96e8c152250262b7decd077d5
 
     public function getDebugInfo()
     {
-        return array (  316 => 144,  287 => 116,  283 => 114,  278 => 111,  266 => 105,  262 => 104,  258 => 103,  252 => 100,  248 => 99,  243 => 98,  239 => 97,  235 => 95,  233 => 94,  210 => 73,  204 => 72,  197 => 68,  193 => 67,  189 => 66,  186 => 65,  184 => 64,  179 => 62,  176 => 61,  172 => 60,  169 => 59,  162 => 55,  157 => 52,  155 => 51,  145 => 43,  141 => 41,  136 => 38,  129 => 36,  121 => 35,  117 => 34,  113 => 33,  108 => 32,  104 => 31,  101 => 30,  99 => 29,  84 => 16,  81 => 15,  77 => 14,  68 => 12,  61 => 11,  52 => 5,  49 => 4,  43 => 2,  33 => 1,);
+        return array (  354 => 171,  326 => 144,  322 => 142,  310 => 134,  307 => 133,  302 => 130,  290 => 124,  286 => 123,  282 => 122,  276 => 119,  272 => 118,  267 => 117,  263 => 116,  260 => 115,  258 => 114,  238 => 96,  235 => 94,  231 => 91,  224 => 85,  218 => 84,  211 => 80,  207 => 79,  203 => 78,  200 => 77,  198 => 76,  193 => 74,  190 => 73,  186 => 72,  183 => 71,  176 => 67,  171 => 64,  169 => 63,  162 => 58,  155 => 52,  151 => 50,  146 => 47,  139 => 45,  131 => 44,  127 => 43,  123 => 42,  118 => 41,  114 => 40,  111 => 39,  108 => 38,  99 => 31,  97 => 30,  89 => 24,  83 => 19,  80 => 18,  69 => 13,  64 => 12,  61 => 11,  52 => 5,  49 => 4,  43 => 2,  33 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -352,24 +390,33 @@ class __TwigTemplate_46972291605a20009d966c44ca7d03d85e96e8c152250262b7decd077d5
 <script src=\"public/js/Songs.js\"></script>
 
 {% endblock %}
-{% block header %}\t\t\t{% for gameInfos in gameInfos %}
-\t\t\t\t<h2 id=\"gameTitle\">{{ gameInfos['name'] }}</h2>
-\t\t\t{% endfor %}
-\t\t\t{% endblock %}
+{% block header %}
+\t{% for gameInfos in gameInfos %}
+\t\t<h2 id=\"gameTitle\">{{ gameInfos['name'] }}</h2>
+\t{% endfor %}
+{% endblock %}
+
+
 {% block content %}
 
 <div id=\"ingameContent\">
 
-\t\t<section id=\"ambianceSongContainer\" class=\"ingameContainer\">
+
+{# ************* Section de gauche : liste de sons d'ambiance ************* #}
+
+\t<section id=\"ambianceSongContainer\" class=\"ingameContainer\">
 \t\t\t<div id='ambianceSong' class=\"ingame\">
 
 \t\t\t\t<div class='sectionContent' id=\"ambianceSongContent\">
+
+{% if gamesInfos is same as(true) and sessionId != 0 %}
 \t\t\t\t\t<form action=\"?action=sons\" id='songSearchForm' method=\"post\">
 \t\t\t\t\t\t\t<label for=\"songTerm\">Rechercher un son</label>
 \t\t\t\t\t\t\t<input type=text name=\"songTerm\" id=\"songTerm\">
 \t\t\t\t\t\t\t<input type=\"submit\" id=\"searchASong\" value=\"Rechercher\">
 \t\t\t\t\t\t\t<div id=\"resultSongSearch\"></div>
 \t\t\t\t\t\t</form>
+{% endif %}
 \t\t\t{% if gameSongs %}
 
 \t\t\t{% for gameSongs in gameSongs %}
@@ -387,7 +434,10 @@ class __TwigTemplate_46972291605a20009d966c44ca7d03d85e96e8c152250262b7decd077d5
 \t\t</div>
 
 \t\t</div>
-\t\t</section>
+\t</section>
+
+{# ************* Section du milieu : liste de musiques et vidéos ************* #}
+
 
 \t\t<section id=\"ambianceMusiqueContainer\" class=\"ingameContainer\">
 \t\t\t<div id=\"ambianceMusique\" class=\"ingame\">
@@ -418,10 +468,18 @@ class __TwigTemplate_46972291605a20009d966c44ca7d03d85e96e8c152250262b7decd077d5
 \t\t</div>
 \t\t</section>
 
+
+{# ************* Section de droite : règles en accès rapide ************* #}
+
+
+{# A DEVELOPPER #}
+
+{# ************* Section du bas : feuilles de note et jet de dés ************* #}
+
 \t\t<section id=\"diceRollContainer\" class=\"ingameContainer\">
 \t\t\t<div id=\"diceRoll\" class='ingame'>
 
-\t</div>
+\t\t\t</div>
 \t\t</section>
 </div>
 
@@ -437,7 +495,6 @@ class __TwigTemplate_46972291605a20009d966c44ca7d03d85e96e8c152250262b7decd077d5
 \t\t\t\t<div id=\"notes\">
 \t\t\t\t\t\t{% if blocNotes %}
 \t\t\t\t<form  id=\"notesGameEdit\">
-
 \t\t\t\t\t\t{% for blocNotes in blocNotes %}
 \t\t\t<fieldset id=\"fieldNotes\"  data-id=\"{{ blocNotes['id'] }}\">
 \t\t\t\t<legend name=\"title\" class=\"title\" id=\"notesTitle\">{{ blocNotes['title'] }}</legend>
@@ -451,13 +508,21 @@ class __TwigTemplate_46972291605a20009d966c44ca7d03d85e96e8c152250262b7decd077d5
 \t\t\t</fieldset>
 
 \t\t\t<input type=\"button\" class=\"editNotes\" value =\"Sauvegarder\"/>
-\t\t\t{% endfor %}
+\t\t\t\t{% endfor %}
 \t\t\t</form>
 
 \t\t\t{% else %}
-<p>Aucun bloc note existant</p>
+\t\t{% if\tsessionId != 0 %}
+\t\t\t<form id=\"newNote\" data-id='{{ gameId }}'>
+\t\t\t\t<input id=\"notesTitleEdit\" value=''>
+\t\t\t\t<div class=\"container\" id=\"notesContentEdit\"></strong></em></color></u></p></div>
+\t\t\t\t<div class=\"container javascript\" id=\"delta-container\"></div>
+
+\t\t\t<input type=\"button\" id=\"createNewNote\" value =\"Sauvegarder\"/>
+\t\t</form>
 \t\t\t{% endif %}
 \t\t\t\t\t\t<button id=\"switchEdit\">+</button>
+\t\t\t{% endif %}
 \t\t\t\t</div>
 
 

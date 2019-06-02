@@ -6,6 +6,7 @@ Ingame.prototype.init = function(){
 	var content = this.quillStarter();
 	document.getElementById('rollDices').addEventListener('click', this.rollDices.bind(this));
 	document.getElementById('switchEdit').addEventListener('click', this.switchEdit.bind(this));
+	document.getElementById('createNewNote').addEventListener('click', this.newNote.bind(this));
 	var notes = document.getElementsByClassName("editNotes");
 
 		for (var i = 0; i < notes.length; i++){
@@ -14,9 +15,6 @@ Ingame.prototype.init = function(){
 	var header = document.getElementById('header');
 	header.style.height = '70px';
 	document.getElementById('title').style.display = 'none';
-
-
-
 }
 
 Ingame.prototype.quillStarter = function(){
@@ -104,17 +102,14 @@ var content = this.getText();
 		type: "POST",
 		url: "?action=notesEdit",
 		dataType: 'html',
-		dataType: 'html',
 		data : 'title=' + title + '&content=' + content + '&id=' + id,
 		success: function(){
 			return true;
 		}
 	});
 		if (success= true){
-		console.log('ajax ok');
 		this.switchReadOnly(content);
 		}
-		console.log(content);
 		//var delta = quill.getContents();
 	//	console.log(delta);
 
@@ -133,9 +128,20 @@ var content = this.getText();
 
 
 
-	/*Ingame.prototype.newNote = function(){
-		var formulaire = document.forms['notesGameEdit'];
-		var firstField = formulaire.firstChild;
+	Ingame.prototype.newNote = function(){
+		var content = this.getText();
+		var title = document.getElementById("notesTitleEdit").value;
+		var gameId = document.getElementById('newNote').dataset.id;
+		console.log(gameId);
+		$.ajax({
+			type: "POST",
+			url: "?action=notesCreate",
+			dataType: 'html',
+			data : 'title=' + title + '&content=' + content + '&gameId=' + gameId,
+		});
+}
+/*
+	//	var firstField = formulaire.firstChild;
 	//	var formulaire = document.getElementById['notesField'];
 		var fieldset = document.createElement ("fieldset");
 		var legend = document.createElement ("input");

@@ -8,10 +8,6 @@ function login($twig, $message){
 	echo $twig->render('login.twig', array('message' => $message));
 }
 
-function inscription($twig){
-	echo $twig->render('inscription.twig');
-}
-
 function logout($twig){
 	$userSession = new UserSession();
 	$userSession = $userSession->logout();
@@ -50,25 +46,43 @@ function checkAuth(){
 		throw new Exception ('Cet email est déjà enregistré.<br /><a href="index?action=inscription">Connectez vous</a>');
 	}
 	else{
-	$userSignUp = $userSignUp->signUp($password, $mail, $key);
-	$content = 'Bienvenue sur l\'Ecran du MJ,
+	$newUser = $userSignUp->signUp($password, $mail, $key);
+	if (!preg_match("#^[a-z0-9._-]+@(hotmail|live|msn).[a-z]{2,4}$#", $mail))
+	{
+		$passage_ligne = "\r\n";
+	}
+	else
+	{
+		$passage_ligne = "\n";
+	}
+
+
+	$headers = 'From: inscription@lecrandumj.fr' . 	$passage_ligne .
+	     'X-Mailer: PHP/' . phpversion();
+	$message= 'Bienvenue sur l\'Ecran du MJ,
 
 	Pour activer votre compte, veuillez cliquer sur le lien ci dessous
 	ou copier/coller dans votre navigateur internet.
 
-	localhost/appliJDR/index.php?action=validaccount&mail='.urlencode($mail).'&key='.urlencode($key).'
+	http://lecrandumj.fr/index.php?action=validation&mail='.urlencode($mail).'&key='.urlencode($key).'
 
 	---------------
 	Ceci est un mail automatique, Merci de ne pas y répondre.';
-	$sujet = 'Activation de votre compte';
-	$entete = "From: inscription@lecrandumj.com" ;
-	mail($mail, $sujet, $content, $entete);
-	header('Location:?action=accueil&message=emailsent');
+	$subject = 'Activation de votre compte';
+
+	if(mail($mail, $subject, $message, $headers)){
+		header('Location:?action=accueil&message=emailsent');
+	}
+	else{
+		throw new Exception('Votre inscription n\'a pas pu s\'effectuer. Réessayez dans quelques minutes. Si le problème persiste, contactez le support : support@lecrandumj.fr');
+	}
 	exit();
 	}
 }
 
 function validAccount($mail, $key){
+	$userSession = new UserSession();
+	$userSession = $userSession->logout();
 	$checkAccount = new App\Model\UsersManager();
 	$checkVal = $checkAccount->validUser($mail, $key);
 	if($checkVal > 0){

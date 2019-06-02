@@ -33,7 +33,7 @@ class UsersManager extends Manager{
 	}
 
 
-	public function validUser($pseudo, $key){
+	public function validUser($mail, $key){
 		$req = $this->db->prepare('UPDATE users SET statut = 1 WHERE mail = :mail AND activation_key = :key AND statut = 0');
 		$req->execute(array(
 			'mail' => $mail,

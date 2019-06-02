@@ -1,5 +1,6 @@
 <?php
 namespace App\Model;
+ob_start();
 class SongsManager extends Manager{
 
 	public function getFavSongs($userId){
@@ -38,8 +39,7 @@ class SongsManager extends Manager{
 			$array = array();
 			while($donnee = $req->fetch())
 			{
-				array_push($array, array(
-					'value' => $donnee['name'],
+				array_push($array, array('value' => $donnee['name'],
 					'label' => $donnee['name'],
 					'desc' => $donnee['access'],
 					'id' => $donnee['id']
@@ -50,8 +50,23 @@ class SongsManager extends Manager{
 			return $result;
 	}
 
+	public function searchASong($term){
+			$req = $this->db->prepare('SELECT name, access, id FROM songs WHERE name LIKE :term');
+			$req->execute(array('term' => '%'.$term.'%'));
+			$array = array();
+			while($donnee = $req->fetch())
+			{
+			array_push($array, array('value' => $donnee['name'],
+					'label' => $donnee['name'],
+					'desc' => $donnee['access'],
+					'id' => $donnee['id']
+				));
+			}
+			$result = json_encode($array);
+			return $result;
+	}
 
-	public function getAllSongs($firstElement, $limit){
+	public function getAllSongs($firstElement, $limit, $keyword){
 		$req = $this->db->prepare(
 			'SELECT SQL_CALC_FOUND_ROWS
 			s.name AS song_name,
@@ -63,10 +78,14 @@ class SongsManager extends Manager{
 			FROM songs s
 			INNER JOIN thematics t
 			ON s.principal_theme = t.id
+			WHERE (t.name LIKE :keyword)
+			OR (s.name LIKE :keyword)
+			OR (s.keyword LIKE :keyword)
 			ORDER BY s.principal_theme
 			LIMIT :firstElement, :limite');
 		$req->bindParam(':firstElement', $firstElement, \PDO::PARAM_INT);
 		$req->bindParam(':limite', $limit, \PDO::PARAM_INT);
+		$req->bindParam('keyword', $keyword);
 		$req->execute();
 		$allSongs = $req->fetchAll();
 		return $allSongs;
@@ -82,13 +101,6 @@ class SongsManager extends Manager{
 	}
  }
 
-
-	public function getSongsByKeyWord($keyword){
-		$req = $this->db->prepare('SELECT name, id, access FROM songs WHERE (keyword LIKE :keyword) OR (name LIKE :keyword)');
-		$req->execute(array('keyword' => '%'.$keyword.'%'));
-		$allSongs = $req->fetchAll();
-		return $allSongs;
-	}
 
 
 	public function checkFavSongs($userId, $songId){

@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', function(){
 if(typeof Manage != 'undefined'){
 var manage = new Manage();
 }
+if(typeof Template != 'undefined'){
+var manage = new Template();
+}
 loaded = 1;
 return loaded;
 }

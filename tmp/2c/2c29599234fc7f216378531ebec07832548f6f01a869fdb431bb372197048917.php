@@ -21,7 +21,6 @@ class __TwigTemplate_b82769005016e1456edc0e58296c80135d1591dea38c7ecea2ce9fb5bfc
         $this->blocks = [
             'title' => [$this, 'block_title'],
             'script' => [$this, 'block_script'],
-            'header' => [$this, 'block_header'],
             'content' => [$this, 'block_content'],
         ];
     }
@@ -49,34 +48,42 @@ class __TwigTemplate_b82769005016e1456edc0e58296c80135d1591dea38c7ecea2ce9fb5bfc
     {
     }
 
-    // line 6
-    public function block_header($context, array $blocks = [])
-    {
-        echo "Connexion";
-    }
-
-    // line 8
+    // line 7
     public function block_content($context, array $blocks = [])
     {
-        // line 9
-        echo "
-<form id=\"formLogin\" action = \"index.php?action=authenticize\" method=\"post\" >
-\t\t<h2>Identification</h2>
-\t\t<label for=\"identifiant\">Identifiant</label>
-\t\t<input type=\"text\" name=\"identifiant\" id=\"identifiant\" /><br />
-\t\t<label for=\"password\">Mot de passe</label>
-\t\t<input type=\"password\" name=\"password\" id=\"password\" /><br />
-\t\t<input type=\"submit\" value = \"Envoyer\"/>
-\t</form>
-<a href=\"?action=inscription\">S'inscrire</a>
-<a href=\"?action=sendpassword\">Mot de passe oublié<a>
+        // line 8
+        echo "<div id=\"loginBox\">
+\t<form id=\"formLoginPage\" action =\"index.php?action=authenticize\" method=\"post\" >
+\t\t\t<h2>Identification</h2>
+\t\t\t<label for=\"identifiantPage\">Identifiant</label>
+\t\t\t<input type=\"text\" name=\"identifiantPage\" id=\"identifiantPage\" /><br />
+\t\t\t<label for=\"passwordLogin\">Mot de passe</label>
+\t\t\t<input type=\"password\" name=\"passwordLogin\" id=\"passwordLogin\" /><br />
+\t\t\t<input type=\"submit\" value = \"Envoyer\"/>
+\t\t</form>
+</div>
 
-<form id=\"changePassword\" action = \"index.php?action=resetpassword\" method=\"post\" >
-\t\t<h2>Réintialiser le mot de passe</h2>
-\t\t<label for=\"mail\">Email</label>
-\t\t<input type=\"email\" name=\"mail\" id=\"mail\" required /><br />
-\t\t<input type=\"submit\" value = \"Envoyer\"/>
+<div id=\"resetPasswordBox\">
+\t<button class=\"gestionButton\" data-form=\"changePasswordForm\" id=\"resetPasswordButton\">Réinitialiser le mot de passe<span class=\"caret\"><i class=\"fas fa-angle-down\"></i></span></button>
+\t<form id=\"changePasswordForm\" class=\"hide\" action=\"index.php?action=resetpassword\" method=\"post\" >
+\t\t\t<h2>Réintialiser le mot de passe</h2>
+\t\t\t<label for=\"mailPassChange\">Email</label>
+\t\t\t<input type=\"email\" name=\"mailPassChange\" id=\"mailPassChange\" required /><br />
+\t\t\t<input type=\"submit\" value = \"Envoyer\"/>
 \t</form>
+</div>
+
+<div id=\"inscriptionBox\">
+\t<button class=\"gestionButton\" data-form=\"formSignUp\" id=\"inscriptionButton\">Inscription<span class=\"caret\"><i class=\"fas fa-angle-down\"></i></span></button>
+\t<form id=\"formSignUp\" action=\"index.php?action=signup\" method=\"post\" class='hide'>
+\t\t\t<h2>Inscription</h2>
+\t\t\t<label for=\"mailInscription\">Email</label>
+\t\t\t<input type=\"email\" name=\"mailInscription\" id=\"mailInscription\" required /><br />
+\t\t\t<label for=\"passwordInscription\">Mot de passe</label>
+\t\t\t<input type=\"password\" name=\"passwordInscription\" id=\"passwordInscription\" required /><br />
+\t\t\t<input type=\"submit\" value = \"Envoyer\"/>
+\t\t</form>
+</div>
 
 ";
     }
@@ -93,7 +100,7 @@ class __TwigTemplate_b82769005016e1456edc0e58296c80135d1591dea38c7ecea2ce9fb5bfc
 
     public function getDebugInfo()
     {
-        return array (  62 => 9,  59 => 8,  53 => 6,  48 => 4,  42 => 2,  32 => 1,);
+        return array (  55 => 8,  52 => 7,  47 => 4,  41 => 2,  31 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -111,28 +118,42 @@ class __TwigTemplate_b82769005016e1456edc0e58296c80135d1591dea38c7ecea2ce9fb5bfc
 
 {% block script %}{% endblock %}
 
-{% block header %}Connexion{% endblock %}
 
 {% block content %}
+<div id=\"loginBox\">
+\t<form id=\"formLoginPage\" action =\"index.php?action=authenticize\" method=\"post\" >
+\t\t\t<h2>Identification</h2>
+\t\t\t<label for=\"identifiantPage\">Identifiant</label>
+\t\t\t<input type=\"text\" name=\"identifiantPage\" id=\"identifiantPage\" /><br />
+\t\t\t<label for=\"passwordLogin\">Mot de passe</label>
+\t\t\t<input type=\"password\" name=\"passwordLogin\" id=\"passwordLogin\" /><br />
+\t\t\t<input type=\"submit\" value = \"Envoyer\"/>
+\t\t</form>
+</div>
 
-<form id=\"formLogin\" action = \"index.php?action=authenticize\" method=\"post\" >
-\t\t<h2>Identification</h2>
-\t\t<label for=\"identifiant\">Identifiant</label>
-\t\t<input type=\"text\" name=\"identifiant\" id=\"identifiant\" /><br />
-\t\t<label for=\"password\">Mot de passe</label>
-\t\t<input type=\"password\" name=\"password\" id=\"password\" /><br />
-\t\t<input type=\"submit\" value = \"Envoyer\"/>
+<div id=\"resetPasswordBox\">
+\t<button class=\"gestionButton\" data-form=\"changePasswordForm\" id=\"resetPasswordButton\">Réinitialiser le mot de passe<span class=\"caret\"><i class=\"fas fa-angle-down\"></i></span></button>
+\t<form id=\"changePasswordForm\" class=\"hide\" action=\"index.php?action=resetpassword\" method=\"post\" >
+\t\t\t<h2>Réintialiser le mot de passe</h2>
+\t\t\t<label for=\"mailPassChange\">Email</label>
+\t\t\t<input type=\"email\" name=\"mailPassChange\" id=\"mailPassChange\" required /><br />
+\t\t\t<input type=\"submit\" value = \"Envoyer\"/>
 \t</form>
-<a href=\"?action=inscription\">S'inscrire</a>
-<a href=\"?action=sendpassword\">Mot de passe oublié<a>
+</div>
 
-<form id=\"changePassword\" action = \"index.php?action=resetpassword\" method=\"post\" >
-\t\t<h2>Réintialiser le mot de passe</h2>
-\t\t<label for=\"mail\">Email</label>
-\t\t<input type=\"email\" name=\"mail\" id=\"mail\" required /><br />
-\t\t<input type=\"submit\" value = \"Envoyer\"/>
-\t</form>
+<div id=\"inscriptionBox\">
+\t<button class=\"gestionButton\" data-form=\"formSignUp\" id=\"inscriptionButton\">Inscription<span class=\"caret\"><i class=\"fas fa-angle-down\"></i></span></button>
+\t<form id=\"formSignUp\" action=\"index.php?action=signup\" method=\"post\" class='hide'>
+\t\t\t<h2>Inscription</h2>
+\t\t\t<label for=\"mailInscription\">Email</label>
+\t\t\t<input type=\"email\" name=\"mailInscription\" id=\"mailInscription\" required /><br />
+\t\t\t<label for=\"passwordInscription\">Mot de passe</label>
+\t\t\t<input type=\"password\" name=\"passwordInscription\" id=\"passwordInscription\" required /><br />
+\t\t\t<input type=\"submit\" value = \"Envoyer\"/>
+\t\t</form>
+</div>
 
-{% endblock %}", "login.twig", "C:\\wamp64\\www\\appliJDR\\src\\view\\login.twig");
+{% endblock %}
+", "login.twig", "C:\\wamp64\\www\\appliJDR\\src\\view\\login.twig");
     }
 }

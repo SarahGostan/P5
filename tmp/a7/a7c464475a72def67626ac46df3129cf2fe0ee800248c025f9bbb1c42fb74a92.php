@@ -41,8 +41,8 @@ class __TwigTemplate_7488a4a94a14e6aff9e1ed58cd473ea0bd206c1c0b6f7ad373046ef0928
         // line 5
         $this->displayBlock('title', $context, $blocks);
         echo "</title>
-        <link href=\"public/style.css\" rel=\"stylesheet\" />
-        <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\" integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\">
+\t\t<link href=\"public/style.css\" rel=\"stylesheet\" />
+\t\t<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\" integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\">
         <link rel=\"stylesheet\" href=\"//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css\">
         <link href=\"https://cdn.quilljs.com/1.3.6/quill.snow.css\" rel=\"stylesheet\">
         <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.8.1/css/all.css\" integrity=\"sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf\" crossorigin=\"anonymous\">
@@ -53,7 +53,7 @@ class __TwigTemplate_7488a4a94a14e6aff9e1ed58cd473ea0bd206c1c0b6f7ad373046ef0928
     <script src=\"//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js\"></script>
     <script src=\"//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/go.min.js\"></script>
     <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js\" integrity=\"sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl\" crossorigin=\"anonymous\"></script>
-
+    <script src=\"public/js/Template.js\"></script>
 
 \t\t";
         // line 20
@@ -67,7 +67,10 @@ class __TwigTemplate_7488a4a94a14e6aff9e1ed58cd473ea0bd206c1c0b6f7ad373046ef0928
 
 \t\t<header id=\"header\">
 
-\t\t<a href=\"index.php\" id=\"title\"><img src=\"public/images/resize_logo.png\" alt=\"logo\" /><h1><div id=\"ecran\">L'ecran</div><div id=\"du\">du</div><div id=\"mj\">MJ</div></h1></a>
+\t\t<a href=\"index.php\" id=\"title\"><img src=\"public/images/resize_logo.png\" alt=\"logo\" />
+      <div id=\"principalTitle\">
+        <div id=\"ecran\" class\"ecranTitle\">L'ecran</div><div id=\"du\" class=\"ecranTitle\">du</div><div id=\"mj\" class=\"ecranTitle\">MJ</div>
+      </div></a>
 \t<nav>
 \t\t<ul id=\"menu\">
 \t\t\t<li class= \"links\" id=\"gamesMenu\">
@@ -83,9 +86,9 @@ class __TwigTemplate_7488a4a94a14e6aff9e1ed58cd473ea0bd206c1c0b6f7ad373046ef0928
         </a>
       </li>
 \t\t\t";
-        // line 44
+        // line 47
         if ( !(null === (isset($context["id"]) ? $context["id"] : null))) {
-            // line 45
+            // line 48
             echo "\t\t\t<li class=\"links\" id=\"accountMenu\">
         <a href=\"?action=account\">
           <span class)\"icon\"><i class=\"fas fa-user-circle\"></i>
@@ -94,40 +97,51 @@ class __TwigTemplate_7488a4a94a14e6aff9e1ed58cd473ea0bd206c1c0b6f7ad373046ef0928
       </li>
 \t\t\t";
         }
-        // line 52
+        // line 55
         echo "\t\t</ul>
 \t</nav>
 
 \t<div id=\"connexion\">
 \t";
-        // line 56
+        // line 59
         if ( !(null === (isset($context["id"]) ? $context["id"] : null))) {
-            // line 57
+            // line 60
             echo "\t<a href=\"index?action=logout\">Déconnexion</a>
 \t";
         } else {
-            // line 59
-            echo "\t<a href=\"index?action=login\">Connexion</a>
-\t<a href=\"index?action=inscription\">Inscription</a>
+            // line 62
+            echo "  <a href=\"index?action=login\">Inscription</a>
+
+  <div id=\"loginBox\">
+  \t<button class=\"gestionButton\" data-form=\"loginForm\" id=\"loginButton\">Connexion<span class=\"caret\"><i class=\"fas fa-angle-down\"></i></span></button>
+    <form id=\"loginForm\" class='hide' action=\"index.php?action=authenticize\" method=\"post\" >
+    \t\t<label for=\"identifiant\">Identifiant</label>
+    \t\t<input type=\"text\" name=\"identifiant\" id=\"identifiant\" /><br />
+    \t\t<label for=\"password\">Mot de passe</label>
+    \t\t<input type=\"password\" name=\"password\" id=\"password\" /><br />
+    \t\t<input type=\"submit\" value = \"Envoyer\"/>
+        <span><a href=\"?action=login\">Mot de passe oublié ?</a></span>
+    \t</form>
+  </div>
 
 \t";
         }
-        // line 63
+        // line 77
         echo "\t</div>
 \t\t\t";
-        // line 64
+        // line 78
         $this->displayBlock('message', $context, $blocks);
-        // line 65
+        // line 79
         echo "\t\t\t\t";
         $this->displayBlock('header', $context, $blocks);
-        // line 66
+        // line 80
         echo "\t\t</header>
 
 \t\t <div id=\"content\">
 \t\t\t";
-        // line 69
+        // line 83
         $this->displayBlock('content', $context, $blocks);
-        // line 70
+        // line 84
         echo "\t\t</div>
 
 \t\t<footer>
@@ -137,9 +151,9 @@ class __TwigTemplate_7488a4a94a14e6aff9e1ed58cd473ea0bd206c1c0b6f7ad373046ef0928
 
 <script src=\"public/js/main.js\"></script>
 ";
-        // line 78
+        // line 92
         $this->displayBlock('script_bottom', $context, $blocks);
-        // line 79
+        // line 93
         echo "
 \t</body>
 </html>
@@ -156,23 +170,23 @@ class __TwigTemplate_7488a4a94a14e6aff9e1ed58cd473ea0bd206c1c0b6f7ad373046ef0928
     {
     }
 
-    // line 64
+    // line 78
     public function block_message($context, array $blocks = [])
     {
         echo twig_escape_filter($this->env, (isset($context["message"]) ? $context["message"] : null), "html", null, true);
     }
 
-    // line 65
+    // line 79
     public function block_header($context, array $blocks = [])
     {
     }
 
-    // line 69
+    // line 83
     public function block_content($context, array $blocks = [])
     {
     }
 
-    // line 78
+    // line 92
     public function block_script_bottom($context, array $blocks = [])
     {
     }
@@ -189,7 +203,7 @@ class __TwigTemplate_7488a4a94a14e6aff9e1ed58cd473ea0bd206c1c0b6f7ad373046ef0928
 
     public function getDebugInfo()
     {
-        return array (  176 => 78,  171 => 69,  166 => 65,  160 => 64,  155 => 20,  150 => 5,  143 => 79,  141 => 78,  131 => 70,  129 => 69,  124 => 66,  121 => 65,  119 => 64,  116 => 63,  110 => 59,  106 => 57,  104 => 56,  98 => 52,  89 => 45,  87 => 44,  62 => 21,  60 => 20,  42 => 5,  36 => 1,);
+        return array (  190 => 92,  185 => 83,  180 => 79,  174 => 78,  169 => 20,  164 => 5,  157 => 93,  155 => 92,  145 => 84,  143 => 83,  138 => 80,  135 => 79,  133 => 78,  130 => 77,  113 => 62,  109 => 60,  107 => 59,  101 => 55,  92 => 48,  90 => 47,  62 => 21,  60 => 20,  42 => 5,  36 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -207,8 +221,8 @@ class __TwigTemplate_7488a4a94a14e6aff9e1ed58cd473ea0bd206c1c0b6f7ad373046ef0928
     <head>
         <meta charset=\"utf-8\" />
         <title>{% block title %}{% endblock %}</title>
-        <link href=\"public/style.css\" rel=\"stylesheet\" />
-        <link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\" integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\">
+\t\t<link href=\"public/style.css\" rel=\"stylesheet\" />
+\t\t<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\" integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\">
         <link rel=\"stylesheet\" href=\"//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css\">
         <link href=\"https://cdn.quilljs.com/1.3.6/quill.snow.css\" rel=\"stylesheet\">
         <link rel=\"stylesheet\" href=\"https://use.fontawesome.com/releases/v5.8.1/css/all.css\" integrity=\"sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf\" crossorigin=\"anonymous\">
@@ -219,7 +233,7 @@ class __TwigTemplate_7488a4a94a14e6aff9e1ed58cd473ea0bd206c1c0b6f7ad373046ef0928
     <script src=\"//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js\"></script>
     <script src=\"//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/go.min.js\"></script>
     <script src=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js\" integrity=\"sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl\" crossorigin=\"anonymous\"></script>
-
+    <script src=\"public/js/Template.js\"></script>
 
 \t\t{% block script %}{% endblock %}
 
@@ -230,7 +244,10 @@ class __TwigTemplate_7488a4a94a14e6aff9e1ed58cd473ea0bd206c1c0b6f7ad373046ef0928
 
 \t\t<header id=\"header\">
 
-\t\t<a href=\"index.php\" id=\"title\"><img src=\"public/images/resize_logo.png\" alt=\"logo\" /><h1><div id=\"ecran\">L'ecran</div><div id=\"du\">du</div><div id=\"mj\">MJ</div></h1></a>
+\t\t<a href=\"index.php\" id=\"title\"><img src=\"public/images/resize_logo.png\" alt=\"logo\" />
+      <div id=\"principalTitle\">
+        <div id=\"ecran\" class\"ecranTitle\">L'ecran</div><div id=\"du\" class=\"ecranTitle\">du</div><div id=\"mj\" class=\"ecranTitle\">MJ</div>
+      </div></a>
 \t<nav>
 \t\t<ul id=\"menu\">
 \t\t\t<li class= \"links\" id=\"gamesMenu\">
@@ -260,8 +277,19 @@ class __TwigTemplate_7488a4a94a14e6aff9e1ed58cd473ea0bd206c1c0b6f7ad373046ef0928
 \t{% if id is not null %}
 \t<a href=\"index?action=logout\">Déconnexion</a>
 \t{% else %}
-\t<a href=\"index?action=login\">Connexion</a>
-\t<a href=\"index?action=inscription\">Inscription</a>
+  <a href=\"index?action=login\">Inscription</a>
+
+  <div id=\"loginBox\">
+  \t<button class=\"gestionButton\" data-form=\"loginForm\" id=\"loginButton\">Connexion<span class=\"caret\"><i class=\"fas fa-angle-down\"></i></span></button>
+    <form id=\"loginForm\" class='hide' action=\"index.php?action=authenticize\" method=\"post\" >
+    \t\t<label for=\"identifiant\">Identifiant</label>
+    \t\t<input type=\"text\" name=\"identifiant\" id=\"identifiant\" /><br />
+    \t\t<label for=\"password\">Mot de passe</label>
+    \t\t<input type=\"password\" name=\"password\" id=\"password\" /><br />
+    \t\t<input type=\"submit\" value = \"Envoyer\"/>
+        <span><a href=\"?action=login\">Mot de passe oublié ?</a></span>
+    \t</form>
+  </div>
 
 \t{% endif %}
 \t</div>

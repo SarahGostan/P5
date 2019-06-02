@@ -103,7 +103,6 @@ function removeVideo($link, $gameId, $videoId, $id){
 function newGame($id, $gameName, $image){
 	$gamesManager = new App\Model\GamesManager();
 	$newGame = $gamesManager->newGame($id, $gameName);
-	$newGameNotes = $gamesManager->newNotes($id, $newGame);
 	if($image != false){
 	$imageWay = "public/icones/users/icone" . $newGame;
 	$result = move_uploaded_file($image['tmp_name'], $imageWay);
@@ -133,6 +132,27 @@ function 	notesEdit($post_id, $title, $content, $owner_id){
 	$gamesManager = new App\Model\GamesManager();
 	$checkNote = $gamesManager->checkNoteId($owner_id, $post_id);
 	if ($checkNote['total'] > 0){
-		$editNotes = $gamesManager->editeNotes($title, $content, $post_id);
+		$editNotes = $gamesManager->editNotes($title, $content, $post_id);
 }
+
+}
+
+function newNote($content, $title, $gameId, $id){
+		$gamesManager = new App\Model\GamesManager();
+		$checkNoteExist = $gamesManager->checkNoteExist($gameId, $id);
+		if(empty($checkNoteExist)){
+			$gamesManager->createNewNote($content, $title, $gameId, $id);
+		}
+		else{
+			var_dump($checkNoteExist);
+		}
+
+	//	if ($checkNoteExist['total'] == 0){
+		//	$gamesManager->createNewNote();
+	//	}
+//		else{
+	//		$checkNote = $gamesManager->checkNoteId($id, $post_id);
+	//		if ($checkNote['total'] > 0){
+	//			$editNotes = $gamesManager->editNotes($title, $content, $post_id);
+//		}
 }

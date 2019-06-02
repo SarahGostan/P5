@@ -61,22 +61,26 @@ class __TwigTemplate_625da49f841d05d51085002396e3796ee82ab5433a43c4af6cb940d994d
     {
         // line 6
         echo "
-<form action=\"?action=sons\" id='songSearchForm' method=\"post\">
-\t\t<label for=\"songTerm\">Rechercher un son</label>
-\t\t<input type=text name=\"songTerm\" id=\"songTerm\" required>
-\t\t<input type=\"submit\" id=\"searchASong\" value=\"Rechercher\">
-\t\t<div id=\"resultSongSearch\"></div>
-</form>
+<div id=\"songSearch\">
+\t<form action=\"?action=allsongs\" id='songSearchForm' method=\"post\">
+\t\t\t<label for=\"songTerm\">Rechercher un son</label>
+\t\t\t<input type=text name=\"songTerm\" id=\"songTerm\" required>
+\t\t\t<input type=\"submit\" id=\"searchASong\" value=\"Rechercher\">
+\t</form>
 
+\t<div id=\"resultSongSearch\" class='songs'></div>
+</div>
 
 \t\t<div id=\"thematics\">
 \t\t";
-        // line 16
+        // line 18
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable($context["thematics"]);
         foreach ($context['_seq'] as $context["_key"] => $context["thematics"]) {
-            // line 17
-            echo "\t\t<a href=\"\">";
+            // line 19
+            echo "\t\t<a href=\"?action=allsongs&songTerm=";
+            echo twig_escape_filter($this->env, $this->getAttribute($context["thematics"], "name", [], "array"), "html", null, true);
+            echo "\">";
             echo twig_escape_filter($this->env, $this->getAttribute($context["thematics"], "name", [], "array"), "html", null, true);
             echo "</a>
 \t\t";
@@ -84,51 +88,51 @@ class __TwigTemplate_625da49f841d05d51085002396e3796ee82ab5433a43c4af6cb940d994d
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['thematics'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 19
+        // line 21
         echo "\t\t</div>
 
 <div id=\"allSongs\">
 
 
 \t";
-        // line 24
+        // line 26
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable($context["allSongs"]);
         foreach ($context['_seq'] as $context["_key"] => $context["allSongs"]) {
-            // line 25
+            // line 27
             echo "
-\t<div class=\"songs\"><span class=\"songAdd\"><h5>";
-            // line 26
+\t<div class=\"songs\"><div class=\"songAdd\"><h5>";
+            // line 28
             echo twig_escape_filter($this->env, $this->getAttribute($context["allSongs"], "song_name", [], "array"), "html", null, true);
             echo "</h5>
 \t\t";
-            // line 27
+            // line 29
             if (twig_in_filter($this->getAttribute($context["allSongs"], "song_id", [], "array"), (isset($context["favSongs"]) ? $context["favSongs"] : null))) {
-                // line 28
+                // line 30
                 echo "\t\t\t";
                 if ( !(null === (isset($context["id"]) ? $context["id"] : null))) {
-                    // line 29
+                    // line 31
                     echo "\t\t\t\t<button class=\"removeSong\" id=\"";
                     echo twig_escape_filter($this->env, $this->getAttribute($context["allSongs"], "song_id", [], "array"), "html", null, true);
-                    echo "\"></button></span>
+                    echo "\"></button></div>
 \t\t\t";
                 }
-                // line 31
+                // line 33
                 echo "\t\t";
             } else {
-                // line 32
+                // line 34
                 echo "\t\t\t";
                 if ( !(null === (isset($context["id"]) ? $context["id"] : null))) {
-                    // line 33
+                    // line 35
                     echo "\t\t\t\t<button class=\"addSong\" id=\"";
                     echo twig_escape_filter($this->env, $this->getAttribute($context["allSongs"], "song_id", [], "array"), "html", null, true);
-                    echo "\"></button></span>
+                    echo "\"></button></div>
 \t\t\t";
                 }
-                // line 35
+                // line 37
                 echo "\t\t";
             }
-            // line 36
+            // line 38
             echo "\t\t<audio src=\"public/songs/";
             echo twig_escape_filter($this->env, $this->getAttribute($context["allSongs"], "song_access", [], "array"), "html", null, true);
             echo "\" controls></audio>
@@ -143,7 +147,7 @@ class __TwigTemplate_625da49f841d05d51085002396e3796ee82ab5433a43c4af6cb940d994d
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['allSongs'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 44
+        // line 46
         echo "
 
 
@@ -153,98 +157,104 @@ class __TwigTemplate_625da49f841d05d51085002396e3796ee82ab5433a43c4af6cb940d994d
 
 \t\t\t<div class=\"songsInTheme\">
 \t\t";
-        // line 52
+        // line 54
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable($context["allSongs"]);
         foreach ($context['_seq'] as $context["_key"] => $context["allSongs"]) {
-            // line 53
+            // line 55
             echo "\t\t\t";
             if (($this->getAttribute($context["allSongs"], "song_principal_theme", [], "array") == $this->getAttribute((isset($context["thematics"]) ? $context["thematics"] : null), "thematic_id", [], "array"))) {
-                // line 54
+                // line 56
                 echo "\t\t\t\t<div class=\"songs\"><span class=\"songAdd\"><h5>";
                 echo twig_escape_filter($this->env, $this->getAttribute($context["allSongs"], "song_name", [], "array"), "html", null, true);
                 echo "</h5>
 \t\t\t\t\t";
-                // line 55
+                // line 57
                 if (twig_in_filter($this->getAttribute($context["allSongs"], "song_id", [], "array"), (isset($context["favSongs"]) ? $context["favSongs"] : null))) {
-                    // line 56
+                    // line 58
                     echo "\t\t\t\t\t\t";
                     if ( !(null === (isset($context["id"]) ? $context["id"] : null))) {
-                        // line 57
+                        // line 59
                         echo "\t\t\t\t\t\t\t<button class=\"removeSong\" id=\"";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["allSongs"], "song_id", [], "array"), "html", null, true);
                         echo "\"></button></span>
 \t\t\t\t\t\t";
                     }
-                    // line 59
+                    // line 61
                     echo "\t\t\t\t\t";
                 } else {
-                    // line 60
+                    // line 62
                     echo "\t\t\t\t\t\t";
                     if ( !(null === (isset($context["id"]) ? $context["id"] : null))) {
-                        // line 61
+                        // line 63
                         echo "\t\t\t\t\t\t\t<button class=\"addSong\" id=\"";
                         echo twig_escape_filter($this->env, $this->getAttribute($context["allSongs"], "song_id", [], "array"), "html", null, true);
                         echo "\"></button></span>
 \t\t\t\t\t\t";
                     }
-                    // line 63
+                    // line 65
                     echo "\t\t\t\t\t";
                 }
-                // line 64
+                // line 66
                 echo "\t\t\t\t\t<audio src=\"public/songs/";
                 echo twig_escape_filter($this->env, $this->getAttribute($context["allSongs"], "song_access", [], "array"), "html", null, true);
                 echo "\" controls></audio>
 \t\t\t\t\t</div>
 \t\t\t";
             }
-            // line 67
+            // line 69
             echo "
 ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['allSongs'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 69
+        // line 71
         echo "</div>
 </div>
 
 
-
 ";
-        // line 74
-        $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(range(1, (isset($context["pageNumber"]) ? $context["pageNumber"] : null)));
-        foreach ($context['_seq'] as $context["_key"] => $context["i"]) {
-            // line 75
-            if (($context["i"] == (isset($context["page"]) ? $context["page"] : null))) {
-                // line 76
-                echo twig_escape_filter($this->env, $context["i"], "html", null, true);
-                echo "
+        // line 75
+        if (((isset($context["pageNumber"]) ? $context["pageNumber"] : null) != 0)) {
+            // line 76
+            $context['_parent'] = $context;
+            $context['_seq'] = twig_ensure_traversable(range(1, (isset($context["pageNumber"]) ? $context["pageNumber"] : null)));
+            foreach ($context['_seq'] as $context["_key"] => $context["i"]) {
+                // line 77
+                if (($context["i"] == (isset($context["page"]) ? $context["page"] : null))) {
+                    // line 78
+                    echo twig_escape_filter($this->env, $context["i"], "html", null, true);
+                    echo "
 ";
-            } else {
-                // line 78
-                echo "<a href=\"?action=allsongs&page=";
-                echo twig_escape_filter($this->env, $context["i"], "html", null, true);
-                echo "\">";
-                echo twig_escape_filter($this->env, $context["i"], "html", null, true);
-                echo "</a>
+                } else {
+                    // line 80
+                    echo "<a href=\"?action=allsongs&page=";
+                    echo twig_escape_filter($this->env, $context["i"], "html", null, true);
+                    echo "\">";
+                    echo twig_escape_filter($this->env, $context["i"], "html", null, true);
+                    echo "</a>
 ";
+                }
             }
+            $_parent = $context['_parent'];
+            unset($context['_seq'], $context['_iterated'], $context['_key'], $context['i'], $context['_parent'], $context['loop']);
+            $context = array_intersect_key($context, $_parent) + $_parent;
+        } else {
+            // line 84
+            echo "<a href=\"?action=allsongs\">Tous les sons</a>
+";
         }
-        $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['i'], $context['_parent'], $context['loop']);
-        $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 81
+        // line 86
         echo "</div>
 
 ";
     }
 
-    // line 88
+    // line 93
     public function block_script_bottom($context, array $blocks = [])
     {
-        // line 89
+        // line 94
         echo "
 ";
     }
@@ -261,7 +271,7 @@ class __TwigTemplate_625da49f841d05d51085002396e3796ee82ab5433a43c4af6cb940d994d
 
     public function getDebugInfo()
     {
-        return array (  248 => 89,  245 => 88,  239 => 81,  227 => 78,  222 => 76,  220 => 75,  216 => 74,  209 => 69,  202 => 67,  195 => 64,  192 => 63,  186 => 61,  183 => 60,  180 => 59,  174 => 57,  171 => 56,  169 => 55,  164 => 54,  161 => 53,  157 => 52,  147 => 44,  132 => 36,  129 => 35,  123 => 33,  120 => 32,  117 => 31,  111 => 29,  108 => 28,  106 => 27,  102 => 26,  99 => 25,  95 => 24,  88 => 19,  79 => 17,  75 => 16,  63 => 6,  60 => 5,  55 => 4,  49 => 3,  43 => 2,  33 => 1,);
+        return array (  258 => 94,  255 => 93,  249 => 86,  245 => 84,  232 => 80,  227 => 78,  225 => 77,  221 => 76,  219 => 75,  213 => 71,  206 => 69,  199 => 66,  196 => 65,  190 => 63,  187 => 62,  184 => 61,  178 => 59,  175 => 58,  173 => 57,  168 => 56,  165 => 55,  161 => 54,  151 => 46,  136 => 38,  133 => 37,  127 => 35,  124 => 34,  121 => 33,  115 => 31,  112 => 30,  110 => 29,  106 => 28,  103 => 27,  99 => 26,  92 => 21,  81 => 19,  77 => 18,  63 => 6,  60 => 5,  55 => 4,  49 => 3,  43 => 2,  33 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -280,17 +290,19 @@ class __TwigTemplate_625da49f841d05d51085002396e3796ee82ab5433a43c4af6cb940d994d
 {% block header %}{% endblock %}
 {% block content %}
 
-<form action=\"?action=sons\" id='songSearchForm' method=\"post\">
-\t\t<label for=\"songTerm\">Rechercher un son</label>
-\t\t<input type=text name=\"songTerm\" id=\"songTerm\" required>
-\t\t<input type=\"submit\" id=\"searchASong\" value=\"Rechercher\">
-\t\t<div id=\"resultSongSearch\"></div>
-</form>
+<div id=\"songSearch\">
+\t<form action=\"?action=allsongs\" id='songSearchForm' method=\"post\">
+\t\t\t<label for=\"songTerm\">Rechercher un son</label>
+\t\t\t<input type=text name=\"songTerm\" id=\"songTerm\" required>
+\t\t\t<input type=\"submit\" id=\"searchASong\" value=\"Rechercher\">
+\t</form>
 
+\t<div id=\"resultSongSearch\" class='songs'></div>
+</div>
 
 \t\t<div id=\"thematics\">
 \t\t{% for thematics in thematics %}
-\t\t<a href=\"\">{{ thematics['name']}}</a>
+\t\t<a href=\"?action=allsongs&songTerm={{ thematics['name']}}\">{{ thematics['name']}}</a>
 \t\t{% endfor %}
 \t\t</div>
 
@@ -299,14 +311,14 @@ class __TwigTemplate_625da49f841d05d51085002396e3796ee82ab5433a43c4af6cb940d994d
 
 \t{% for allSongs in allSongs %}
 
-\t<div class=\"songs\"><span class=\"songAdd\"><h5>{{ allSongs['song_name'] }}</h5>
+\t<div class=\"songs\"><div class=\"songAdd\"><h5>{{ allSongs['song_name'] }}</h5>
 \t\t{% if allSongs['song_id'] in favSongs %}
 \t\t\t{% if id is not null %}
-\t\t\t\t<button class=\"removeSong\" id=\"{{ allSongs['song_id'] }}\"></button></span>
+\t\t\t\t<button class=\"removeSong\" id=\"{{ allSongs['song_id'] }}\"></button></div>
 \t\t\t{% endif %}
 \t\t{% else %}
 \t\t\t{% if id is not null %}
-\t\t\t\t<button class=\"addSong\" id=\"{{ allSongs['song_id'] }}\"></button></span>
+\t\t\t\t<button class=\"addSong\" id=\"{{ allSongs['song_id'] }}\"></button></div>
 \t\t\t{% endif %}
 \t\t{% endif %}
 \t\t<audio src=\"public/songs/{{ allSongs['song_access'] }}\" controls></audio>
@@ -346,7 +358,7 @@ class __TwigTemplate_625da49f841d05d51085002396e3796ee82ab5433a43c4af6cb940d994d
 </div>
 
 
-
+{% if pageNumber != 0 %}
 {% for i in 1..pageNumber %}
 {% if i == page %}
 {{ i }}
@@ -354,6 +366,9 @@ class __TwigTemplate_625da49f841d05d51085002396e3796ee82ab5433a43c4af6cb940d994d
 <a href=\"?action=allsongs&page={{ i }}\">{{ i}}</a>
 {% endif %}
 {% endfor %}
+{% else %}
+<a href=\"?action=allsongs\">Tous les sons</a>
+{% endif %}
 </div>
 
 {% endblock %}

@@ -8,24 +8,33 @@
 <script src="public/js/Songs.js"></script>
 
 {% endblock %}
-{% block header %}			{% for gameInfos in gameInfos %}
-				<h2 id="gameTitle">{{ gameInfos['name'] }}</h2>
-			{% endfor %}
-			{% endblock %}
+{% block header %}
+	{% for gameInfos in gameInfos %}
+		<h2 id="gameTitle">{{ gameInfos['name'] }}</h2>
+	{% endfor %}
+{% endblock %}
+
+
 {% block content %}
 
 <div id="ingameContent">
 
-		<section id="ambianceSongContainer" class="ingameContainer">
+
+{# ************* Section de gauche : liste de sons d'ambiance ************* #}
+
+	<section id="ambianceSongContainer" class="ingameContainer">
 			<div id='ambianceSong' class="ingame">
 
 				<div class='sectionContent' id="ambianceSongContent">
+
+{% if gamesInfos is same as(true) and sessionId != 0 %}
 					<form action="?action=sons" id='songSearchForm' method="post">
 							<label for="songTerm">Rechercher un son</label>
 							<input type=text name="songTerm" id="songTerm">
 							<input type="submit" id="searchASong" value="Rechercher">
 							<div id="resultSongSearch"></div>
 						</form>
+{% endif %}
 			{% if gameSongs %}
 
 			{% for gameSongs in gameSongs %}
@@ -43,7 +52,10 @@
 		</div>
 
 		</div>
-		</section>
+	</section>
+
+{# ************* Section du milieu : liste de musiques et vidéos ************* #}
+
 
 		<section id="ambianceMusiqueContainer" class="ingameContainer">
 			<div id="ambianceMusique" class="ingame">
@@ -74,10 +86,18 @@
 		</div>
 		</section>
 
+
+{# ************* Section de droite : règles en accès rapide ************* #}
+
+
+{# A DEVELOPPER #}
+
+{# ************* Section du bas : feuilles de note et jet de dés ************* #}
+
 		<section id="diceRollContainer" class="ingameContainer">
 			<div id="diceRoll" class='ingame'>
 
-	</div>
+			</div>
 		</section>
 </div>
 
@@ -93,7 +113,6 @@
 				<div id="notes">
 						{% if blocNotes %}
 				<form  id="notesGameEdit">
-
 						{% for blocNotes in blocNotes %}
 			<fieldset id="fieldNotes"  data-id="{{ blocNotes['id'] }}">
 				<legend name="title" class="title" id="notesTitle">{{ blocNotes['title'] }}</legend>
@@ -107,13 +126,21 @@
 			</fieldset>
 
 			<input type="button" class="editNotes" value ="Sauvegarder"/>
-			{% endfor %}
+				{% endfor %}
 			</form>
 
 			{% else %}
-<p>Aucun bloc note existant</p>
+		{% if	sessionId != 0 %}
+			<form id="newNote" data-id='{{ gameId }}'>
+				<input id="notesTitleEdit" value=''>
+				<div class="container" id="notesContentEdit"></strong></em></color></u></p></div>
+				<div class="container javascript" id="delta-container"></div>
+
+			<input type="button" id="createNewNote" value ="Sauvegarder"/>
+		</form>
 			{% endif %}
 						<button id="switchEdit">+</button>
+			{% endif %}
 				</div>
 
 

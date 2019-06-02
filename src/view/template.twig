@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8" />
         <title>{% block title %}{% endblock %}</title>
-        <link href="public/style.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+		<link href="public/style.css" rel="stylesheet" />
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
         <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -15,7 +15,7 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/languages/go.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
+    <script src="public/js/Template.js"></script>
 
 		{% block script %}{% endblock %}
 
@@ -26,7 +26,10 @@
 
 		<header id="header">
 
-		<a href="index.php" id="title"><img src="public/images/resize_logo.png" alt="logo" /><h1><div id="ecran">L'ecran</div><div id="du">du</div><div id="mj">MJ</div></h1></a>
+		<a href="index.php" id="title"><img src="public/images/resize_logo.png" alt="logo" />
+      <div id="principalTitle">
+        <div id="ecran" class"ecranTitle">L'ecran</div><div id="du" class="ecranTitle">du</div><div id="mj" class="ecranTitle">MJ</div>
+      </div></a>
 	<nav>
 		<ul id="menu">
 			<li class= "links" id="gamesMenu">
@@ -56,8 +59,19 @@
 	{% if id is not null %}
 	<a href="index?action=logout">Déconnexion</a>
 	{% else %}
-	<a href="index?action=login">Connexion</a>
-	<a href="index?action=inscription">Inscription</a>
+  <a href="index?action=login">Inscription</a>
+
+  <div id="loginBox">
+  	<button class="gestionButton" data-form="loginForm" id="loginButton">Connexion<span class="caret"><i class="fas fa-angle-down"></i></span></button>
+    <form id="loginForm" class='hide' action="index.php?action=authenticize" method="post" >
+    		<label for="identifiant">Identifiant</label>
+    		<input type="text" name="identifiant" id="identifiant" /><br />
+    		<label for="password">Mot de passe</label>
+    		<input type="password" name="password" id="password" /><br />
+    		<input type="submit" value = "Envoyer"/>
+        <span><a href="?action=login">Mot de passe oublié ?</a></span>
+    	</form>
+  </div>
 
 	{% endif %}
 	</div>

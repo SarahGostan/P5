@@ -1,5 +1,4 @@
 <?php
-ob_start();
 
 include __DIR__ . '/vendor/autoload.php';
 use \App\Model\Manager;
@@ -16,7 +15,7 @@ require 'src/Others/global.php';
 require 'src/Controller/LogsController.php';
 require 'src/Controller/SongsController.php';
 require 'src/Controller/GamesController.php';
-require 'src/Controller/frontend.php';
+require 'src/Controller/PagesController.php';
 
 
 
@@ -85,8 +84,16 @@ try{
 			}
 		break;
 
-		case 'inscription':
-			inscription($twig);
+		case 'notesCreate':
+		if($id > 0){
+			$content = $_POST['content'];
+			$title = $_POST['title'];
+			$gameId = $_POST['gameId'];
+			 newNote($content, $title, $gameId, $id);
+		}
+		else{
+			throw new Exception('Vous devez être connecté pour effectuer cette action');
+		}
 		break;
 
 		case 'accountnewgame':
@@ -95,7 +102,7 @@ try{
 
 		if(empty($_POST['gameName']))
 		{
-		 Throw new Exception('Echec de la création de votre partie. Utilisez un point de fortune, réessayez !');
+		 throw new Exception('Echec de la création de votre partie. Utilisez un point de fortune, réessayez !');
 		}
 		else
 		{
@@ -141,6 +148,11 @@ try{
 			}
 			break;
 
+	case 'envoimail':
+	$res = mail('sarahgstn@gmail.com', 'test', 'test');
+	echo($res);
+	break;
+
 		case 'accountsupressgame':
 			if (isset($_GET['id']))
 			{
@@ -177,7 +189,17 @@ try{
 			else{
 				$page = 1;
 			}
-			allSongs($twig, $id, $page);
+			if(isset($_POST['songTerm'])){
+				$keyword = $_POST['songTerm'];
+			}
+			else if(isset($_GET['songTerm'])){
+					$keyword = $_GET['songTerm'];
+			}
+			else{
+		$keyword = '%';
+		}
+
+			allSongs($twig, $id, $page, $keyword);
 		break;
 
 		case 'notesEdit':
@@ -189,21 +211,11 @@ try{
 		break;
 
 
-		case 'sons':
-		if (!empty($_POST['songTerm'])){
-			$keyword = $_POST['songTerm'];
-			getSongsByKeyWord($twig, $keyword);
-	}
-		else{
-			$page = 1;
-				allSongs($twig, $id, $page);
-		}
-		break;
-
 		case 'searchsong':
 		$term = $_GET['term'];
 		$result = searchSong($term);
-		echo($result);
+		ob_clean();
+		echo $result;
 		exit;
 
 		case 'jouer':
@@ -224,12 +236,16 @@ try{
 		}
 		break;
 
+		case'guide':
+		guide($twig);
+		break;
+
 		case 'signup':
-		if (!empty($_POST['password']) && !empty($_POST['mail'])){
-			signup($_POST['password'],  $_POST['mail'], $message, $twig);
+		if (!empty($_POST['passwordInscription']) && !empty($_POST['mailInscription'])){
+			signup($_POST['passwordInscription'],  $_POST['mailInscription'], $message, $twig);
 		}
 		else{
-			throw new Exception('La page demand�e est invalide');
+			throw new Exception('Impossible de finaliser l\'inscription. Veuillez réessayer plus tard.');
 		}
 			break;
 
@@ -238,14 +254,16 @@ try{
 			break;
 
 		case 'validation':
-			logout($twig);
-			validAccount($_GET['pseudo'], $_GET['key']);
+			validAccount($_GET['mail'], $_GET['key']);
 			break;
 
 
 		case 'authenticize':
-			if (!empty($_POST['identifiant']) && !empty($_POST['password'])){
-				authenticize($_POST['identifiant'], $_POST['password'], $twig);
+		if($id != 0){
+			accueil($twig, $message);
+		}
+		else if (!empty($_POST['identifiantPage']) && !empty($_POST['passwordLogin'])){
+				authenticize($_POST['identifiantPage'], $_POST['passwordLogin'], $twig);
 			}
 			else{
 				$message = "Email ou mot de passe manquant";
@@ -259,6 +277,17 @@ try{
 
 			case 'accountChangePassword':
 				accountChangePassword($_SESSION['id'], $_POST['actualPassword'], $_POST['newPassword']);
+				break;
+
+			case 'songFavStatut':
+				if(isset($_GET['songId'])){
+					$songId = $_GET['songId'];
+				}
+				else{
+					throw new Exception('Vous venez de pénétrer une URL hors jeu. Vous devriez fuir cet endroit au plus vite');
+				}
+				$result = checkSong($id, $songId);
+				echo($result);
 				break;
 
 				default:

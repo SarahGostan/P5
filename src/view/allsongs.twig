@@ -4,17 +4,19 @@
 {% block header %}{% endblock %}
 {% block content %}
 
-<form action="?action=sons" id='songSearchForm' method="post">
-		<label for="songTerm">Rechercher un son</label>
-		<input type=text name="songTerm" id="songTerm" required>
-		<input type="submit" id="searchASong" value="Rechercher">
-		<div id="resultSongSearch"></div>
-</form>
+<div id="songSearch">
+	<form action="?action=allsongs" id='songSearchForm' method="post">
+			<label for="songTerm">Rechercher un son</label>
+			<input type=text name="songTerm" id="songTerm" required>
+			<input type="submit" id="searchASong" value="Rechercher">
+	</form>
 
+	<div id="resultSongSearch" class='songs'></div>
+</div>
 
 		<div id="thematics">
 		{% for thematics in thematics %}
-		<a href="">{{ thematics['name']}}</a>
+		<a href="?action=allsongs&songTerm={{ thematics['name']}}">{{ thematics['name']}}</a>
 		{% endfor %}
 		</div>
 
@@ -23,14 +25,14 @@
 
 	{% for allSongs in allSongs %}
 
-	<div class="songs"><span class="songAdd"><h5>{{ allSongs['song_name'] }}</h5>
+	<div class="songs"><div class="songAdd"><h5>{{ allSongs['song_name'] }}</h5>
 		{% if allSongs['song_id'] in favSongs %}
 			{% if id is not null %}
-				<button class="removeSong" id="{{ allSongs['song_id'] }}"></button></span>
+				<button class="removeSong" id="{{ allSongs['song_id'] }}"></button></div>
 			{% endif %}
 		{% else %}
 			{% if id is not null %}
-				<button class="addSong" id="{{ allSongs['song_id'] }}"></button></span>
+				<button class="addSong" id="{{ allSongs['song_id'] }}"></button></div>
 			{% endif %}
 		{% endif %}
 		<audio src="public/songs/{{ allSongs['song_access'] }}" controls></audio>
@@ -70,7 +72,7 @@
 </div>
 
 
-
+{% if pageNumber != 0 %}
 {% for i in 1..pageNumber %}
 {% if i == page %}
 {{ i }}
@@ -78,6 +80,9 @@
 <a href="?action=allsongs&page={{ i }}">{{ i}}</a>
 {% endif %}
 {% endfor %}
+{% else %}
+<a href="?action=allsongs">Tous les sons</a>
+{% endif %}
 </div>
 
 {% endblock %}

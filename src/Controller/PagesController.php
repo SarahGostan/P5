@@ -14,7 +14,9 @@ function error($twig, $errorMessage){
 	echo $twig->render('erreur.twig',  array('errorMessage' => $errorMessage));
 }
 
-
+function guide($twig){
+	echo$twig->render('getStarted.twig');
+}
 
 function account($twig, $message){
 	if($message == 'fail'){
