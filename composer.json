@@ -1,7 +1,7 @@
 {
     "name": "utilisateur/p5",
     "require": {
-        "twig/twig": "^1.41"
+        "twig/twig": "^3.11"
     },
     "autoload": {
     "psr-4" : {
